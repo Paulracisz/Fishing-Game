@@ -33,6 +33,10 @@ body {
   background-color: #1a1a1a;
 }
 
+.centered {
+  margin-left: 25% !important;
+}
+
 .hasCaughtBox {
   width: 50px;
   background-color: whitesmoke;
