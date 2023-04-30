@@ -9,6 +9,7 @@ import Clownfish from "./assets/clownfish.png";
 function App() {
   let currentRod = "wood";
   let galleryHidden = true;
+  let currentLength = 0;
   let fishes = {
     Boot: {
       hasCaught: false,
@@ -30,81 +31,74 @@ function App() {
   const fish = (e) => {
     e.preventDefault();
     let RNG = fishRNG(currentRod);
-    let currentLength = 0;
     switch (RNG) {
       case 0:
         // BOOT
         window.alert(
           "You caught a boot... Well, at least you caught something..."
         );
-        fishes.Boot.hasCaught = true;
-        currentLength = Math.floor(Math.random() * (365 - 182) + 182);
-        if (fishes.Boot.recordLength < currentLength) {
-          fishes.Boot.recordLength = currentLength;
-        }
-        document.getElementsByClassName("length-text")[0].innerHTML =
-          "Length " + currentLength + "CM";
-        document.getElementsByClassName("record-text")[0].innerHTML =
-          "Current Record: " + fishes.Boot.recordLength + "CM";
-        document.getElementsByClassName("fish-text")[0].innerHTML = "Boot";
-        document.getElementsByClassName("fish-ico")[0].src = Boot;
+        populateData("Boot");
         break;
       case 1:
         // MINNOWS
         window.alert("You caught some minnows... Just small fry...");
-        fishes.Minnows.hasCaught = true;
-        currentLength = Math.floor(Math.random() * (5 - 1) + 1);
-        if (fishes.Minnows.recordLength < currentLength) {
-          fishes.Minnows.recordLength = currentLength;
-        }
-        document.getElementsByClassName("record-text")[0].innerHTML =
-          "Current Record: " + fishes.Minnows.recordLength + "CM";
-        document.getElementsByClassName("length-text")[0].innerHTML =
-          "Length: " + currentLength + "CM";
-        document.getElementsByClassName("fish-text")[0].innerHTML = "Minnows";
-        document.getElementsByClassName("fish-ico")[0].src = Minnows;
+        populateData("Minnows");
         break;
       case 2:
         // GOLDFISH
         window.alert(
           "You caught a goldfish... Maybe you can keep it as a pet..."
         );
-        fishes.Goldfish.hasCaught = true;
-        currentLength = Math.floor(Math.random() * (14 - 1) + 1);
-        if (fishes.Goldfish.recordLength < currentLength) {
-          fishes.Goldfish.recordLength = currentLength;
-        }
-        document.getElementsByClassName("length-text")[0].innerHTML =
-          "Length: " + currentLength + "CM";
-        document.getElementsByClassName("record-text")[0].innerHTML =
-          "Current Record: " + fishes.Goldfish.recordLength + "CM";
-        document.getElementsByClassName("fish-text")[0].innerHTML = "Goldfish";
-        document.getElementsByClassName("fish-ico")[0].src = Goldfish;
+        populateData("Goldfish");
         break;
       case 3:
         // CLOWNFISH
         window.alert("You caught a clownfish... What's so funny?");
-        document.getElementsByClassName("fish-text")[0].innerHTML = "Clownfish";
-        fishes.Clownfish.hasCaught = true;
-        currentLength = Math.floor(Math.random() * (10 - 6) + 6);
-        if (fishes.Clownfish.recordLength < currentLength) {
-          fishes.Clownfish.recordLength = currentLength;
-        }
-        document.getElementsByClassName("length-text")[0].innerHTML =
-          "Length: " + currentLength + "CM";
-        document.getElementsByClassName("record-text")[0].innerHTML =
-          "Current Record: " + fishes.Clownfish.recordLength + "CM";
-        console.log(document.getElementsByClassName("fish-ico")[0]);
-        document.getElementsByClassName("fish-ico")[0].src = Clownfish;
+        populateData("Clownfish");
         break;
     }
-    console.log(fishes);
   };
 
   const toggleGallery = (e) => {
     e.preventDefault;
     galleryHidden = !galleryHidden;
     document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;
+  };
+
+  const populateData = (name) => {
+    fishes[name].hasCaught = true;
+    // get length, will be based on the fish
+    switch (name) {
+      case "Boot":
+        currentLength = Math.floor(Math.random() * (30 - 15) + 15);
+        document.getElementsByClassName("fish-ico")[0].src = Boot;
+        break;
+      case "Minnows":
+        currentLength = Math.floor(Math.random() * (5 - 1) + 1);
+        document.getElementsByClassName("fish-ico")[0].src = Minnows;
+        break;
+      case "Goldfish":
+        currentLength = Math.floor(Math.random() * (14 - 1) + 1);
+        document.getElementsByClassName("fish-ico")[0].src = Goldfish;
+        break;
+      case "Clownfish":
+        currentLength = Math.floor(Math.random() * (10 - 6) + 6);
+        document.getElementsByClassName("fish-ico")[0].src = Clownfish;
+        break;
+    }
+
+    // Calculate if its a record length, and if it is, update the obj for the gallery
+    if (fishes[name].recordLength < currentLength) {
+      fishes[name].recordLength = currentLength;
+    }
+
+    // Populating the HTML
+    document.getElementsByClassName("length-text")[0].innerHTML =
+      "Length: " + currentLength + "CM";
+    document.getElementsByClassName("record-text")[0].innerHTML =
+      "Current Record: " + fishes[name].recordLength + "CM";
+    document.getElementsByClassName("fish-text")[0].innerHTML = `${name}`;
+    document.getElementsByClassName(name)[0].classList.add("hasCaughtBox");
   };
 
   const fishRNG = (rodType) => {
@@ -132,32 +126,32 @@ function App() {
         </div>
         <div hidden={true} className="gallery-modal">
           <h1>Gallery</h1>
-          <img
-            className={
-              fishes.Boot.hasCaught ? "hasCaughtBox" : "hasNotCaughtBox"
-            }
-            src={Boot}
-          ></img>{" "}
-          <img
-            className={
-              fishes.Minnows.hasCaught ? "hasCaughtBox" : "hasNotCaughtBox"
-            }
-            src={Minnows}
-          ></img>{" "}
-          <img
-            className={
-              fishes.Goldfish.hasCaught ? "hasCaughtBox" : "hasNotCaughtBox"
-            }
-            src={Goldfish}
-          ></img>{" "}
-          <img
-            className={
-              fishes.Clownfish.hasCaught ? "hasCaughtBox" : "hasNotCaughtBox"
-            }
-            src={Clownfish}
-          ></img>
-          <div onClick={toggleGallery} className="button centered">
-            Close
+          <div className="gallery-flex">
+            <div className="gallery-div">
+              <p>
+                Boot <br /> Record Length: {fishes["Boot"].recordLength}
+              </p>
+              <img className="Boot Gallery" src={Boot}></img>{" "}
+            </div>
+            <div className="gallery-div">
+              <p>
+                Minnows <br />
+              </p>
+              <img className="Minnows Gallery" src={Minnows}></img>{" "}
+            </div>
+            <div className="gallery-div">
+              <p>Goldfish</p>
+              <img className="Goldfish Gallery" src={Goldfish}></img>{" "}
+            </div>
+            <div className="gallery-div">
+              <p>Clownfish</p>
+              <img className="Clownfish Gallery" src={Clownfish}></img>
+            </div>
+          </div>
+          <div className="gallery-button-flex">
+            <div onClick={toggleGallery} className="button centered">
+              Close
+            </div>
           </div>
         </div>
         <div className="fishing-rod-box">

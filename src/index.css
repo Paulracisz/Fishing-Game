@@ -33,19 +33,22 @@ body {
   background-color: #1a1a1a;
 }
 
-.centered {
-  margin-left: 25% !important;
+.gallery-button-flex {
+  display: flex;
+  justify-content: center;
+  align-items: end;
 }
 
 .hasCaughtBox {
-  width: 50px;
-  background-color: whitesmoke;
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
+  width: 50px !important;
+  background-color: whitesmoke !important;
+  padding: 10px !important;
+  border: 1px solid black !important;
+  border-radius: 5px !important;
+  filter: grayscale(0%) !important;
 }
 
-.hasNotCaughtBox {
+.Gallery {
   width: 50px;
   background-color: gray;
   padding: 10px;
@@ -168,6 +171,25 @@ button:hover {
   border: 1px solid black;
   border-radius: 10px;
   background-color: rgb(244, 200, 7);
+}
+
+p {
+  color: white;
+  text-shadow: 1px 1px black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.gallery-div {
+  margin: 5px;
+}
+
+.gallery-flex {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .fish-text,
