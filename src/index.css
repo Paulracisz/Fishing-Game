@@ -64,6 +64,13 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  text-decoration: underline;
+  color: black;
+  text-shadow: 1px 1px white;
+  line-height: 1.1;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -137,7 +144,6 @@ button:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.545);
   padding: 15px;
   font-weight: bold;
   text-shadow: 2px 2px black;
@@ -191,9 +197,15 @@ button:hover {
   background: linear-gradient(130deg, rgba(244, 200, 7, 1) 50%, rgba(255, 255, 255, 1) 50%);
 }
 
+text {
+  
+  color: black;
+  text-shadow: 1px 1px white;
+}
+
 p {
-  color: white;
-  text-shadow: 1px 1px black;
+  color: black;
+  text-shadow: 1px 1px white;
   font-size: 16px;
   font-weight: bold;
 }
@@ -203,10 +215,10 @@ p {
 }
 
 .gallery-flex {
-
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 10px;
   align-items: center;
 }
 

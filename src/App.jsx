@@ -5,8 +5,13 @@ import Boot from "./assets/boot.png";
 import Minnows from "./assets/minnows.png";
 import Goldfish from "./assets/goldfish.png";
 import Clownfish from "./assets/clownfish.png";
-import React, { useState } from 'react';
-import Coin from './assets/coin.png';
+import React, { useState } from "react";
+import Coin from "./assets/coin.png";
+import IronRod from "./assets/IronRod.png";
+import SteelRod from './assets/SteelRod.png';
+import Beach from './assets/Beach.png'
+import LakeIco from './assets/lake-ico.png';
+import Atlantis from './assets/Atlantis.png';
 
 function App() {
   let currentRod = "wood";
@@ -102,32 +107,33 @@ function App() {
   const toggleGallery = (e) => {
     e.preventDefault();
     galleryHidden = !galleryHidden;
-    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;    
+    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;
     if (shopHidden == false) {
       shopHidden = true;
       document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
     }
   };
-  
+
   const closeGallery = (e) => {
     galleryHidden = true;
-    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;  
-  }
-  
+    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;
+  };
+
   const closeShop = (e) => {
     shopHidden = true;
     document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
-  }
-  
+  };
+
   const toggleShop = (e) => {
     e.preventDefault();
     shopHidden = !shopHidden;
     if (galleryHidden == false) {
       galleryHidden = true;
-      document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;  
+      document.getElementsByClassName("gallery-modal")[0].hidden =
+        galleryHidden;
     }
     document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
-  }
+  };
 
   const populateData = (name) => {
     fishes[name].hasCaught = true;
@@ -178,22 +184,22 @@ function App() {
         return Math.floor(Math.random() * 10);
     }
   };
-  
+
   const calculateCoins = (speciesOfFish, lengthOfFish) => {
     switch (speciesOfFish) {
       case "Boot":
-        return // boot does not give coins
+        return; // boot does not give coins
       case "Minnows":
-        setCount(coins += fishes.Minnows.coinValue * lengthOfFish);
+        setCount((coins += fishes.Minnows.coinValue * lengthOfFish));
         break;
       case "Goldfish":
-        setCount(coins += fishes.Goldfish.coinValue * lengthOfFish);
+        setCount((coins += fishes.Goldfish.coinValue * lengthOfFish));
         break;
       case "Clownfish":
-        setCount(coins += fishes.Clownfish.coinValue * lengthOfFish);
+        setCount((coins += fishes.Clownfish.coinValue * lengthOfFish));
         break;
     }
-  }
+  };
 
   return (
     <>
@@ -239,6 +245,46 @@ function App() {
         </div>
         <div hidden={true} className="shop-modal">
           <h1>Shop</h1>
+        <div className="current-coins">
+          <img className="coin-ico" src={Coin} />
+          Current Coins: {coins}
+        </div>
+          <h2>Fishing Rods</h2>
+          <div className="gallery-flex">
+          <div className="gallery-div">
+            <p>
+              Iron Rod <br /> Cost:
+            </p>
+            <img className="Iron Rod hasCaughtBox" src={IronRod}></img>{" "}
+          </div>
+          <div className="gallery-div">
+            <p>
+              Steel Rod <br /> Cost:
+            </p>
+            <img className="Steel Rod hasCaughtBox" src={SteelRod}></img>{" "}
+          </div>
+          </div>
+            <h2>Locale</h2>
+          <div className="gallery-flex">
+          <div className="gallery-div">
+            <p>
+              Beach <br /> Cost:
+            </p>
+            <img className="Iron Rod hasCaughtBox" src={Beach}></img>{" "}
+          </div>
+          <div className="gallery-div">
+            <p>
+              Lake <br /> Cost:
+            </p>
+            <img className="Iron Rod hasCaughtBox" src={LakeIco}></img>{" "}
+          </div>
+          <div className="gallery-div">
+            <p>
+              Atlantis <br /> Cost:
+            </p>
+            <img className="Iron Rod hasCaughtBox" src={Atlantis}></img>{" "}
+          </div>
+          </div>
           <div className="gallery-button-flex">
             <div onClick={closeShop} className="button centered">
               Close
@@ -249,12 +295,17 @@ function App() {
           <h1 className="fishing-rod-text">Wooden Pole Rod</h1>
           <img className="fishing-rod" src={fishingRodIcon1}></img>
         </div>
-        <div className="current-coins"><img className="coin-ico" src={Coin}/>Current Coins: {coins}</div>
+        <div className="current-coins">
+          <img className="coin-ico" src={Coin} />
+          Current Coins: {coins}
+        </div>
         <div className="button-flex">
           <div onClick={fish} className="button">
             FISH
           </div>
-          <div onClick={toggleShop} className="button">SHOP</div>
+          <div onClick={toggleShop} className="button">
+            SHOP
+          </div>
           <div onClick={toggleGallery} className="button">
             GALLERY
           </div>
