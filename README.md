@@ -24,4 +24,4 @@ Contributing
 If you wish to contribute to this project, please submit a pull request.
 
 Credits
-This project was created by Paul Racisz and is licensed by the [ #MIT Licesne].
+This project was created by Paul Racisz and is licensed by the [https://github.com/Paulracisz/Fishing-Game/blob/main/LICENSE#MIT Licesne].
