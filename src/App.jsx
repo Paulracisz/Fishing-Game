@@ -202,11 +202,11 @@ function App() {
   };
   
   /** TODO: \
-   * Add message explaining money calculation
-   * make rods in shop purchasable,
-   * make locales purchasable, and also add sidebar to equip different locales
-   * add X's out on items already purchased, and prevent user from purchasing twice.
-   * make record length functional in the gallery tab
+   * Add message explaining money calculation []
+   * make rods in shop purchasable, []
+   * make locales purchasable, and also add sidebar to equip different locales []
+   * add X's out on items already purchased, and prevent user from purchasing twice. []
+   * make record length functional in the gallery tab []
    * 
    * potential features:
    * make gallery icons clickable and show real picture of fish and description
