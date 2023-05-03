@@ -126,6 +126,23 @@ button:hover {
   filter: brightness(50%);
 }
 
+.coin-ico {
+  width: 2.5em;
+  margin-right: 5px;
+}
+
+.current-coins {
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.545);
+  padding: 15px;
+  font-weight: bold;
+  text-shadow: 2px 2px black;
+}
+
 .button-flex {
   display: flex;
   align-items: flex-end;
@@ -164,13 +181,14 @@ button:hover {
   align-items: center;
 }
 
-.gallery-modal {
+.gallery-modal,
+.shop-modal {
   position: absolute;
   width: 40%;
   height: 80%;
   border: 1px solid black;
   border-radius: 10px;
-  background-color: rgb(244, 200, 7);
+  background: linear-gradient(130deg, rgba(244, 200, 7, 1) 50%, rgba(255, 255, 255, 1) 50%);
 }
 
 p {

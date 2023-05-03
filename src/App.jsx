@@ -5,25 +5,65 @@ import Boot from "./assets/boot.png";
 import Minnows from "./assets/minnows.png";
 import Goldfish from "./assets/goldfish.png";
 import Clownfish from "./assets/clownfish.png";
+import React, { useState } from 'react';
+import Coin from './assets/coin.png';
 
 function App() {
   let currentRod = "wood";
   let galleryHidden = true;
   let currentLength = 0;
+  let shopHidden = true;
+  let [coins, setCount] = useState(0);
   let fishes = {
     Boot: {
       hasCaught: false,
+      coinValue: 0,
       recordLength: 0,
     },
     Minnows: {
       hasCaught: false,
+      coinValue: 1,
       recordLength: 0,
     },
     Goldfish: {
       hasCaught: false,
+      coinValue: 2,
       recordLength: 0,
     },
     Clownfish: {
+      hasCaught: false,
+      coinValue: 3,
+      recordLength: 0,
+    },
+    Sturgeon: {
+      hasCaught: false,
+      recordLength: 0,
+    },
+    Pike: {
+      hasCaught: false,
+      recordLength: 0,
+    },
+    Catfish: {
+      hasCaught: false,
+      recordLength: 0,
+    },
+    Trout: {
+      hasCaught: false,
+      recordLength: 0,
+    },
+    Flounder: {
+      hasCaught: false,
+      recordLength: 0,
+    },
+    Cod: {
+      hasCaught: false,
+      recordLength: 0,
+    },
+    Haddoc: {
+      hasCaught: false,
+      recordLength: 0,
+    },
+    Herring: {
       hasCaught: false,
       recordLength: 0,
     },
@@ -60,10 +100,34 @@ function App() {
   };
 
   const toggleGallery = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     galleryHidden = !galleryHidden;
-    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;
+    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;    
+    if (shopHidden == false) {
+      shopHidden = true;
+      document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
+    }
   };
+  
+  const closeGallery = (e) => {
+    galleryHidden = true;
+    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;  
+  }
+  
+  const closeShop = (e) => {
+    shopHidden = true;
+    document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
+  }
+  
+  const toggleShop = (e) => {
+    e.preventDefault();
+    shopHidden = !shopHidden;
+    if (galleryHidden == false) {
+      galleryHidden = true;
+      document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;  
+    }
+    document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
+  }
 
   const populateData = (name) => {
     fishes[name].hasCaught = true;
@@ -76,14 +140,17 @@ function App() {
       case "Minnows":
         currentLength = Math.floor(Math.random() * (5 - 1) + 1);
         document.getElementsByClassName("fish-ico")[0].src = Minnows;
+        calculateCoins("Minnows", currentLength);
         break;
       case "Goldfish":
         currentLength = Math.floor(Math.random() * (14 - 1) + 1);
         document.getElementsByClassName("fish-ico")[0].src = Goldfish;
+        calculateCoins("Goldfish", currentLength);
         break;
       case "Clownfish":
         currentLength = Math.floor(Math.random() * (10 - 6) + 6);
         document.getElementsByClassName("fish-ico")[0].src = Clownfish;
+        calculateCoins("Clownfish", currentLength);
         break;
     }
 
@@ -111,6 +178,22 @@ function App() {
         return Math.floor(Math.random() * 10);
     }
   };
+  
+  const calculateCoins = (speciesOfFish, lengthOfFish) => {
+    switch (speciesOfFish) {
+      case "Boot":
+        return // boot does not give coins
+      case "Minnows":
+        setCount(coins += fishes.Minnows.coinValue * lengthOfFish);
+        break;
+      case "Goldfish":
+        setCount(coins += fishes.Goldfish.coinValue * lengthOfFish);
+        break;
+      case "Clownfish":
+        setCount(coins += fishes.Clownfish.coinValue * lengthOfFish);
+        break;
+    }
+  }
 
   return (
     <>
@@ -149,7 +232,15 @@ function App() {
             </div>
           </div>
           <div className="gallery-button-flex">
-            <div onClick={toggleGallery} className="button centered">
+            <div onClick={closeGallery} className="button centered">
+              Close
+            </div>
+          </div>
+        </div>
+        <div hidden={true} className="shop-modal">
+          <h1>Shop</h1>
+          <div className="gallery-button-flex">
+            <div onClick={closeShop} className="button centered">
               Close
             </div>
           </div>
@@ -158,11 +249,12 @@ function App() {
           <h1 className="fishing-rod-text">Wooden Pole Rod</h1>
           <img className="fishing-rod" src={fishingRodIcon1}></img>
         </div>
+        <div className="current-coins"><img className="coin-ico" src={Coin}/>Current Coins: {coins}</div>
         <div className="button-flex">
           <div onClick={fish} className="button">
             FISH
           </div>
-          <div className="button">SHOP</div>
+          <div onClick={toggleShop} className="button">SHOP</div>
           <div onClick={toggleGallery} className="button">
             GALLERY
           </div>
