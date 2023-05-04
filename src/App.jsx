@@ -292,17 +292,22 @@ function App() {
 
   /** TODO: \
    * Add message explaining money calculation []
-   * make rods in shop purchasable, [X]
    * make locales purchasable, and also add sidebar to equip different locales []
    * add X's out on items already purchased, and prevent user from purchasing twice. []
    * make record length functional in the gallery tab []
    * replace window.alert() with text box []
-   *
+   * add color to the current coins text []
+   * 
+   * COMPLETE:
+   * make rods in shop purchasable, [X]
+   * add the rest of the fish [X]
+   * 
+   * 
    * potential features:
-   * make gallery icons clickable and show real picture of fish and description
-   * user accounts that store your data
-   * aquarium that shows fish you have caught
-   * skill based slider QTE on fish action.
+   * make gallery icons clickable and show real picture of fish and description []
+   * user accounts that store your data []
+   * aquarium that shows fish you have caught []
+   * skill based slider QTE on fish action. []
    *
    */
 

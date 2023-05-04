@@ -48,6 +48,10 @@ body {
   filter: grayscale(0%) !important;
 }
 
+.hasCaughtBox:hover {
+  cursor: pointer;
+}
+
 .Gallery {
   width: 50px;
   background-color: gray;
@@ -165,7 +169,6 @@ button:hover {
   width: 55px;
   height: 55px;
   padding: 5px;
-  background: rgba(0, 0, 0, 0.427)
 }
 
 .fish-flex {
