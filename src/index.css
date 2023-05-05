@@ -1,12 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -31,6 +31,13 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #1a1a1a;
+}
+
+.calc-text {
+  font-size: 35px;
+  font-weight: bold;
+	-webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 .gallery-button-flex {
@@ -61,17 +68,22 @@ body {
   filter: grayscale(100%)
 }
 
+div {
+  color: white;
+  text-shadow: 1px 1px black;
+}
+
 h1 {
   font-size: 3.2em;
   color: white;
-  text-shadow: 1px 1px black;
+	-webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
   line-height: 1.1;
 }
 
 h2 {
   text-decoration: underline;
-  color: black;
-  text-shadow: 1px 1px white;
+  color: white;
   line-height: 1.1;
 }
 
@@ -102,13 +114,13 @@ button:hover {
   justify-content: space-around;
   background-position: center;
   background-repeat: no-repeat;
-  height: 1024px;
+  height: 900px;
 }
 
 .fishing-rod-box {
   width: 100px;
   height: 100px;
-  background-color: rgb(215, 215, 215);
+  background-color: rgb(73, 73, 73);
   border: 5px solid white;
   display: flex;
   flex-direction: column;
@@ -122,14 +134,17 @@ button:hover {
 .button {
   width: 200px;
   height: 25px;
+  font-weight: bolder;
   margin: 5px;
   font-weight: bold;
-  color: black;
-  text-shadow: 1px 1px white;
+  color: white;
   background-color: rgb(221, 221, 31);
   border: 1px solid rgb(180, 180, 30);
   border-radius: 500px;
   transition: 0.2s all ease;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .button:hover {
@@ -161,8 +176,10 @@ button:hover {
 
 .fishing-rod-text {
   font-size: 16px;
-  text-shadow: 1px 1px white;
-  color: black;
+  font-weight: bolder;
+  -webkit-text-stroke-width: 0;
+  text-shadow: 1px 1px black;
+  color: white;
 }
 
 .fishing-rod {
@@ -180,7 +197,7 @@ button:hover {
 
 .fish-box {
   width: 250px;
-  background-color: rgb(215, 215, 215);
+  background-color: rgb(64, 64, 64);
   border: 5px solid white;
   display: flex;
   flex-direction: column;
@@ -197,7 +214,7 @@ button:hover {
   height: 80%;
   border: 1px solid black;
   border-radius: 10px;
-  background: linear-gradient(130deg, rgba(244, 200, 7, 1) 50%, rgba(255, 255, 255, 1) 50%);
+  background: linear-gradient(130deg, rgb(75, 77, 77) 50%, rgb(92, 30, 30) 50%);
 }
 
 text {
@@ -207,8 +224,11 @@ text {
 }
 
 p {
-  color: black;
-  text-shadow: 1px 1px white;
+  color: white;
+  -webkit-text-stroke-color: none;
+  -webkit-text-stroke-width: 0;
+  text-shadow: 1px 1px black;
+  font-weight: bold;
   font-size: 16px;
   font-weight: bold;
 }
@@ -230,9 +250,15 @@ p {
 .length-text,
 .record-text {
   font-size: 24px;
-  color: black;
-  text-shadow: 1px 1px white;
+  color: white;
+  margin: 0px;
   font-weight: bold;
+}
+
+.catch-text
+.calc-text {
+  font-size: 25px;
+  margin: 10px;
 }
 
 .fish-ico {

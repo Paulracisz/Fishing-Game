@@ -18,10 +18,12 @@ import SteelRod from "./assets/SteelRod.png";
 import Beach from "./assets/Beach.png";
 import LakeIco from "./assets/lake-ico.png";
 import Atlantis from "./assets/Atlantis.png";
+import BeachScene from './assets/beachscene.png';
 
 function App() {
   let [currentRod, setRod] = useState("wood");
   let galleryHidden = true;
+  let ownedLocales = ["default"];
   let currentLength = 0;
   let shopHidden = true;
   let [coins, setCount] = useState(0);
@@ -83,62 +85,53 @@ function App() {
     switch (RNG) {
       case 0:
         // BOOT
-        window.alert(
-          "You caught a boot... Well, at least you caught something..."
-        );
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a boot... Well, at least you caught something..."
+        document.getElementsByClassName("calc-text")[0].innerHTML = "The Boot has no monetary value."
         populateData("Boot");
         break;
       case 1:
         // MINNOWS
-        window.alert("You caught some minnows... Just small fry...");
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught some minnows... Just small fry..."
         populateData("Minnows");
         break;
       case 2:
         // GOLDFISH
-        window.alert(
-          "You caught a goldfish... Maybe you can keep it as a pet..."
-        );
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a goldfish... Maybe you can keep it as a pet..."
         populateData("Goldfish");
         break;
       case 3:
         // CLOWNFISH
-        window.alert("You caught a clownfish... What's so funny?");
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a clownfish... What's so funny?"
         populateData("Clownfish");
         break;
       case 4:
         // TUNA
-        window.alert("You caught a Tuna... Now you just need a guitar!");
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Tuna... Now you just need a guitar!"
         populateData("Tuna");
         break;
       case 5:
         // PUFFERFISH
-        window.alert(
-          "You caught a Pufferfish... I heard they are getting expensive... must be inflation!"
-        );
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Pufferfish... I heard they are getting expensive... must be inflation!"
         populateData("Pufferfish");
         break;
       case 6:
         // KOI
-        window.alert(
-          "You caught a Koi... Make sure its the real thing, and not a deKoi!"
-        );
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Koi... Make sure its the real thing, and not a deKoi!"
         populateData("Koi");
         break;
       case 7:
         // CARP
-        window.alert(
-          "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!"
-        );
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!"
         populateData("Carp");
         break;
       case 8:
         // BASS
-        window.alert("You caught a Bass... don't drop it!");
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Bass... don't drop it!"
         populateData("Bass");
         break;
       case 9:
         // SHARK
-        window.alert("You caught a Shark... We're gonna need a bigger boat...");
+        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Shark... We're gonna need a bigger boat..."
         populateData("Shark");
         break;
     }
@@ -257,7 +250,24 @@ function App() {
 
   const calculateCoins = (speciesOfFish, lengthOfFish) => {
     setCount((coins += fishes[speciesOfFish].coinValue * lengthOfFish));
+    document.getElementsByClassName("calc-text")[0].innerHTML = "Species Value: " + fishes[speciesOfFish].coinValue + " * Length Of Fish: " + lengthOfFish + " = " + fishes[speciesOfFish].coinValue * lengthOfFish
   };
+  
+  const purchaseLocale = (localeType, localeCost) => {
+    switch (localeType) {
+      case "beach":
+        if (
+          coins >= localeCost &&
+          ownedLocales.includes("beach") == false
+        ) {
+        window.alert("You have purchased the Beach Cost: -10000 Coins");
+        document.getElementsByClassName("Beach")[0].src = './src/assets/checked.png';
+        ownedLocales.push("beach");
+        document.getElementsByClassName("content-box")[0].backgroundImage = {BeachScene}
+        setCount((coins -= localeCost));
+        }
+    }
+  }
 
   const purchaseRod = (rodType, rodCost) => {
     switch (rodType) {
@@ -272,6 +282,7 @@ function App() {
           window.alert("You have purchased the Iron Rod Cost: -500 Coins");
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Iron Rod";
+            document.getElementsByClassName("Iron")[0].src = './src/assets/checked.png';
           document.getElementsByClassName("fishing-rod")[0].src =
             "./src/assets/ironRod.png";
         }
@@ -283,6 +294,7 @@ function App() {
           window.alert("You have purchased the Steel Rod Cost: -1000 Coins");
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Steel Rod";
+          document.getElementsByClassName("Steel")[0].src = './src/assets/checked.png';
           document.getElementsByClassName("fishing-rod")[0].src =
             "./src/assets/steelRod.png";
         }
@@ -291,23 +303,25 @@ function App() {
   };
 
   /** TODO: \
-   * Add message explaining money calculation []
    * make locales purchasable, and also add sidebar to equip different locales []
-   * add X's out on items already purchased, and prevent user from purchasing twice. []
    * make record length functional in the gallery tab []
-   * replace window.alert() with text box []
-   * add color to the current coins text []
-   * 
-   * COMPLETE:
-   * make rods in shop purchasable, [X]
-   * add the rest of the fish [X]
-   * 
+   * add descriptions of the fish and images modal that 
+   * pops up when the user clicks the boxes in the gallery []
+   * make locale image changing work for the content-box []
    * 
    * potential features:
-   * make gallery icons clickable and show real picture of fish and description []
    * user accounts that store your data []
    * aquarium that shows fish you have caught []
    * skill based slider QTE on fish action. []
+   * 
+   * COMPLETE:
+   * add X's out on items already purchased, and prevent user from purchasing twice. [X]
+   * Add message explaining money calculation [X]
+   * replace window.alert() with text box [X]
+   * add color to the current coins text [X]
+   * make rods in shop purchasable, [X]
+   * add the rest of the fish [X]
+   * 
    *
    */
 
@@ -315,6 +329,8 @@ function App() {
     <>
       <h1>Fishing Game</h1>
       <div className="content-box">
+          <h1 className="catch-text"></h1>
+          <h1 className="calc-text"></h1>
         <div className="fish-flex">
           <div className="fish-box">
             <p className="fish-text"></p>
@@ -422,21 +438,21 @@ function App() {
           <div className="gallery-flex">
             <div className="gallery-div">
               <p>
-                Beach <br /> Cost:
+                Beach <br /> Cost: 10,000
               </p>
-              <img className="Iron Rod hasCaughtBox" src={Beach}></img>{" "}
+              <img onClick={() => purchaseLocale("beach", 10000)} className="Beach hasCaughtBox" src={Beach}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
-                Lake <br /> Cost:
+                Lake <br /> Cost: 20,000
               </p>
-              <img className="Iron Rod hasCaughtBox" src={LakeIco}></img>{" "}
+              <img className="Lake hasCaughtBox" src={LakeIco}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
-                Atlantis <br /> Cost:
+                Atlantis <br /> Cost: 50,000
               </p>
-              <img className="Iron Rod hasCaughtBox" src={Atlantis}></img>{" "}
+              <img className="Atlantis hasCaughtBox" src={Atlantis}></img>{" "}
             </div>
           </div>
           <div className="gallery-button-flex">
