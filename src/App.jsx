@@ -18,12 +18,13 @@ import SteelRod from "./assets/SteelRod.png";
 import Beach from "./assets/Beach.png";
 import LakeIco from "./assets/lake-ico.png";
 import Atlantis from "./assets/Atlantis.png";
-import BeachScene from './assets/beachscene.png';
+import DefaultIco from "./assets/DefaultIco.png";
 
 function App() {
   let [currentRod, setRod] = useState("wood");
   let galleryHidden = true;
-  let ownedLocales = ["default"];
+  let infoWindowHidden = true;
+  let [ownedLocales, setLocale] = useState(["default"]);
   let currentLength = 0;
   let shopHidden = true;
   let [coins, setCount] = useState(0);
@@ -85,53 +86,64 @@ function App() {
     switch (RNG) {
       case 0:
         // BOOT
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a boot... Well, at least you caught something..."
-        document.getElementsByClassName("calc-text")[0].innerHTML = "The Boot has no monetary value."
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a boot... Well, at least you caught something...";
+        document.getElementsByClassName("calc-text")[0].innerHTML =
+          "The Boot has no monetary value.";
         populateData("Boot");
         break;
       case 1:
         // MINNOWS
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught some minnows... Just small fry..."
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught some minnows... Just small fry...";
         populateData("Minnows");
         break;
       case 2:
         // GOLDFISH
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a goldfish... Maybe you can keep it as a pet..."
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a goldfish... Maybe you can keep it as a pet...";
         populateData("Goldfish");
         break;
       case 3:
         // CLOWNFISH
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a clownfish... What's so funny?"
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a clownfish... What's so funny?";
         populateData("Clownfish");
         break;
       case 4:
         // TUNA
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Tuna... Now you just need a guitar!"
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Tuna... Now you just need a guitar!";
         populateData("Tuna");
         break;
       case 5:
         // PUFFERFISH
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Pufferfish... I heard they are getting expensive... must be inflation!"
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Pufferfish... I heard they are getting expensive... must be inflation!";
         populateData("Pufferfish");
         break;
       case 6:
         // KOI
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Koi... Make sure its the real thing, and not a deKoi!"
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Koi... Make sure its the real thing, and not a deKoi!";
         populateData("Koi");
         break;
       case 7:
         // CARP
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!"
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!";
         populateData("Carp");
         break;
       case 8:
         // BASS
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Bass... don't drop it!"
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Bass... don't drop it!";
         populateData("Bass");
         break;
       case 9:
         // SHARK
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Shark... We're gonna need a bigger boat..."
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Shark... We're gonna need a bigger boat...";
         populateData("Shark");
         break;
     }
@@ -250,24 +262,181 @@ function App() {
 
   const calculateCoins = (speciesOfFish, lengthOfFish) => {
     setCount((coins += fishes[speciesOfFish].coinValue * lengthOfFish));
-    document.getElementsByClassName("calc-text")[0].innerHTML = "Species Value: " + fishes[speciesOfFish].coinValue + " * Length Of Fish: " + lengthOfFish + " = " + fishes[speciesOfFish].coinValue * lengthOfFish
+    document.getElementsByClassName("calc-text")[0].innerHTML =
+      "Species Value: " +
+      fishes[speciesOfFish].coinValue +
+      " * Length Of Fish: " +
+      lengthOfFish +
+      " = " +
+      fishes[speciesOfFish].coinValue * lengthOfFish;
   };
-  
+
   const purchaseLocale = (localeType, localeCost) => {
     switch (localeType) {
       case "beach":
-        if (
-          coins >= localeCost &&
-          ownedLocales.includes("beach") == false
-        ) {
-        window.alert("You have purchased the Beach Cost: -10000 Coins");
-        document.getElementsByClassName("Beach")[0].src = './src/assets/checked.png';
-        ownedLocales.push("beach");
-        document.getElementsByClassName("content-box")[0].backgroundImage = {BeachScene}
-        setCount((coins -= localeCost));
+        if (coins >= localeCost && ownedLocales.includes("beach") == false) {
+          window.alert("You have purchased the Beach Cost: -10000 Coins");
+          document.getElementsByClassName("Beach")[0].src =
+            "./src/assets/checked.png";
+          setLocale((ownedLocales) => [...ownedLocales, "beach"]);
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.add("hasCaughtBox");
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.add("selected");
+          document
+            .getElementsByClassName("Default-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.remove("selected");
+          document.getElementsByClassName(
+            "content-box"
+          )[0].style.backgroundImage = "url(./src/assets/beachscene.png)";
+          setCount((coins -= localeCost));
         }
+        break;
+      case "lake":
+        if (coins >= localeCost && ownedLocales.includes("lake") == false) {
+          window.alert("You have purchased the Lake Cost: -20000 Coins");
+          document.getElementsByClassName("Lake")[0].src =
+            "./src/assets/checked.png";
+          setLocale((ownedLocales) => [...ownedLocales, "lake"]);
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.add("selected");
+          document
+            .getElementsByClassName("Default-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.add("hasCaughtBox");
+          document.getElementsByClassName(
+            "content-box"
+          )[0].style.backgroundImage = "url(./src/assets/lake2.png)";
+          setCount((coins -= localeCost));
+        }
+        break;
+      case "atlantis":
+        if (coins >= localeCost && ownedLocales.includes("atlantis") == false) {
+          window.alert("You have purchased Atlantis Cost: -50000 Coins");
+          document.getElementsByClassName("Atlantis")[0].src =
+            "./src/assets/checked.png";
+          setLocale((ownedLocales) => [...ownedLocales, "atlantis"]);
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.add("selected");
+          document
+            .getElementsByClassName("Default-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.add("hasCaughtBox");
+          document.getElementsByClassName(
+            "content-box"
+          )[0].style.backgroundImage = "url(./src/assets/atlantisscene.png)";
+          setCount((coins -= localeCost));
+        }
+        break;
     }
-  }
+  };
+
+  const equipLocale = (localeType) => {
+    switch (localeType) {
+      case "default":
+        if (ownedLocales.includes("default")) {
+          document
+            .getElementsByClassName("Default-Equip")[0]
+            .classList.add("selected");
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.remove("selected");
+          document.getElementsByClassName(
+            "content-box"
+          )[0].style.backgroundImage = "url(./src/assets/lake.png)";
+        }
+        break;
+      case "beach":
+        if (ownedLocales.includes("beach")) {
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.add("selected");
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Default-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.remove("selected");
+          document.getElementsByClassName(
+            "content-box"
+          )[0].style.backgroundImage = "url(./src/assets/beachscene.png)";
+        }
+        break;
+      case "lake":
+        if (ownedLocales.includes("lake")) {
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Default-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.add("selected");
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.remove("selected");
+          document.getElementsByClassName(
+            "content-box"
+          )[0].style.backgroundImage = "url(./src/assets/lake2.png)";
+        }
+        break;
+      case "atlantis":
+        if (ownedLocales.includes("atlantis")) {
+          document
+            .getElementsByClassName("Beach-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Default-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Lake-Equip")[0]
+            .classList.remove("selected");
+          document
+            .getElementsByClassName("Atlantis-Equip")[0]
+            .classList.add("selected");
+          document.getElementsByClassName(
+            "content-box"
+          )[0].style.backgroundImage = "url(./src/assets/atlantisscene.png)";
+        }
+        break;
+    }
+  };
 
   const purchaseRod = (rodType, rodCost) => {
     switch (rodType) {
@@ -282,7 +451,8 @@ function App() {
           window.alert("You have purchased the Iron Rod Cost: -500 Coins");
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Iron Rod";
-            document.getElementsByClassName("Iron")[0].src = './src/assets/checked.png';
+          document.getElementsByClassName("Iron")[0].src =
+            "./src/assets/checked.png";
           document.getElementsByClassName("fishing-rod")[0].src =
             "./src/assets/ironRod.png";
         }
@@ -291,37 +461,48 @@ function App() {
         if (coins >= rodCost && currentRod !== "steel") {
           setRod("steel");
           setCount((coins -= rodCost));
-          window.alert("You have purchased the Steel Rod Cost: -1000 Coins");
+          window.alert("You have purchased the Steel Rod Cost: -5000 Coins");
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Steel Rod";
-          document.getElementsByClassName("Steel")[0].src = './src/assets/checked.png';
+          document.getElementsByClassName("Steel")[0].src =
+            "./src/assets/checked.png";
           document.getElementsByClassName("fishing-rod")[0].src =
             "./src/assets/steelRod.png";
         }
         break;
     }
   };
+  
+  const toggleInfoWindow = (fishType) => {
+    infoWindowHidden = false;
+    switch (fishType) {
+      case "boot":
+        document.getElementsByClassName("info-pic")[0].src = "./src/assets/realboot.png"
+      break;
+    }
+  }
 
   /** TODO: \
-   * make locales purchasable, and also add sidebar to equip different locales []
    * make record length functional in the gallery tab []
-   * add descriptions of the fish and images modal that 
+   * add descriptions of the fish and images modal that
    * pops up when the user clicks the boxes in the gallery []
-   * make locale image changing work for the content-box []
-   * 
+   *
    * potential features:
    * user accounts that store your data []
    * aquarium that shows fish you have caught []
    * skill based slider QTE on fish action. []
-   * 
+   *
    * COMPLETE:
+   * make the steel rod more expensive [X]
+   * make locales purchasable, and also add sidebar to equip different locales [X]
+   * make locale image changing work for the content-box [X]
    * add X's out on items already purchased, and prevent user from purchasing twice. [X]
    * Add message explaining money calculation [X]
    * replace window.alert() with text box [X]
    * add color to the current coins text [X]
    * make rods in shop purchasable, [X]
    * add the rest of the fish [X]
-   * 
+   *
    *
    */
 
@@ -329,8 +510,8 @@ function App() {
     <>
       <h1>Fishing Game</h1>
       <div className="content-box">
-          <h1 className="catch-text"></h1>
-          <h1 className="calc-text"></h1>
+        <h1 className="catch-text"></h1>
+        <h1 className="calc-text"></h1>
         <div className="fish-flex">
           <div className="fish-box">
             <p className="fish-text"></p>
@@ -339,6 +520,10 @@ function App() {
             <img className="fish-ico"></img>
           </div>
         </div>
+        <div hidden={true} className="info-window-modal">
+          <img className="info-pic"></img>
+          <p className="info-text"></p>
+        </div>
         <div hidden={true} className="gallery-modal">
           <h1>Gallery</h1>
           <div className="gallery-flex">
@@ -346,7 +531,7 @@ function App() {
               <p>
                 Boot <br />
               </p>
-              <img className="Boot Gallery" src={Boot}></img>{" "}
+              <img onClick={() => toggleInfoWindow("boot")} className="Boot Gallery" src={Boot}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
@@ -364,37 +549,43 @@ function App() {
             </div>
             <div className="gallery-div">
               <p>
-                 Tuna<br />
+                Tuna
+                <br />
               </p>
               <img className="Tuna Gallery" src={Tuna}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
-                 Pufferfish<br />
+                Pufferfish
+                <br />
               </p>
               <img className="Pufferfish Gallery" src={Pufferfish}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
-                 Koifish<br />
+                Koifish
+                <br />
               </p>
               <img className="Koi Gallery" src={Koifish}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
-                 Carp<br />
+                Carp
+                <br />
               </p>
               <img className="Carp Gallery" src={Carp}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
-                 Bass<br />
+                Bass
+                <br />
               </p>
               <img className="Bass Gallery" src={Bass}></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
-                 Shark<br />
+                Shark
+                <br />
               </p>
               <img className="Shark Gallery" src={Shark}></img>{" "}
             </div>
@@ -425,10 +616,10 @@ function App() {
             </div>
             <div className="gallery-div">
               <p>
-                Steel Rod <br /> Cost: 1000 Coins
+                Steel Rod <br /> Cost: 5000 Coins
               </p>
               <img
-                onClick={() => purchaseRod("steel", 1000)}
+                onClick={() => purchaseRod("steel", 5000)}
                 className="Steel Rod hasCaughtBox"
                 src={SteelRod}
               ></img>{" "}
@@ -440,19 +631,31 @@ function App() {
               <p>
                 Beach <br /> Cost: 10,000
               </p>
-              <img onClick={() => purchaseLocale("beach", 10000)} className="Beach hasCaughtBox" src={Beach}></img>{" "}
+              <img
+                onClick={() => purchaseLocale("beach", 10000)}
+                className="Beach hasCaughtBox"
+                src={Beach}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Lake <br /> Cost: 20,000
               </p>
-              <img className="Lake hasCaughtBox" src={LakeIco}></img>{" "}
+              <img
+                onClick={() => purchaseLocale("lake", 20000)}
+                className="Lake hasCaughtBox"
+                src={LakeIco}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Atlantis <br /> Cost: 50,000
               </p>
-              <img className="Atlantis hasCaughtBox" src={Atlantis}></img>{" "}
+              <img
+                onClick={() => purchaseLocale("atlantis", 50000)}
+                className="Atlantis hasCaughtBox"
+                src={Atlantis}
+              ></img>{" "}
             </div>
           </div>
           <div className="gallery-button-flex">
@@ -478,6 +681,34 @@ function App() {
           </div>
           <div onClick={toggleGallery} className="button">
             GALLERY
+          </div>
+          <div className="gallery-div">
+            <img
+              onClick={() => equipLocale("default")}
+              className="hasCaughtBox selected Default-Equip Lower-Z-Index"
+              src={DefaultIco}
+            ></img>{" "}
+          </div>
+          <div className="gallery-div">
+            <img
+              onClick={() => equipLocale("beach")}
+              className="Gallery Lower-Z-Index Beach-Equip"
+              src={Beach}
+            ></img>{" "}
+          </div>
+          <div className="gallery-div">
+            <img
+              onClick={() => equipLocale("lake")}
+              className="Gallery Lower-Z-Index Lake-Equip"
+              src={LakeIco}
+            ></img>{" "}
+          </div>
+          <div className="gallery-div">
+            <img
+              onClick={() => equipLocale("atlantis")}
+              className="Gallery Lower-Z-Index Atlantis-Equip"
+              src={Atlantis}
+            ></img>{" "}
           </div>
         </div>
       </div>
