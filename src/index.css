@@ -53,6 +53,9 @@ body {
   border: 1px solid black !important;
   border-radius: 5px !important;
   filter: grayscale(0%) !important;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .Lower-Z-Index {
