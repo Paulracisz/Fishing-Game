@@ -22,8 +22,6 @@ import DefaultIco from "./assets/DefaultIco.png";
 
 /** TODO: \
  * make record length functional in the gallery tab []
- * add descriptions of the fish and images modal that
- * pops up when the user clicks the boxes in the gallery []
  * deploy the app as a github page []
  *
  * potential features:
@@ -32,6 +30,8 @@ import DefaultIco from "./assets/DefaultIco.png";
  * skill based slider QTE on fish action. []
  *
  * COMPLETE:
+ * add descriptions of the fish and images modal that
+ * pops up when the user clicks the boxes in the gallery [X]
  * make the steel rod more expensive [X]
  * make locales purchasable, and also add sidebar to equip different locales [X]
  * make locale image changing work for the content-box [X]
@@ -556,84 +556,80 @@ function App() {
           document.getElementsByClassName("info-pic")[0].src =
             "./src/assets/realclownfish.png";
           break;
-          case "Tuna":
-            document.getElementsByClassName(
-              "info-window-modal"
-            )[0].hidden = false;
-            document.getElementsByClassName("info-title")[0].innerHTML =
-              "Tuna";
-            document.getElementsByClassName("info-text")[0].innerHTML =
-              "A tuna is a saltwater fish that belongs to the tribe Thunnini, a subgrouping of the Scombridae (mackerel) family. The Thunnini comprise 15 species across five genera, the sizes of which vary greatly, ranging from the bullet tuna (max length: 50 cm or 1.6 ft, weight: 1.8 kg or 4 lb) up to the Atlantic bluefin tuna (max length: 4.6 m or 15 ft, weight: 684 kg or 1,508 lb), which averages 2 m (6.6 ft) and is believed to live up to 50 years.";
-            document.getElementsByClassName("info-link")[0].href =
-              "https://en.wikipedia.org/wiki/Tuna";
-            document.getElementsByClassName("info-pic")[0].src =
-              "./src/assets/realtuna.png";
-            break;
-            case "Pufferfish":
-              document.getElementsByClassName(
-                "info-window-modal"
-              )[0].hidden = false;
-              document.getElementsByClassName("info-title")[0].innerHTML =
-                "Pufferfish";
-              document.getElementsByClassName("info-text")[0].innerHTML =
-                "Tetraodontidae is a family of primarily marine and estuarine fish of the order Tetraodontiformes. The family includes many familiar species variously called pufferfish, puffers, balloonfish, blowfish, blowers, blowies, bubblefish, globefish, swellfish, toadfish, toadies, toadle, honey toads, sugar toads, and sea squab.They are morphologically similar to the closely related porcupinefish, which have large external spines (unlike the thinner, hidden spines of the Tetraodontidae, which are only visible when the fish have puffed up).";
-              document.getElementsByClassName("info-link")[0].href =
-                "https://en.wikipedia.org/wiki/Tetraodontidae";
-              document.getElementsByClassName("info-pic")[0].src =
-                "./src/assets/realpufferfish.png";
-              break;
-              case "Koi":
-                document.getElementsByClassName(
-                  "info-window-modal"
-                )[0].hidden = false;
-                document.getElementsByClassName("info-title")[0].innerHTML =
-                  "Koi Fish";
-                document.getElementsByClassName("info-text")[0].innerHTML =
-                  "Koi (鯉, English: /ˈkɔɪ/, Japanese: [koꜜi]), or more specifically nishikigoi (錦鯉, Japanese: [ɲiɕi̥kiꜜɡoi], literally 'brocaded carp'), are colored varieties of the Amur carp (Cyprinus rubrofuscus) that are kept for decorative purposes in outdoor koi ponds or water gardens. Koi is an informal name for the colored variants of C. rubrofuscus kept for ornamental purposes. There are many varieties of ornamental koi, originating from breeding that began in Niigata, Japan in the early 19th century.";
-                document.getElementsByClassName("info-link")[0].href =
-                  "https://en.wikipedia.org/wiki/Koi";
-                document.getElementsByClassName("info-pic")[0].src =
-                  "./src/assets/realkoi.png";
-                break;
-                case "Carp":
-                  document.getElementsByClassName(
-                    "info-window-modal"
-                  )[0].hidden = false;
-                  document.getElementsByClassName("info-title")[0].innerHTML =
-                    "Carp";
-                  document.getElementsByClassName("info-text")[0].innerHTML =
-                    "Carp are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While carp is consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
-                  document.getElementsByClassName("info-link")[0].href =
-                    "https://en.wikipedia.org/wiki/Carp";
-                  document.getElementsByClassName("info-pic")[0].src =
-                    "./src/assets/realcarp.png";
-                  break;
-                  case "Bass":
-                    document.getElementsByClassName(
-                      "info-window-modal"
-                    )[0].hidden = false;
-                    document.getElementsByClassName("info-title")[0].innerHTML =
-                      "Bass";
-                    document.getElementsByClassName("info-text")[0].innerHTML =
-                      "Bass (/bæs/) is a name shared by many species of fish. The term encompasses both freshwater and marine species, all belonging to the large order Perciformes, or perch-like fishes. The word bass comes from Middle English bars, meaning 'perch'.";
-                    document.getElementsByClassName("info-link")[0].href =
-                      "https://en.wikipedia.org/wiki/Bass_(fish)";
-                    document.getElementsByClassName("info-pic")[0].src =
-                      "./src/assets/realbass.png";
-                    break;
-                    case "Shark":
-                      document.getElementsByClassName(
-                        "info-window-modal"
-                      )[0].hidden = false;
-                      document.getElementsByClassName("info-title")[0].innerHTML =
-                        "Shark";
-                      document.getElementsByClassName("info-text")[0].innerHTML =
-                        "Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head. Modern sharks are classified within the clade Selachimorpha (or Selachii) and are the sister group to the Batoidea (rays and kin). Some sources extend the term 'shark' as an informal category including extinct members of Chondrichthyes (cartilaginous fish) with a shark-like morphology, such as hybodonts and xenacanths. Shark-like chondrichthyans such as Cladoselache and Doliodus first appeared in the Devonian Period (419-359 Ma), though some fossilized chondrichthyan-like scales are as old as the Late Ordovician (458-444 Ma). The oldest modern sharks (selachians) are known from the Early Jurassic, about 200 Ma.";
-                      document.getElementsByClassName("info-link")[0].href =
-                        "https://en.wikipedia.org/wiki/Shark";
-                      document.getElementsByClassName("info-pic")[0].src =
-                        "./src/assets/realshark.png";
-                      break;
+        case "Tuna":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML = "Tuna";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "A tuna is a saltwater fish that belongs to the tribe Thunnini, a subgrouping of the Scombridae (mackerel) family. The Thunnini comprise 15 species across five genera, the sizes of which vary greatly, ranging from the bullet tuna (max length: 50 cm or 1.6 ft, weight: 1.8 kg or 4 lb) up to the Atlantic bluefin tuna (max length: 4.6 m or 15 ft, weight: 684 kg or 1,508 lb), which averages 2 m (6.6 ft) and is believed to live up to 50 years.";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Tuna";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realtuna.png";
+          break;
+        case "Pufferfish":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML =
+            "Pufferfish";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Tetraodontidae is a family of primarily marine and estuarine fish of the order Tetraodontiformes. The family includes many familiar species variously called pufferfish, puffers, balloonfish, blowfish, blowers, blowies, bubblefish, globefish, swellfish, toadfish, toadies, toadle, honey toads, sugar toads, and sea squab.They are morphologically similar to the closely related porcupinefish, which have large external spines (unlike the thinner, hidden spines of the Tetraodontidae, which are only visible when the fish have puffed up).";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Tetraodontidae";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realpufferfish.png";
+          break;
+        case "Koi":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML =
+            "Koi Fish";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Koi (鯉, English: /ˈkɔɪ/, Japanese: [koꜜi]), or more specifically nishikigoi (錦鯉, Japanese: [ɲiɕi̥kiꜜɡoi], literally 'brocaded carp'), are colored varieties of the Amur carp (Cyprinus rubrofuscus) that are kept for decorative purposes in outdoor koi ponds or water gardens. Koi is an informal name for the colored variants of C. rubrofuscus kept for ornamental purposes. There are many varieties of ornamental koi, originating from breeding that began in Niigata, Japan in the early 19th century.";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Koi";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realkoi.png";
+          break;
+        case "Carp":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML = "Carp";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Carp are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While carp is consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Carp";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realcarp.png";
+          break;
+        case "Bass":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML = "Bass";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Bass (/bæs/) is a name shared by many species of fish. The term encompasses both freshwater and marine species, all belonging to the large order Perciformes, or perch-like fishes. The word bass comes from Middle English bars, meaning 'perch'.";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Bass_(fish)";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realbass.png";
+          break;
+        case "Shark":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML = "Shark";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head. Modern sharks are classified within the clade Selachimorpha (or Selachii) and are the sister group to the Batoidea (rays and kin). Some sources extend the term 'shark' as an informal category including extinct members of Chondrichthyes (cartilaginous fish) with a shark-like morphology, such as hybodonts and xenacanths. Shark-like chondrichthyans such as Cladoselache and Doliodus first appeared in the Devonian Period (419-359 Ma), though some fossilized chondrichthyan-like scales are as old as the Late Ordovician (458-444 Ma). The oldest modern sharks (selachians) are known from the Early Jurassic, about 200 Ma.";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Shark";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realshark.png";
+          break;
       }
     }
   };
