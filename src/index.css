@@ -128,6 +128,7 @@ h2 {
   text-decoration: underline;
   color: white;
   line-height: 1.1;
+  margin-bottom: 0;
 }
 
 button {
