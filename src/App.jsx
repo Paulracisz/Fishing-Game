@@ -19,10 +19,22 @@ import Beach from "./assets/beach.png";
 import LakeIco from "./assets/lake-ico.png";
 import Atlantis from "./assets/atlantis.png";
 import DefaultIco from "./assets/defaultIco.png";
+import Checked from './assets/checked.png';
+import RealBoot from './assets/realboot.png';
+import RealMinnows from './assets/realminnow.png';
+import RealGoldfish from './assets/realgoldfish.png';
+import RealClownfish from './assets/realclownfish.png';
+import RealTuna from './assets/realtuna.png';
+import RealPufferfish from './assets/realpufferfish.png';
+import RealKoi from './assets/realkoi.png';
+import RealCarp from './assets/realcarp.png';
+import RealBass from './assets/realbass.png';
+import RealShark from './assets/realshark.png';
 
 /** TODO: \
  * make record length functional in the gallery tab []
  * deploy the app as a github page []
+ * change all image sources to imported pictures so it will work on the deployed website []
  *
  * potential features:
  * user accounts that store your data []
@@ -302,7 +314,7 @@ function App() {
         if (coins >= localeCost && ownedLocales.includes("beach") == false) {
           window.alert("You have purchased the Beach Cost: -10000 Coins");
           document.getElementsByClassName("Beach")[0].src =
-            "./src/assets/checked.png";
+            Checked;
           setLocale((ownedLocales) => [...ownedLocales, "beach"]);
           document
             .getElementsByClassName("Beach-Equip")[0]
@@ -321,7 +333,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./src/assets/beachscene.png)";
+          )[0].style.backgroundImage = "url(./assets/beachscene.png)";
           setCount((coins -= localeCost));
         }
         break;
@@ -329,7 +341,7 @@ function App() {
         if (coins >= localeCost && ownedLocales.includes("lake") == false) {
           window.alert("You have purchased the Lake Cost: -20000 Coins");
           document.getElementsByClassName("Lake")[0].src =
-            "./src/assets/checked.png";
+            Checked;
           setLocale((ownedLocales) => [...ownedLocales, "lake"]);
           document
             .getElementsByClassName("Lake-Equip")[0]
@@ -348,7 +360,7 @@ function App() {
             .classList.add("hasCaughtBox");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./src/assets/lake2.png)";
+          )[0].style.backgroundImage = "url(./assets/lake2.png)";
           setCount((coins -= localeCost));
         }
         break;
@@ -356,7 +368,7 @@ function App() {
         if (coins >= localeCost && ownedLocales.includes("atlantis") == false) {
           window.alert("You have purchased Atlantis Cost: -50000 Coins");
           document.getElementsByClassName("Atlantis")[0].src =
-            "./src/assets/checked.png";
+            Checked;
           setLocale((ownedLocales) => [...ownedLocales, "atlantis"]);
           document
             .getElementsByClassName("Atlantis-Equip")[0]
@@ -375,7 +387,7 @@ function App() {
             .classList.add("hasCaughtBox");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./src/assets/atlantisscene.png)";
+          )[0].style.backgroundImage = "url(./assets/atlantisscene.png)";
           setCount((coins -= localeCost));
         }
         break;
@@ -400,7 +412,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./src/assets/lake.png)";
+          )[0].style.backgroundImage = "url(./assets/lake.png)";
         }
         break;
       case "beach":
@@ -419,7 +431,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./src/assets/beachscene.png)";
+          )[0].style.backgroundImage = "url(./assets/beachscene.png)";
         }
         break;
       case "lake":
@@ -438,7 +450,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./src/assets/lake2.png)";
+          )[0].style.backgroundImage = "url(./assets/lake2.png)";
         }
         break;
       case "atlantis":
@@ -457,7 +469,7 @@ function App() {
             .classList.add("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./src/assets/atlantisscene.png)";
+          )[0].style.backgroundImage = "url(./assets/atlantisscene.png)";
         }
         break;
     }
@@ -477,9 +489,9 @@ function App() {
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Iron Rod";
           document.getElementsByClassName("Iron")[0].src =
-            "./src/assets/checked.png";
+            Checked;
           document.getElementsByClassName("fishing-rod")[0].src =
-            "./src/assets/ironRod.png";
+            IronRod;
         }
         break;
       case "steel":
@@ -490,9 +502,9 @@ function App() {
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Steel Rod";
           document.getElementsByClassName("Steel")[0].src =
-            "./src/assets/checked.png";
+            Checked;
           document.getElementsByClassName("fishing-rod")[0].src =
-            "./src/assets/steelRod.png";
+            SteelRod;
         }
         break;
     }
@@ -513,7 +525,7 @@ function App() {
           document.getElementsByClassName("info-text")[0].innerHTML =
             "Boots are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While boots are consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realboot.png";
+            RealBoot;
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Boot";
           break;
@@ -526,7 +538,7 @@ function App() {
           document.getElementsByClassName("info-text")[0].innerHTML =
             "Minnow is the common name for a number of species of small freshwater fish, belonging to several genera of the families Cyprinidae and Leuciscidae. They are also known in Ireland as pinkeens. Smaller fish in the subfamily Leusciscidae are considered by anglers to be 'true' minnows.";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realminnow.png";
+            RealMinnows;
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Minnow";
           break;
@@ -539,7 +551,7 @@ function App() {
           document.getElementsByClassName("info-text")[0].innerHTML =
             "The Goldfish (Carassius auratus) is a freshwater fish in the family Cyprinidae of order Cypriniformes. It is commonly kept as a pet in indoor aquariums, and is one of the most popular aquarium fish. Goldfish released into the wild have become an invasive pest in parts of North America. Native to China, the goldfish is a relatively small member of the carp family (which also includes the Prussian carp and the crucian carp).";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realgoldfish.png";
+            RealGoldfish;
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Goldfish";
           break;
@@ -554,7 +566,7 @@ function App() {
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Clownfish";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realclownfish.png";
+            RealClownfish;
           break;
         case "Tuna":
           document.getElementsByClassName(
@@ -566,7 +578,7 @@ function App() {
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Tuna";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realtuna.png";
+            RealTuna;
           break;
         case "Pufferfish":
           document.getElementsByClassName(
@@ -579,7 +591,7 @@ function App() {
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Tetraodontidae";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realpufferfish.png";
+            RealPufferfish;
           break;
         case "Koi":
           document.getElementsByClassName(
@@ -592,7 +604,7 @@ function App() {
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Koi";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realkoi.png";
+            RealKoi;
           break;
         case "Carp":
           document.getElementsByClassName(
@@ -604,7 +616,7 @@ function App() {
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Carp";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realcarp.png";
+            RealCarp;
           break;
         case "Bass":
           document.getElementsByClassName(
@@ -616,7 +628,7 @@ function App() {
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Bass_(fish)";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realbass.png";
+            RealBass;
           break;
         case "Shark":
           document.getElementsByClassName(
@@ -628,7 +640,7 @@ function App() {
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Shark";
           document.getElementsByClassName("info-pic")[0].src =
-            "./src/assets/realshark.png";
+            RealShark;
           break;
       }
     }
