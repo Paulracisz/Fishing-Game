@@ -1,6 +1,9 @@
 # Fishing Web Game
 This project is a web-based fishing game that allows users to catch fish, earn coins, and buy better fishing rods to catch better fish. The game is built with React and Vite and features a gallery that displays the user's catch record, including the species, length in centimeters, and the longest fish caught for each species.
 
+## Deployment
+To view the deployed webpage, click here: https://paulracisz.github.io/Fishing-Game/
+
 ## Getting Started
 To get started with the game, follow these steps:
 
@@ -30,3 +33,6 @@ If you wish to contribute to this project, please submit a pull request.
 
 ## Credits and License
 This project was created by Paul Racisz and is licensed by the [MIT License](https://github.com/Paulracisz/Fishing-Game/blob/main/LICENSE).
+The icons are from: https://www.flaticon.com/
+The realistic images of the fish are from: https://www.pngegg.com/
+The descriptions of the fish are from Wikipedia: https://www.wikipedia.org/
