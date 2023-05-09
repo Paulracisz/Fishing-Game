@@ -15,10 +15,10 @@ import React, { useState } from "react";
 import Coin from "./assets/coin.png";
 import IronRod from "./assets/ironRod.png";
 import SteelRod from "./assets/steelRod.png";
-import Beach from "./assets/Beach.png";
+import Beach from "./assets/beach.png";
 import LakeIco from "./assets/lake-ico.png";
-import Atlantis from "./assets/Atlantis.png";
-import DefaultIco from "./assets/DefaultIco.png";
+import Atlantis from "./assets/atlantis.png";
+import DefaultIco from "./assets/defaultIco.png";
 
 /** TODO: \
  * make record length functional in the gallery tab []
