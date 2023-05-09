@@ -267,7 +267,7 @@ button:hover {
   border: 1px solid black;
   border-radius: 10px;
   z-index: 1;
-  background: linear-gradient(130deg, rgb(75, 77, 77) 50%, rgb(92, 30, 30) 50%);
+  background: linear-gradient(130deg, rgb(75, 77, 77) 50%, rgb(19, 23, 61) 50%);
 }
 
 .selected {
