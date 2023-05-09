@@ -30,6 +30,10 @@ import RealKoi from './assets/realkoi.png';
 import RealCarp from './assets/realcarp.png';
 import RealBass from './assets/realbass.png';
 import RealShark from './assets/realshark.png';
+import Lake from './assets/lake.png';
+import BeachScene from './assets/beachscene.png';
+import LakeScene from './assets/lake2.png';
+import AtlantisScene from './assets/atlantisscene.png';
 
 /** TODO: \
  * make record length functional in the gallery tab []
@@ -333,7 +337,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./assets/beachscene.png)";
+          )[0].style.backgroundImage = `url(${Beach})`;
           setCount((coins -= localeCost));
         }
         break;
@@ -360,7 +364,7 @@ function App() {
             .classList.add("hasCaughtBox");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./assets/lake2.png)";
+          )[0].style.backgroundImage = `url(${LakeScene})`;
           setCount((coins -= localeCost));
         }
         break;
@@ -387,7 +391,7 @@ function App() {
             .classList.add("hasCaughtBox");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./assets/atlantisscene.png)";
+          )[0].style.backgroundImage = `url(${AtlantisScene})`;
           setCount((coins -= localeCost));
         }
         break;
@@ -412,7 +416,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./assets/lake.png)";
+          )[0].style.backgroundImage = `url(${Lake})`;
         }
         break;
       case "beach":
@@ -431,7 +435,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./assets/beachscene.png)";
+          )[0].style.backgroundImage = `url(${BeachScene})`;
         }
         break;
       case "lake":
@@ -450,7 +454,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./assets/lake2.png)";
+          )[0].style.backgroundImage = `url(${LakeScene})`;
         }
         break;
       case "atlantis":
@@ -469,7 +473,7 @@ function App() {
             .classList.add("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = "url(./assets/atlantisscene.png)";
+          )[0].style.backgroundImage = `url(${AtlantisScene})`;
         }
         break;
     }
