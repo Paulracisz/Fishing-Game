@@ -20,6 +20,31 @@ import LakeIco from "./assets/lake-ico.png";
 import Atlantis from "./assets/Atlantis.png";
 import DefaultIco from "./assets/DefaultIco.png";
 
+/** TODO: \
+ * make record length functional in the gallery tab []
+ * add descriptions of the fish and images modal that
+ * pops up when the user clicks the boxes in the gallery []
+ * deploy the app as a github page []
+ *
+ * potential features:
+ * user accounts that store your data []
+ * aquarium that shows fish you have caught []
+ * skill based slider QTE on fish action. []
+ *
+ * COMPLETE:
+ * make the steel rod more expensive [X]
+ * make locales purchasable, and also add sidebar to equip different locales [X]
+ * make locale image changing work for the content-box [X]
+ * add X's out on items already purchased, and prevent user from purchasing twice. [X]
+ * Add message explaining money calculation [X]
+ * replace window.alert() with text box [X]
+ * add color to the current coins text [X]
+ * make rods in shop purchasable, [X]
+ * add the rest of the fish [X]
+ *
+ *
+ */
+
 function App() {
   let [currentRod, setRod] = useState("wood");
   let galleryHidden = true;
@@ -472,39 +497,154 @@ function App() {
         break;
     }
   };
-  
-  const toggleInfoWindow = (fishType) => {
-    infoWindowHidden = false;
-    switch (fishType) {
-      case "boot":
-        document.getElementsByClassName("info-pic")[0].src = "./src/assets/realboot.png"
-      break;
-    }
-  }
 
-  /** TODO: \
-   * make record length functional in the gallery tab []
-   * add descriptions of the fish and images modal that
-   * pops up when the user clicks the boxes in the gallery []
-   *
-   * potential features:
-   * user accounts that store your data []
-   * aquarium that shows fish you have caught []
-   * skill based slider QTE on fish action. []
-   *
-   * COMPLETE:
-   * make the steel rod more expensive [X]
-   * make locales purchasable, and also add sidebar to equip different locales [X]
-   * make locale image changing work for the content-box [X]
-   * add X's out on items already purchased, and prevent user from purchasing twice. [X]
-   * Add message explaining money calculation [X]
-   * replace window.alert() with text box [X]
-   * add color to the current coins text [X]
-   * make rods in shop purchasable, [X]
-   * add the rest of the fish [X]
-   *
-   *
-   */
+  const toggleInfoWindow = (fishType) => {
+    if (
+      document
+        .getElementsByClassName(fishType)[0]
+        .classList.contains("hasCaughtBox")
+    ) {
+      switch (fishType) {
+        case "Boot":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML = "BOOT";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Boots are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While boots are consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realboot.png";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Boot";
+          break;
+        case "Minnows":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML =
+            "Minnows";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Minnow is the common name for a number of species of small freshwater fish, belonging to several genera of the families Cyprinidae and Leuciscidae. They are also known in Ireland as pinkeens. Smaller fish in the subfamily Leusciscidae are considered by anglers to be 'true' minnows.";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realminnow.png";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Minnow";
+          break;
+        case "Goldfish":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML =
+            "Goldfish";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "The Goldfish (Carassius auratus) is a freshwater fish in the family Cyprinidae of order Cypriniformes. It is commonly kept as a pet in indoor aquariums, and is one of the most popular aquarium fish. Goldfish released into the wild have become an invasive pest in parts of North America. Native to China, the goldfish is a relatively small member of the carp family (which also includes the Prussian carp and the crucian carp).";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realgoldfish.png";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Goldfish";
+          break;
+        case "Clownfish":
+          document.getElementsByClassName(
+            "info-window-modal"
+          )[0].hidden = false;
+          document.getElementsByClassName("info-title")[0].innerHTML =
+            "Clownfish";
+          document.getElementsByClassName("info-text")[0].innerHTML =
+            "Clownfish or anemonefish are fishes from the subfamily Amphiprioninae in the family Pomacentridae. Thirty species of clownfish are recognized: one in the genus Premnas, while the remaining are in the genus Amphiprion. In the wild, they all form symbiotic mutualisms with sea anemones. Depending on the species, anemonefish are overall yellow, orange, or a reddish or blackish color, and many show white bars or patches. The largest can reach a length of 17 cm (6+1⁄2 in), while the smallest barely achieve 7–8 cm (2+3⁄4–3+1⁄4 in).";
+          document.getElementsByClassName("info-link")[0].href =
+            "https://en.wikipedia.org/wiki/Clownfish";
+          document.getElementsByClassName("info-pic")[0].src =
+            "./src/assets/realclownfish.png";
+          break;
+          case "Tuna":
+            document.getElementsByClassName(
+              "info-window-modal"
+            )[0].hidden = false;
+            document.getElementsByClassName("info-title")[0].innerHTML =
+              "Tuna";
+            document.getElementsByClassName("info-text")[0].innerHTML =
+              "A tuna is a saltwater fish that belongs to the tribe Thunnini, a subgrouping of the Scombridae (mackerel) family. The Thunnini comprise 15 species across five genera, the sizes of which vary greatly, ranging from the bullet tuna (max length: 50 cm or 1.6 ft, weight: 1.8 kg or 4 lb) up to the Atlantic bluefin tuna (max length: 4.6 m or 15 ft, weight: 684 kg or 1,508 lb), which averages 2 m (6.6 ft) and is believed to live up to 50 years.";
+            document.getElementsByClassName("info-link")[0].href =
+              "https://en.wikipedia.org/wiki/Tuna";
+            document.getElementsByClassName("info-pic")[0].src =
+              "./src/assets/realtuna.png";
+            break;
+            case "Pufferfish":
+              document.getElementsByClassName(
+                "info-window-modal"
+              )[0].hidden = false;
+              document.getElementsByClassName("info-title")[0].innerHTML =
+                "Pufferfish";
+              document.getElementsByClassName("info-text")[0].innerHTML =
+                "Tetraodontidae is a family of primarily marine and estuarine fish of the order Tetraodontiformes. The family includes many familiar species variously called pufferfish, puffers, balloonfish, blowfish, blowers, blowies, bubblefish, globefish, swellfish, toadfish, toadies, toadle, honey toads, sugar toads, and sea squab.They are morphologically similar to the closely related porcupinefish, which have large external spines (unlike the thinner, hidden spines of the Tetraodontidae, which are only visible when the fish have puffed up).";
+              document.getElementsByClassName("info-link")[0].href =
+                "https://en.wikipedia.org/wiki/Tetraodontidae";
+              document.getElementsByClassName("info-pic")[0].src =
+                "./src/assets/realpufferfish.png";
+              break;
+              case "Koi":
+                document.getElementsByClassName(
+                  "info-window-modal"
+                )[0].hidden = false;
+                document.getElementsByClassName("info-title")[0].innerHTML =
+                  "Koi Fish";
+                document.getElementsByClassName("info-text")[0].innerHTML =
+                  "Koi (鯉, English: /ˈkɔɪ/, Japanese: [koꜜi]), or more specifically nishikigoi (錦鯉, Japanese: [ɲiɕi̥kiꜜɡoi], literally 'brocaded carp'), are colored varieties of the Amur carp (Cyprinus rubrofuscus) that are kept for decorative purposes in outdoor koi ponds or water gardens. Koi is an informal name for the colored variants of C. rubrofuscus kept for ornamental purposes. There are many varieties of ornamental koi, originating from breeding that began in Niigata, Japan in the early 19th century.";
+                document.getElementsByClassName("info-link")[0].href =
+                  "https://en.wikipedia.org/wiki/Koi";
+                document.getElementsByClassName("info-pic")[0].src =
+                  "./src/assets/realkoi.png";
+                break;
+                case "Carp":
+                  document.getElementsByClassName(
+                    "info-window-modal"
+                  )[0].hidden = false;
+                  document.getElementsByClassName("info-title")[0].innerHTML =
+                    "Carp";
+                  document.getElementsByClassName("info-text")[0].innerHTML =
+                    "Carp are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While carp is consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
+                  document.getElementsByClassName("info-link")[0].href =
+                    "https://en.wikipedia.org/wiki/Carp";
+                  document.getElementsByClassName("info-pic")[0].src =
+                    "./src/assets/realcarp.png";
+                  break;
+                  case "Bass":
+                    document.getElementsByClassName(
+                      "info-window-modal"
+                    )[0].hidden = false;
+                    document.getElementsByClassName("info-title")[0].innerHTML =
+                      "Bass";
+                    document.getElementsByClassName("info-text")[0].innerHTML =
+                      "Bass (/bæs/) is a name shared by many species of fish. The term encompasses both freshwater and marine species, all belonging to the large order Perciformes, or perch-like fishes. The word bass comes from Middle English bars, meaning 'perch'.";
+                    document.getElementsByClassName("info-link")[0].href =
+                      "https://en.wikipedia.org/wiki/Bass_(fish)";
+                    document.getElementsByClassName("info-pic")[0].src =
+                      "./src/assets/realbass.png";
+                    break;
+                    case "Shark":
+                      document.getElementsByClassName(
+                        "info-window-modal"
+                      )[0].hidden = false;
+                      document.getElementsByClassName("info-title")[0].innerHTML =
+                        "Shark";
+                      document.getElementsByClassName("info-text")[0].innerHTML =
+                        "Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head. Modern sharks are classified within the clade Selachimorpha (or Selachii) and are the sister group to the Batoidea (rays and kin). Some sources extend the term 'shark' as an informal category including extinct members of Chondrichthyes (cartilaginous fish) with a shark-like morphology, such as hybodonts and xenacanths. Shark-like chondrichthyans such as Cladoselache and Doliodus first appeared in the Devonian Period (419-359 Ma), though some fossilized chondrichthyan-like scales are as old as the Late Ordovician (458-444 Ma). The oldest modern sharks (selachians) are known from the Early Jurassic, about 200 Ma.";
+                      document.getElementsByClassName("info-link")[0].href =
+                        "https://en.wikipedia.org/wiki/Shark";
+                      document.getElementsByClassName("info-pic")[0].src =
+                        "./src/assets/realshark.png";
+                      break;
+      }
+    }
+  };
+
+  const closeInfoWindow = (e) => {
+    document.getElementsByClassName("info-window-modal")[0].hidden = true;
+    console.log(
+      "hidden",
+      document.getElementsByClassName("info-window-modal")[0].hidden
+    );
+  };
 
   return (
     <>
@@ -521,8 +661,22 @@ function App() {
           </div>
         </div>
         <div hidden={true} className="info-window-modal">
-          <img className="info-pic"></img>
-          <p className="info-text"></p>
+          <div className="info-flex">
+            <img className="info-pic"></img>
+            <h2 className="info-title"></h2>
+            <p className="info-text"></p>
+            <a
+              href=""
+              rel="noopener noreferrer"
+              target="_blank"
+              className="info-link"
+            >
+              Wikipedia Link
+            </a>
+            <div onClick={closeInfoWindow} className="button centered">
+              CLOSE
+            </div>
+          </div>
         </div>
         <div hidden={true} className="gallery-modal">
           <h1>Gallery</h1>
@@ -531,63 +685,103 @@ function App() {
               <p>
                 Boot <br />
               </p>
-              <img onClick={() => toggleInfoWindow("boot")} className="Boot Gallery" src={Boot}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Boot")}
+                className="Boot Gallery"
+                src={Boot}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Minnows <br />
               </p>
-              <img className="Minnows Gallery" src={Minnows}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Minnows")}
+                className="Minnows Gallery"
+                src={Minnows}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>Goldfish</p>
-              <img className="Goldfish Gallery" src={Goldfish}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Goldfish")}
+                className="Goldfish Gallery"
+                src={Goldfish}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>Clownfish</p>
-              <img className="Clownfish Gallery" src={Clownfish}></img>
+              <img
+                onClick={() => toggleInfoWindow("Clownfish")}
+                className="Clownfish Gallery"
+                src={Clownfish}
+              ></img>
             </div>
             <div className="gallery-div">
               <p>
                 Tuna
                 <br />
               </p>
-              <img className="Tuna Gallery" src={Tuna}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Tuna")}
+                className="Tuna Gallery"
+                src={Tuna}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Pufferfish
                 <br />
               </p>
-              <img className="Pufferfish Gallery" src={Pufferfish}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Pufferfish")}
+                className="Pufferfish Gallery"
+                src={Pufferfish}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Koifish
                 <br />
               </p>
-              <img className="Koi Gallery" src={Koifish}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Koi")}
+                className="Koi Gallery"
+                src={Koifish}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Carp
                 <br />
               </p>
-              <img className="Carp Gallery" src={Carp}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Carp")}
+                className="Carp Gallery"
+                src={Carp}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Bass
                 <br />
               </p>
-              <img className="Bass Gallery" src={Bass}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Bass")}
+                className="Bass Gallery"
+                src={Bass}
+              ></img>{" "}
             </div>
             <div className="gallery-div">
               <p>
                 Shark
                 <br />
               </p>
-              <img className="Shark Gallery" src={Shark}></img>{" "}
+              <img
+                onClick={() => toggleInfoWindow("Shark")}
+                className="Shark Gallery"
+                src={Shark}
+              ></img>{" "}
             </div>
           </div>
           <div className="gallery-button-flex">
