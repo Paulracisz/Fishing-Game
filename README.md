@@ -33,6 +33,10 @@ If you wish to contribute to this project, please submit a pull request.
 
 ## Credits and License
 This project was created by Paul Racisz and is licensed by the [MIT License](https://github.com/Paulracisz/Fishing-Game/blob/main/LICENSE).
+<br/>
 The icons are from: https://www.flaticon.com/
+<br/>
 The realistic images of the fish are from: https://www.pngegg.com/
+<br/>
 The descriptions of the fish are from Wikipedia: https://www.wikipedia.org/
+<br/>
