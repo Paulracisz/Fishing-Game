@@ -14,7 +14,7 @@ import Shark from "./assets/shark.png";
 import React, { useState } from "react";
 import Coin from "./assets/coin.png";
 import IronRod from "./assets/ironRod.png";
-import SteelRod from "./assets/SteelRod.png";
+import SteelRod from "./assets/steelRod.png";
 import Beach from "./assets/Beach.png";
 import LakeIco from "./assets/lake-ico.png";
 import Atlantis from "./assets/Atlantis.png";
