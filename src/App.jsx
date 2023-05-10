@@ -37,15 +37,17 @@ import AtlantisScene from './assets/atlantisscene.png';
 
 /** TODO: \
  * make record length functional in the gallery tab []
- * deploy the app as a github page []
- * change all image sources to imported pictures so it will work on the deployed website []
- *
- * potential features:
- * user accounts that store your data []
- * aquarium that shows fish you have caught []
- * skill based slider QTE on fish action. []
- *
- * COMPLETE:
+ * make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens []
+ * add header that says equip locales for the locale boxes []
+*
+* potential features:
+* user accounts that store your data []
+* aquarium that shows fish you have caught []
+* skill based slider QTE on fish action. []
+*
+* COMPLETE:
+* change all image sources to imported pictures so it will work on the deployed website [x]
+ * deploy the app as a github page [X]
  * add descriptions of the fish and images modal that
  * pops up when the user clicks the boxes in the gallery [X]
  * make the steel rod more expensive [X]
@@ -686,7 +688,7 @@ function App() {
               Wikipedia Link
             </a>
             <div onClick={closeInfoWindow} className="button centered">
-              CLOSE
+              Close
             </div>
           </div>
         </div>
