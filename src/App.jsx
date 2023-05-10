@@ -36,13 +36,25 @@ import LakeScene from "./assets/lake2.png";
 import AtlantisScene from "./assets/atlantisscene.png";
 
 /** TODO: \
- * make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens []
- * fix content moving with more text []
  *
- * potential features:
- * user accounts that store your data []
- * aquarium that shows fish you have caught []
- * skill based slider QTE on fish action. []
+ * FEATURES:
+ * Make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens []
+ * Fix content moving with more text []
+ * Make the info window a little more stylish []
+ *
+ * POTENTIAL FEATURES:
+ * User accounts that store your data []
+ * Aquarium that shows fish you have caught []
+ * Skill based slider QTE on fish action. []
+ * Add color schemes []
+ *
+ * REFCATORS:
+ * Get rid of redundant code in as many places as possible []
+ * Possibly break different JSX fragments into different components []
+ * Add more comments to the code explaining what different things do []
+ * Clean up and organize CSS files []
+ * Sort imports []
+ * Dynamically display record lengths in JSX instead of hardcoded indexes []
  *
  * COMPLETE:
  * make record length functional in the gallery tab [X]
@@ -60,7 +72,6 @@ import AtlantisScene from "./assets/atlantisscene.png";
  * add color to the current coins text [X]
  * make rods in shop purchasable, [X]
  * add the rest of the fish [X]
- *
  *
  */
 
