@@ -248,6 +248,24 @@ button:hover {
   justify-content: center;
 }
 
+.equip-locale-flex {
+  display: flex;
+  flex-direction: row;
+  float: right;
+  justify-content: center;
+  align-items: center;
+}
+
+.equip-header {
+}
+
+.equip-header-flex {
+margin-right: 7em;
+margin-bottom: -5px;
+justify-self: center;
+ align-self: flex-end;
+}
+
 .fish-box {
   width: 250px;
   background-color: rgb(64, 64, 64);
@@ -263,8 +281,8 @@ button:hover {
 .gallery-modal,
 .shop-modal {
   position: absolute;
-  width: 40%;
-  height: 80%;
+  width: 40vw;
+  height: 80vh;
   border: 1px solid black;
   border-radius: 10px;
   z-index: 1;
@@ -300,7 +318,7 @@ p {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  padding: 10px;
+  padding: 20px;
   align-items: center;
 }
 

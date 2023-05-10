@@ -19,34 +19,35 @@ import Beach from "./assets/beach.png";
 import LakeIco from "./assets/lake-ico.png";
 import Atlantis from "./assets/atlantis.png";
 import DefaultIco from "./assets/defaultIco.png";
-import Checked from './assets/checked.png';
-import RealBoot from './assets/realboot.png';
-import RealMinnows from './assets/realminnow.png';
-import RealGoldfish from './assets/realgoldfish.png';
-import RealClownfish from './assets/realclownfish.png';
-import RealTuna from './assets/realtuna.png';
-import RealPufferfish from './assets/realpufferfish.png';
-import RealKoi from './assets/realkoi.png';
-import RealCarp from './assets/realcarp.png';
-import RealBass from './assets/realbass.png';
-import RealShark from './assets/realshark.png';
-import Lake from './assets/lake.png';
-import BeachScene from './assets/beachscene.png';
-import LakeScene from './assets/lake2.png';
-import AtlantisScene from './assets/atlantisscene.png';
+import Checked from "./assets/checked.png";
+import RealBoot from "./assets/realboot.png";
+import RealMinnows from "./assets/realminnow.png";
+import RealGoldfish from "./assets/realgoldfish.png";
+import RealClownfish from "./assets/realclownfish.png";
+import RealTuna from "./assets/realtuna.png";
+import RealPufferfish from "./assets/realpufferfish.png";
+import RealKoi from "./assets/realkoi.png";
+import RealCarp from "./assets/realcarp.png";
+import RealBass from "./assets/realbass.png";
+import RealShark from "./assets/realshark.png";
+import Lake from "./assets/lake.png";
+import BeachScene from "./assets/beachscene.png";
+import LakeScene from "./assets/lake2.png";
+import AtlantisScene from "./assets/atlantisscene.png";
 
 /** TODO: \
- * make record length functional in the gallery tab []
  * make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens []
- * add header that says equip locales for the locale boxes []
-*
-* potential features:
-* user accounts that store your data []
-* aquarium that shows fish you have caught []
-* skill based slider QTE on fish action. []
-*
-* COMPLETE:
-* change all image sources to imported pictures so it will work on the deployed website [x]
+ * fix content moving with more text []
+ *
+ * potential features:
+ * user accounts that store your data []
+ * aquarium that shows fish you have caught []
+ * skill based slider QTE on fish action. []
+ *
+ * COMPLETE:
+ * make record length functional in the gallery tab [X]
+ * add header that says equip locales for the locale boxes [X]
+ * change all image sources to imported pictures so it will work on the deployed website [x]
  * deploy the app as a github page [X]
  * add descriptions of the fish and images modal that
  * pops up when the user clicks the boxes in the gallery [X]
@@ -66,61 +67,94 @@ import AtlantisScene from './assets/atlantisscene.png';
 function App() {
   let [currentRod, setRod] = useState("wood");
   let galleryHidden = true;
-  let infoWindowHidden = true;
+  const [fishObj, setFish] = useState([
+    {
+      type: "Boot",
+      recordLength: 0,
+    },
+    {
+      type: "Minnows",
+      recordLength: 0,
+    },
+    {
+      type: "Goldfish",
+      recordLength: 0,
+    },
+    {
+      type: "Clownfish",
+      recordLength: 0,
+    },
+    {
+      type: "Tuna",
+      recordLength: 0,
+    },
+    {
+      type: "Pufferfish",
+      recordLength: 0,
+    },
+    {
+      type: "Koi",
+      recordLength: 0,
+    },
+    {
+      type: "Carp",
+      recordLength: 0,
+    },
+    {
+      type: "Bass",
+      recordLength: 0,
+    },
+    {
+      type: "Shark",
+      recordLength: 0,
+    },
+  ]);
+
   let [ownedLocales, setLocale] = useState(["default"]);
   let currentLength = 0;
   let shopHidden = true;
+
   let [coins, setCount] = useState(0);
   let fishes = {
     Boot: {
       hasCaught: false,
       coinValue: 0,
-      recordLength: 0,
     },
     Minnows: {
       hasCaught: false,
       coinValue: 1,
-      recordLength: 0,
     },
     Goldfish: {
       hasCaught: false,
       coinValue: 2,
-      recordLength: 0,
     },
     Clownfish: {
       hasCaught: false,
       coinValue: 3,
-      recordLength: 0,
     },
     Tuna: {
       hasCaught: false,
       coinValue: 4,
-      recordLength: 0,
     },
     Pufferfish: {
       hasCaught: false,
       coinValue: 5,
-      recordLength: 0,
     },
     Koi: {
       hasCaught: false,
       coinValue: 6,
-      recordLength: 0,
     },
     Carp: {
       hasCaught: false,
       coinValue: 7,
-      recordLength: 0,
     },
     Bass: {
       hasCaught: false,
       coinValue: 8,
-      recordLength: 0,
     },
     Shark: {
       hasCaught: false,
       coinValue: 9,
-      recordLength: 0,
     },
   };
   const fish = (e) => {
@@ -279,15 +313,16 @@ function App() {
     }
 
     // Calculate if its a record length, and if it is, update the obj for the gallery
-    if (fishes[name].recordLength < currentLength) {
-      fishes[name].recordLength = currentLength;
+    const tempArray = [...fishObj]; // get a temp array of the fish state array
+    const fishIndex = tempArray.findIndex((x) => x.type === name); // find the fish in question, and get its index
+    if (tempArray[fishIndex].recordLength < currentLength) {
+      tempArray[fishIndex].recordLength = currentLength; // set the new record length
+      setFish(tempArray);
     }
 
     // Populating the HTML
     document.getElementsByClassName("length-text")[0].innerHTML =
       "Length: " + currentLength + "CM";
-    document.getElementsByClassName("record-text")[0].innerHTML =
-      "Current Record: " + fishes[name].recordLength + "CM";
     document.getElementsByClassName("fish-text")[0].innerHTML = `${name}`;
     document.getElementsByClassName(name)[0].classList.add("hasCaughtBox");
   };
@@ -319,8 +354,7 @@ function App() {
       case "beach":
         if (coins >= localeCost && ownedLocales.includes("beach") == false) {
           window.alert("You have purchased the Beach Cost: -10000 Coins");
-          document.getElementsByClassName("Beach")[0].src =
-            Checked;
+          document.getElementsByClassName("Beach")[0].src = Checked;
           setLocale((ownedLocales) => [...ownedLocales, "beach"]);
           document
             .getElementsByClassName("Beach-Equip")[0]
@@ -346,8 +380,7 @@ function App() {
       case "lake":
         if (coins >= localeCost && ownedLocales.includes("lake") == false) {
           window.alert("You have purchased the Lake Cost: -20000 Coins");
-          document.getElementsByClassName("Lake")[0].src =
-            Checked;
+          document.getElementsByClassName("Lake")[0].src = Checked;
           setLocale((ownedLocales) => [...ownedLocales, "lake"]);
           document
             .getElementsByClassName("Lake-Equip")[0]
@@ -373,8 +406,7 @@ function App() {
       case "atlantis":
         if (coins >= localeCost && ownedLocales.includes("atlantis") == false) {
           window.alert("You have purchased Atlantis Cost: -50000 Coins");
-          document.getElementsByClassName("Atlantis")[0].src =
-            Checked;
+          document.getElementsByClassName("Atlantis")[0].src = Checked;
           setLocale((ownedLocales) => [...ownedLocales, "atlantis"]);
           document
             .getElementsByClassName("Atlantis-Equip")[0]
@@ -494,10 +526,8 @@ function App() {
           window.alert("You have purchased the Iron Rod Cost: -500 Coins");
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Iron Rod";
-          document.getElementsByClassName("Iron")[0].src =
-            Checked;
-          document.getElementsByClassName("fishing-rod")[0].src =
-            IronRod;
+          document.getElementsByClassName("Iron")[0].src = Checked;
+          document.getElementsByClassName("fishing-rod")[0].src = IronRod;
         }
         break;
       case "steel":
@@ -507,10 +537,8 @@ function App() {
           window.alert("You have purchased the Steel Rod Cost: -5000 Coins");
           document.getElementsByClassName("fishing-rod-text")[0].innerHTML =
             "Steel Rod";
-          document.getElementsByClassName("Steel")[0].src =
-            Checked;
-          document.getElementsByClassName("fishing-rod")[0].src =
-            SteelRod;
+          document.getElementsByClassName("Steel")[0].src = Checked;
+          document.getElementsByClassName("fishing-rod")[0].src = SteelRod;
         }
         break;
     }
@@ -530,8 +558,7 @@ function App() {
           document.getElementsByClassName("info-title")[0].innerHTML = "BOOT";
           document.getElementsByClassName("info-text")[0].innerHTML =
             "Boots are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While boots are consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealBoot;
+          document.getElementsByClassName("info-pic")[0].src = RealBoot;
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Boot";
           break;
@@ -543,8 +570,7 @@ function App() {
             "Minnows";
           document.getElementsByClassName("info-text")[0].innerHTML =
             "Minnow is the common name for a number of species of small freshwater fish, belonging to several genera of the families Cyprinidae and Leuciscidae. They are also known in Ireland as pinkeens. Smaller fish in the subfamily Leusciscidae are considered by anglers to be 'true' minnows.";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealMinnows;
+          document.getElementsByClassName("info-pic")[0].src = RealMinnows;
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Minnow";
           break;
@@ -556,8 +582,7 @@ function App() {
             "Goldfish";
           document.getElementsByClassName("info-text")[0].innerHTML =
             "The Goldfish (Carassius auratus) is a freshwater fish in the family Cyprinidae of order Cypriniformes. It is commonly kept as a pet in indoor aquariums, and is one of the most popular aquarium fish. Goldfish released into the wild have become an invasive pest in parts of North America. Native to China, the goldfish is a relatively small member of the carp family (which also includes the Prussian carp and the crucian carp).";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealGoldfish;
+          document.getElementsByClassName("info-pic")[0].src = RealGoldfish;
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Goldfish";
           break;
@@ -571,8 +596,7 @@ function App() {
             "Clownfish or anemonefish are fishes from the subfamily Amphiprioninae in the family Pomacentridae. Thirty species of clownfish are recognized: one in the genus Premnas, while the remaining are in the genus Amphiprion. In the wild, they all form symbiotic mutualisms with sea anemones. Depending on the species, anemonefish are overall yellow, orange, or a reddish or blackish color, and many show white bars or patches. The largest can reach a length of 17 cm (6+1⁄2 in), while the smallest barely achieve 7–8 cm (2+3⁄4–3+1⁄4 in).";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Clownfish";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealClownfish;
+          document.getElementsByClassName("info-pic")[0].src = RealClownfish;
           break;
         case "Tuna":
           document.getElementsByClassName(
@@ -583,8 +607,7 @@ function App() {
             "A tuna is a saltwater fish that belongs to the tribe Thunnini, a subgrouping of the Scombridae (mackerel) family. The Thunnini comprise 15 species across five genera, the sizes of which vary greatly, ranging from the bullet tuna (max length: 50 cm or 1.6 ft, weight: 1.8 kg or 4 lb) up to the Atlantic bluefin tuna (max length: 4.6 m or 15 ft, weight: 684 kg or 1,508 lb), which averages 2 m (6.6 ft) and is believed to live up to 50 years.";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Tuna";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealTuna;
+          document.getElementsByClassName("info-pic")[0].src = RealTuna;
           break;
         case "Pufferfish":
           document.getElementsByClassName(
@@ -596,8 +619,7 @@ function App() {
             "Tetraodontidae is a family of primarily marine and estuarine fish of the order Tetraodontiformes. The family includes many familiar species variously called pufferfish, puffers, balloonfish, blowfish, blowers, blowies, bubblefish, globefish, swellfish, toadfish, toadies, toadle, honey toads, sugar toads, and sea squab.They are morphologically similar to the closely related porcupinefish, which have large external spines (unlike the thinner, hidden spines of the Tetraodontidae, which are only visible when the fish have puffed up).";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Tetraodontidae";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealPufferfish;
+          document.getElementsByClassName("info-pic")[0].src = RealPufferfish;
           break;
         case "Koi":
           document.getElementsByClassName(
@@ -609,8 +631,7 @@ function App() {
             "Koi (鯉, English: /ˈkɔɪ/, Japanese: [koꜜi]), or more specifically nishikigoi (錦鯉, Japanese: [ɲiɕi̥kiꜜɡoi], literally 'brocaded carp'), are colored varieties of the Amur carp (Cyprinus rubrofuscus) that are kept for decorative purposes in outdoor koi ponds or water gardens. Koi is an informal name for the colored variants of C. rubrofuscus kept for ornamental purposes. There are many varieties of ornamental koi, originating from breeding that began in Niigata, Japan in the early 19th century.";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Koi";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealKoi;
+          document.getElementsByClassName("info-pic")[0].src = RealKoi;
           break;
         case "Carp":
           document.getElementsByClassName(
@@ -621,8 +642,7 @@ function App() {
             "Carp are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While carp is consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Carp";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealCarp;
+          document.getElementsByClassName("info-pic")[0].src = RealCarp;
           break;
         case "Bass":
           document.getElementsByClassName(
@@ -633,8 +653,7 @@ function App() {
             "Bass (/bæs/) is a name shared by many species of fish. The term encompasses both freshwater and marine species, all belonging to the large order Perciformes, or perch-like fishes. The word bass comes from Middle English bars, meaning 'perch'.";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Bass_(fish)";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealBass;
+          document.getElementsByClassName("info-pic")[0].src = RealBass;
           break;
         case "Shark":
           document.getElementsByClassName(
@@ -645,8 +664,7 @@ function App() {
             "Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head. Modern sharks are classified within the clade Selachimorpha (or Selachii) and are the sister group to the Batoidea (rays and kin). Some sources extend the term 'shark' as an informal category including extinct members of Chondrichthyes (cartilaginous fish) with a shark-like morphology, such as hybodonts and xenacanths. Shark-like chondrichthyans such as Cladoselache and Doliodus first appeared in the Devonian Period (419-359 Ma), though some fossilized chondrichthyan-like scales are as old as the Late Ordovician (458-444 Ma). The oldest modern sharks (selachians) are known from the Early Jurassic, about 200 Ma.";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Shark";
-          document.getElementsByClassName("info-pic")[0].src =
-            RealShark;
+          document.getElementsByClassName("info-pic")[0].src = RealShark;
           break;
       }
     }
@@ -698,6 +716,8 @@ function App() {
             <div className="gallery-div">
               <p>
                 Boot <br />
+                Record Length: <br />
+                {fishObj[0].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Boot")}
@@ -708,6 +728,8 @@ function App() {
             <div className="gallery-div">
               <p>
                 Minnows <br />
+                Record Length: <br />
+                {fishObj[1].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Minnows")}
@@ -716,7 +738,12 @@ function App() {
               ></img>{" "}
             </div>
             <div className="gallery-div">
-              <p>Goldfish</p>
+              <p>
+                Goldfish
+                <br />
+                Record Length: <br />
+                {fishObj[2].recordLength}cm
+              </p>
               <img
                 onClick={() => toggleInfoWindow("Goldfish")}
                 className="Goldfish Gallery"
@@ -724,7 +751,12 @@ function App() {
               ></img>{" "}
             </div>
             <div className="gallery-div">
-              <p>Clownfish</p>
+              <p>
+                Clownfish
+                <br />
+                Record Length:
+                <br /> {fishObj[3].recordLength}cm
+              </p>
               <img
                 onClick={() => toggleInfoWindow("Clownfish")}
                 className="Clownfish Gallery"
@@ -735,6 +767,8 @@ function App() {
               <p>
                 Tuna
                 <br />
+                Record Length: <br />
+                {fishObj[4].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Tuna")}
@@ -746,6 +780,8 @@ function App() {
               <p>
                 Pufferfish
                 <br />
+                Record Length: <br />
+                {fishObj[5].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Pufferfish")}
@@ -757,6 +793,8 @@ function App() {
               <p>
                 Koifish
                 <br />
+                Record Length: <br />
+                {fishObj[6].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Koi")}
@@ -767,6 +805,9 @@ function App() {
             <div className="gallery-div">
               <p>
                 Carp
+                <br />
+                Record Length:
+                <br /> {fishObj[7].recordLength}cm
                 <br />
               </p>
               <img
@@ -779,6 +820,8 @@ function App() {
               <p>
                 Bass
                 <br />
+                Record Length:
+                <br /> {fishObj[8].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Bass")}
@@ -789,6 +832,9 @@ function App() {
             <div className="gallery-div">
               <p>
                 Shark
+                <br />
+                Record Length: <br />
+                {fishObj[9].recordLength}cm
                 <br />
               </p>
               <img
@@ -880,6 +926,9 @@ function App() {
           <img className="coin-ico" src={Coin} />
           Current Coins: {coins}
         </div>
+        <div className="equip-header-flex">
+          <h2 className="equip-header">Equip Locale</h2>
+        </div>
         <div className="button-flex">
           <div onClick={fish} className="button">
             FISH
@@ -890,33 +939,35 @@ function App() {
           <div onClick={toggleGallery} className="button">
             GALLERY
           </div>
-          <div className="gallery-div">
-            <img
-              onClick={() => equipLocale("default")}
-              className="hasCaughtBox selected Default-Equip Lower-Z-Index"
-              src={DefaultIco}
-            ></img>{" "}
-          </div>
-          <div className="gallery-div">
-            <img
-              onClick={() => equipLocale("beach")}
-              className="Gallery Lower-Z-Index Beach-Equip"
-              src={Beach}
-            ></img>{" "}
-          </div>
-          <div className="gallery-div">
-            <img
-              onClick={() => equipLocale("lake")}
-              className="Gallery Lower-Z-Index Lake-Equip"
-              src={LakeIco}
-            ></img>{" "}
-          </div>
-          <div className="gallery-div">
-            <img
-              onClick={() => equipLocale("atlantis")}
-              className="Gallery Lower-Z-Index Atlantis-Equip"
-              src={Atlantis}
-            ></img>{" "}
+          <div className="equip-locale-flex">
+            <div className="gallery-div">
+              <img
+                onClick={() => equipLocale("default")}
+                className="hasCaughtBox selected Default-Equip Lower-Z-Index"
+                src={DefaultIco}
+              ></img>{" "}
+            </div>
+            <div className="gallery-div">
+              <img
+                onClick={() => equipLocale("beach")}
+                className="Gallery Lower-Z-Index Beach-Equip"
+                src={Beach}
+              ></img>{" "}
+            </div>
+            <div className="gallery-div">
+              <img
+                onClick={() => equipLocale("lake")}
+                className="Gallery Lower-Z-Index Lake-Equip"
+                src={LakeIco}
+              ></img>{" "}
+            </div>
+            <div className="gallery-div">
+              <img
+                onClick={() => equipLocale("atlantis")}
+                className="Gallery Lower-Z-Index Atlantis-Equip"
+                src={Atlantis}
+              ></img>{" "}
+            </div>
           </div>
         </div>
       </div>
