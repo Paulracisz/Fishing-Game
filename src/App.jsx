@@ -41,10 +41,12 @@ import AtlantisScene from "./assets/atlantisscene.png";
  * Make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens []
  * Fix content moving with more text []
  * Make the info window a little more stylish []
+ * Update README when the project is done with finished pictures []
  *
  * POTENTIAL FEATURES:
  * User accounts that store your data []
  * Aquarium that shows fish you have caught []
+ * Screenshot function for the aquarium []
  * Skill based slider QTE on fish action. []
  * Add color schemes []
  *
@@ -57,21 +59,21 @@ import AtlantisScene from "./assets/atlantisscene.png";
  * Dynamically display record lengths in JSX instead of hardcoded indexes []
  *
  * COMPLETE:
- * make record length functional in the gallery tab [X]
- * add header that says equip locales for the locale boxes [X]
- * change all image sources to imported pictures so it will work on the deployed website [x]
- * deploy the app as a github page [X]
- * add descriptions of the fish and images modal that
- * pops up when the user clicks the boxes in the gallery [X]
- * make the steel rod more expensive [X]
- * make locales purchasable, and also add sidebar to equip different locales [X]
- * make locale image changing work for the content-box [X]
- * add X's out on items already purchased, and prevent user from purchasing twice. [X]
+ * Make record length functional in the gallery tab [X]
+ * Add header that says equip locales for the locale boxes [X]
+ * Change all image sources to imported pictures so it will work on the deployed website [x]
+ * Deploy the app as a github page [X]
+ * Add descriptions of the fish and images modal that
+ * Pops up when the user clicks the boxes in the gallery [X]
+ * Make the steel rod more expensive [X]
+ * Make locales purchasable, and also add sidebar to equip different locales [X]
+ * Make locale image changing work for the content-box [X]
+ * Add X's out on items already purchased, and prevent user from purchasing twice. [X]
  * Add message explaining money calculation [X]
- * replace window.alert() with text box [X]
- * add color to the current coins text [X]
- * make rods in shop purchasable, [X]
- * add the rest of the fish [X]
+ * Replace window.alert() with text box [X]
+ * Add color to the current coins text [X]
+ * Make rods in shop purchasable, [X]
+ * Add the rest of the fish [X]
  *
  */
 
