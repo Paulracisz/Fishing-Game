@@ -337,7 +337,7 @@ function App() {
             .classList.remove("selected");
           document.getElementsByClassName(
             "content-box"
-          )[0].style.backgroundImage = `url(${Beach})`;
+          )[0].style.backgroundImage = `url(${BeachScene})`;
           setCount((coins -= localeCost));
         }
         break;
