@@ -49,6 +49,7 @@ import AtlantisScene from "./assets/atlantisscene.png";
  * Screenshot function for the aquarium []
  * Skill based slider QTE on fish action. []
  * Add color schemes []
+ * Different fish in different locales []
  *
  * REFCATORS:
  * Get rid of redundant code in as many places as possible []
