@@ -940,9 +940,6 @@ function App() {
           <img className="coin-ico" src={Coin} />
           Current Coins: {coins}
         </div>
-        <div className="equip-header-flex">
-          <h2 className="equip-header">Equip Locale</h2>
-        </div>
         <div className="button-flex">
           <div onClick={fish} className="button">
             FISH
@@ -954,6 +951,9 @@ function App() {
             GALLERY
           </div>
           <div className="equip-locale-flex">
+        <div className="equip-header-flex">
+          <h2 className="equip-header">Equip Locale</h2>
+        </div>
             <div className="gallery-div">
               <img
                 onClick={() => equipLocale("default")}
