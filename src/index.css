@@ -384,17 +384,10 @@ and (max-width : 600px) {
   width: 100vw;
 }
 
-.gallery-div {
-  width: 1em;
-}
-
 .equip-locale-flex {
   flex-direction: column;
 }
 
-.current-coins {
-  width: 1em;
-}
 
 .button {
   width: 6em;
@@ -423,13 +416,12 @@ h2 {
   width: 1em;
 }
 
-.fishing-rod {
-  width: 2em;
-}
 
 .current-coins {
   font-size: 16px;
   text-shadow: 1px 1px black;
+  text-align: center;
+  margin: 0;
 }
 
 .length-text {

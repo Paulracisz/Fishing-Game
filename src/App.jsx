@@ -952,7 +952,7 @@ function App() {
           </div>
           <div className="equip-locale-flex">
         <div className="equip-header-flex">
-          <h2 className="equip-header">Equip Locale</h2>
+          <h2 className="equip-header">Equip Locale:</h2>
         </div>
             <div className="gallery-div">
               <img
