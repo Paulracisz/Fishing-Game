@@ -180,7 +180,7 @@ button:hover {
 }
 
 .button {
-  width: 200px;
+  width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -263,6 +263,92 @@ button:hover {
   align-items: center;
 }
 
+.aquarium {
+  width: 50em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 25em;
+  background-position: center;
+  object-fit:cover;
+  border-top: 15px solid rgb(3, 3, 3);
+  border-radius: 10px;
+  border-bottom: 15px solid rgb(3, 3, 3);
+  background-size: contain;
+  background-image: url("./assets/aqback.jpg");
+}
+
+
+
+@-webkit-keyframes swim
+{
+  0% {left: 10%}
+	90% {left: 50%;}
+	100% {left: 80%;}
+}
+
+@keyframes swim
+{
+	0% {left: 10%}
+	70% {left: 50%;}
+	100% {left: 80%;}
+}
+
+@-webkit-keyframes swimup
+{
+  0% {top: 10%}
+	90% {top: 50%;}
+	100% {top: 70%;}
+}
+
+@keyframes swimup
+{
+	0% {top: 20%}
+	70% {top: 50%;}
+	100% {top: 70%;}
+}
+
+@keyframes flip
+{
+	0% {-webkit-transform: scaleX(0);
+    transform: scaleX(1);
+  }
+	100% {-webkit-transform: scaleX(1);
+    transform: scaleX(-1)}
+}
+
+.aq-boot,
+.aq-minnows,
+.aq-goldfish,
+.aq-clownfish,
+.aq-tuna,
+.aq-pufferfish,
+.aq-koifish,
+.aq-carp,
+.aq-bass,
+.aq-shark {
+  width: 8em;
+  margin: 4px;
+  position: absolute;
+	-webkit-animation: swim 5s;
+	animation: swim 5s infinite, flip 5s infinite, swimup 10s infinite;
+  animation-direction: alternate-reverse;
+}
+
+.aq-boot {
+  animation-delay: 2s;
+}
+
+.aq-minnows {
+  animation-delay: 3s;
+}
+
+.aq-goldfish {
+  animation-delay: 1s;
+}
+
+
 
 .equip-header-flex {
 justify-self: flex-start;
@@ -282,7 +368,8 @@ justify-self: flex-start;
 }
 
 .gallery-modal,
-.shop-modal {
+.shop-modal,
+.aquarium-modal {
   position: absolute;
   padding: 5px;
   border: 1px solid black;
@@ -397,10 +484,16 @@ and (max-width : 600px) {
   width: 80vw;
 }
 
+.aquarium {
+  width: 20em;
+  height: 25em;
+  background-image: none;
+  background-color: rgb(19, 137, 150);
+}
 
 .button {
-  width: 6em;
-  font-size: 1em;
+  width: 7em;
+  font-size: 10px;
   margin: 0;
 }
 
@@ -443,6 +536,24 @@ h2 {
 
 .fishing-rod-box {
   width: 6em;
+}
+
+.aq-boot,
+.aq-minnows,
+.aq-goldfish,
+.aq-clownfish,
+.aq-tuna,
+.aq-pufferfish,
+.aq-koifish,
+.aq-carp,
+.aq-bass,
+.aq-shark {
+  width: 6em;
+  margin: 4px;
+  position: absolute;
+	-webkit-animation: swim 5s;
+	animation: swim 5s infinite, flip 5s infinite;
+  animation-direction: alternate-reverse;
 }
 
 }
