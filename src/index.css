@@ -46,6 +46,7 @@ body {
 .info-flex {
   display: flex;
   flex-direction: column;
+  width: 80vw;
   align-items: center;
   justify-content: center;
 }
@@ -386,6 +387,14 @@ and (max-width : 600px) {
 
 .equip-locale-flex {
   flex-direction: column;
+}
+
+.info-pic {
+  width: 10em;
+}
+
+.info-flex {
+  width: 80vw;
 }
 
 
