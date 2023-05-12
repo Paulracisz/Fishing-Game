@@ -57,6 +57,7 @@ import AtlantisScene from "./assets/atlantisscene.png";
 * Clean up and organize CSS files []
 * Sort imports []
 * Dynamically display record lengths in JSX instead of hardcoded indexes []
+* Add TypeScript, and re-write it in TypeScript []
 *
 * COMPLETE:
  * Fix content moving with more text [X]
