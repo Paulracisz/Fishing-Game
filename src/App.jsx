@@ -41,6 +41,8 @@ import AtlantisScene from "./assets/atlantisscene.png";
  * Make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens []
  * Make the info window a little more stylish []
  * Update README when the project is done with finished pictures []
+ * Aqaurium: Make 9 different keyframe animations so all the fish move differently []
+ * Aquarium: Make keyframe animations work on mobile too []
 *
 * POTENTIAL FEATURES:
 * User accounts that store your data []
