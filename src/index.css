@@ -46,7 +46,7 @@ body {
 .info-flex {
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  width: 40vw;
   align-items: center;
   justify-content: center;
 }
@@ -328,8 +328,6 @@ button:hover {
 	animation: swim 4s infinite, swimup 4s infinite, flip 3s infinite;
   animation-direction: alternate-reverse;
 }
-
-
 
 .equip-header-flex {
 justify-self: flex-start;
