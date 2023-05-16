@@ -266,47 +266,38 @@ button:hover {
 .aquarium {
   width: 50em;
   display: flex;
+  z-index: 4;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
   height: 25em;
   background-position: center;
   object-fit:cover;
-  border-top: 15px solid rgb(3, 3, 3);
   border-radius: 10px;
-  border-bottom: 15px solid rgb(3, 3, 3);
   background-size: contain;
   background-image: url("./assets/aqback.jpg");
 }
 
-
-
 @-webkit-keyframes swim
 {
-  0% {left: 10%}
-	90% {left: 50%;}
-	100% {left: 80%;}
+	0% {transform: rotate(0deg)}
+	70% {transform: rotate(-10deg)}
+	100% {transform: rotate(10deg)}
 }
 
 @keyframes swim
 {
-	0% {left: 10%}
-	70% {left: 50%;}
-	100% {left: 80%;}
+	0% {left: 5vw}
+  25% {left: 10vw}
+	100% {left: 30vw}
 }
 
-@-webkit-keyframes swimup
+@keyframes swimup 
 {
-  0% {top: 10%}
-	90% {top: 50%;}
-	100% {top: 70%;}
-}
-
-@keyframes swimup
-{
-	0% {top: 20%}
-	70% {top: 50%;}
-	100% {top: 70%;}
+	0% {top: 20vh}
+  25% { top: 30vh}
+  50% { top: 35vh}
+	100% {top: 36vh}
 }
 
 @keyframes flip
@@ -316,12 +307,13 @@ button:hover {
   }
 	100% {-webkit-transform: scaleX(1);
     transform: scaleX(-1)}
+    
 }
 
 .aq-boot,
 .aq-minnows,
-.aq-goldfish,
 .aq-clownfish,
+.aq-goldfish,
 .aq-tuna,
 .aq-pufferfish,
 .aq-koifish,
@@ -330,22 +322,11 @@ button:hover {
 .aq-shark {
   width: 8em;
   margin: 4px;
+  z-index: 1;
   position: absolute;
-	-webkit-animation: swim 5s;
-	animation: swim 5s infinite, flip 5s infinite, swimup 10s infinite;
+	-webkit-animation: swim 4s infinite;
+	animation: swim 4s infinite, swimup 4s infinite, flip 3s infinite;
   animation-direction: alternate-reverse;
-}
-
-.aq-boot {
-  animation-delay: 2s;
-}
-
-.aq-minnows {
-  animation-delay: 3s;
-}
-
-.aq-goldfish {
-  animation-delay: 1s;
 }
 
 
@@ -372,6 +353,8 @@ justify-self: flex-start;
 .aquarium-modal {
   position: absolute;
   padding: 5px;
+  overflow-x: hidden;
+  overflow-y: hidden;
   border: 1px solid black;
   border-radius: 10px;
   z-index: 1;
@@ -480,12 +463,19 @@ and (max-width : 600px) {
   width: 10em;
 }
 
+@keyframes swim
+{
+	0% {left: 5vw}
+	100% {left: 40vw}
+}
+
 .info-flex {
   width: 80vw;
 }
 
 .aquarium {
   width: 20em;
+  z-index: 4;
   height: 25em;
   background-image: none;
   background-color: rgb(19, 137, 150);
