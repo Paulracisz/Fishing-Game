@@ -50,7 +50,8 @@ import AtlantisScene from "./assets/atlantisscene.png";
  * User accounts that store your data []
  * Skill based slider QTE on fish action. []
  * Add color schemes []
- * Different fish in different locales []
+ * Different fish in different locales 
+ * Beach - Crab, Lake 2 - Turtle, Atlantis - Mermaid []
 *
 * REFCATORS:
 * Get rid of redundant code in as many places as possible []
