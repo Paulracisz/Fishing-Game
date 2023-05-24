@@ -1,5 +1,8 @@
-import "./App.css";
+// stylesheets
+
 import "./index.css";
+
+// images
 import fishingRodIcon1 from "./assets/fishing-rod.png";
 import Boot from "./assets/boot.png";
 import Minnows from "./assets/minnows.png";
@@ -38,30 +41,29 @@ import AtlantisScene from "./assets/atlantisscene.png";
 /** TODO: \
  *
  * FEATURES:
- * Make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens []
- * Make the info window a little more stylish []
  * Update README when the project is done with finished pictures []
  * Aqaurium: Make 9 different keyframe animations so all the fish move differently []
  * Aquarium: Make keyframe animations work on mobile too []
-*
-* POTENTIAL FEATURES:
-* User accounts that store your data []
-* Aquarium that shows fish you have caught []
-* Screenshot function for the aquarium []
-* Skill based slider QTE on fish action. []
-* Add color schemes []
-* Different fish in different locales []
-*
-* REFCATORS:
-* Get rid of redundant code in as many places as possible []
-* Possibly break different JSX fragments into different components []
-* Add more comments to the code explaining what different things do []
-* Clean up and organize CSS files []
-* Sort imports []
-* Dynamically display record lengths in JSX instead of hardcoded indexes []
-* Add TypeScript, and re-write it in TypeScript []
+ *
+ * POTENTIAL FEATURES:
+ * User accounts that store your data []
+ * Aquarium that shows fish you have caught []
+ * Screenshot function for the aquarium []
+ * Skill based slider QTE on fish action. []
+ * Add color schemes []
+ * Different fish in different locales []
+ *
+ * REFCATORS:
+ * Get rid of redundant code in as many places as possible []
+ * Possibly break different JSX fragments into different components []
+ * Add more comments to the code explaining what different things do []
+ * Dynamically display record lengths in JSX instead of hardcoded indexes []
 *
 * COMPLETE:
+ * Clean up and organize CSS files [X]
+ * Sort imports [X]
+ * Make dynamic stylings with flexboxes, so it will look good on mobile devices and smaller screens [X]
+ * Make the info window a little more stylish [X]
  * Fix content moving with more text [X]
  * Make record length functional in the gallery tab [X]
  * Add header that says equip locales for the locale boxes [X]
@@ -78,7 +80,7 @@ import AtlantisScene from "./assets/atlantisscene.png";
  * Add color to the current coins text [X]
  * Make rods in shop purchasable, [X]
  * Add the rest of the fish [X]
- *
+ * 
  */
 
 function App() {
@@ -175,6 +177,11 @@ function App() {
       coinValue: 9,
     },
   };
+  
+  const fishAnimations = () => {
+    
+  }
+  
   const fish = (e) => {
     e.preventDefault();
     let RNG = fishRNG(currentRod);
@@ -183,7 +190,7 @@ function App() {
         // BOOT
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught a boot... Well, at least you caught something...";
-          document.getElementsByClassName("aq-boot")[0].hidden = false
+        document.getElementsByClassName("aq-boot")[0].hidden = false;
         document.getElementsByClassName("calc-text")[0].innerHTML =
           "The Boot has no monetary value.";
         populateData("Boot");
@@ -192,61 +199,63 @@ function App() {
         // MINNOWS
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught some minnows... Just small fry...";
-          document.getElementsByClassName("aq-minnows")[0].hidden = false
+        document.getElementsByClassName("aq-minnows")[0].hidden = false;
         populateData("Minnows");
         break;
       case 2:
         // GOLDFISH
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught a goldfish... Maybe you can keep it as a pet...";
-          document.getElementsByClassName("aq-goldfish")[0].hidden = false
+        document.getElementsByClassName("aq-goldfish")[0].hidden = false;
         populateData("Goldfish");
         break;
       case 3:
         // CLOWNFISH
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught a clownfish... What's so funny?";
-          document.getElementsByClassName("aq-clownfish")[0].hidden = false
+        document.getElementsByClassName("aq-clownfish")[0].hidden = false;
         populateData("Clownfish");
         break;
       case 4:
         // TUNA
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Tuna... Now you just need a guitar!";
-        document.getElementsByClassName("aq-tuna")[0].hidden = false
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Tuna... Now you just need a guitar!";
+        document.getElementsByClassName("aq-tuna")[0].hidden = false;
         populateData("Tuna");
         break;
       case 5:
         // PUFFERFISH
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught a Pufferfish... I heard they are getting expensive... must be inflation!";
-          document.getElementsByClassName("aq-pufferfish")[0].hidden = false
+        document.getElementsByClassName("aq-pufferfish")[0].hidden = false;
         populateData("Pufferfish");
         break;
       case 6:
         // KOI
-        document.getElementsByClassName("catch-text")[0].innerHTML = "You caught a Koi... Make sure its the real thing, and not a deKoi!";
-          document.getElementsByClassName("aq-koifish")[0].hidden = false
+        document.getElementsByClassName("catch-text")[0].innerHTML =
+          "You caught a Koi... Make sure its the real thing, and not a deKoi!";
+        document.getElementsByClassName("aq-koifish")[0].hidden = false;
         populateData("Koi");
         break;
       case 7:
         // CARP
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!";
-          document.getElementsByClassName("aq-carp")[0].hidden = false
+        document.getElementsByClassName("aq-carp")[0].hidden = false;
         populateData("Carp");
         break;
       case 8:
         // BASS
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught a Bass... don't drop it!";
-          document.getElementsByClassName("aq-bass")[0].hidden = false
+        document.getElementsByClassName("aq-bass")[0].hidden = false;
         populateData("Bass");
         break;
       case 9:
         // SHARK
         document.getElementsByClassName("catch-text")[0].innerHTML =
           "You caught a Shark... We're gonna need a bigger boat...";
-          document.getElementsByClassName("aq-shark")[0].hidden = false
+        document.getElementsByClassName("aq-shark")[0].hidden = false;
         populateData("Shark");
         break;
     }
@@ -261,17 +270,18 @@ function App() {
       document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
     }
   };
-  
-  
+
   const toggleAquarium = (e) => {
     e.preventDefault();
     aquariumHidden = !aquariumHidden;
-    document.getElementsByClassName("aquarium-modal")[0].hidden = aquariumHidden;
+    document.getElementsByClassName("aquarium-modal")[0].hidden =
+      aquariumHidden;
     if (shopHidden == false || galleryHidden == false) {
       shopHidden = true;
       galleryHidden = true;
       document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
-      document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;
+      document.getElementsByClassName("gallery-modal")[0].hidden =
+        galleryHidden;
     }
   };
 
@@ -299,6 +309,7 @@ function App() {
   const populateData = (name) => {
     fishes[name].hasCaught = true;
     // get length, will be based on the fish
+    calculateCoins(name, currentLength);
     switch (name) {
       case "Boot":
         currentLength = Math.floor(Math.random() * (30 - 15) + 15);
@@ -749,20 +760,20 @@ function App() {
             </div>
           </div>
         </div>
-        
+
         <div hidden={true} className="aquarium-modal">
           <h1>Aquarium</h1>
           <div className="aquarium">
-          <img hidden={true} src={Boot} className="aq-boot"></img>
-          <img hidden={true} src={Minnows} className="aq-minnows"></img>
-          <img hidden={true} src={Goldfish} className="aq-goldfish"></img>
-          <img hidden={true} src={Clownfish} className="aq-clownfish"></img>
-          <img hidden={true} src={Tuna} className="aq-tuna"></img>
-          <img hidden={true} src={Pufferfish} className="aq-pufferfish"></img>
-          <img hidden={true} src={Koifish} className="aq-koifish"></img>
-          <img hidden={true} src={Carp} className="aq-carp"></img>
-          <img hidden={true} src={Bass} className="aq-bass"></img>
-          <img hidden={true} src={Shark} className="aq-shark"></img>
+            <img hidden={true} src={Boot} className="aq-boot"></img>
+            <img hidden={true} src={Minnows} className="aq-minnows"></img>
+            <img hidden={true} src={Goldfish} className="aq-goldfish"></img>
+            <img hidden={true} src={Clownfish} className="aq-clownfish"></img>
+            <img hidden={true} src={Tuna} className="aq-tuna"></img>
+            <img hidden={true} src={Pufferfish} className="aq-pufferfish"></img>
+            <img hidden={true} src={Koifish} className="aq-koifish"></img>
+            <img hidden={true} src={Carp} className="aq-carp"></img>
+            <img hidden={true} src={Bass} className="aq-bass"></img>
+            <img hidden={true} src={Shark} className="aq-shark"></img>
           </div>
         </div>
         <div hidden={true} className="gallery-modal">
@@ -990,13 +1001,14 @@ function App() {
           </div>
           <div onClick={toggleGallery} className="button">
             GALLERY
-          </div>  <div onClick={toggleAquarium} className="button">
+          </div>{" "}
+          <div onClick={toggleAquarium} className="button">
             AQUARIUM
           </div>
           <div className="equip-locale-flex">
-        <div className="equip-header-flex">
-          <h2 className="equip-header">Equip Locale:</h2>
-        </div>
+            <div className="equip-header-flex">
+              <h2 className="equip-header">Equip Locale:</h2>
+            </div>
             <div className="gallery-div">
               <img
                 onClick={() => equipLocale("default")}
