@@ -48,19 +48,19 @@ import AtlantisScene from "./assets/atlantisscene.png";
  *
  * POTENTIAL FEATURES:
  * User accounts that store your data []
- * Aquarium that shows fish you have caught []
- * Screenshot function for the aquarium []
  * Skill based slider QTE on fish action. []
  * Add color schemes []
  * Different fish in different locales []
- *
- * REFCATORS:
- * Get rid of redundant code in as many places as possible []
- * Possibly break different JSX fragments into different components []
- * Add more comments to the code explaining what different things do []
- * Dynamically display record lengths in JSX instead of hardcoded indexes []
- *
- * COMPLETE:
+*
+* REFCATORS:
+* Get rid of redundant code in as many places as possible []
+* Possibly break different JSX fragments into different components []
+* Add more comments to the code explaining what different things do []
+* Dynamically display record lengths in JSX instead of hardcoded indexes []
+*
+* COMPLETE:
+ * Aquarium that shows fish you have caught [X]
+ * Screenshot function for the aquarium [X]
  * Aqaurium: Make 9 different keyframe animations so all the fish move differently [X]
  * Aquarium: Make keyframe animations work on mobile too [X]
  * Clean up and organize CSS files [X]

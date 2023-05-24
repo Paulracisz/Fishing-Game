@@ -219,8 +219,8 @@
   background-position: center;
   object-fit:cover;
   border-radius: 10px;
-  background-size: contain;
-  background-image: url("./assets/aqback.jpg");
+  background-size: cover;
+  background-image: url('./assets/aqback2.jpg');
 }
 
 .aq-boot,
@@ -651,8 +651,6 @@ and (max-width : 600px) {
   width: 20em;
   z-index: 4;
   height: 25em;
-  background-image: none;
-  background-color: rgb(19, 137, 150);
 }
 
 .button {
