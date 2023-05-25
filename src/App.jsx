@@ -1071,6 +1071,7 @@ function App() {
         
         <div hidden={true} className="slider-modal">
           <div className="slider-flex">
+            <p>Land the white marker in the green area to recieve a 2x Multiplier towards the coin value of your next catch!</p>
           <div className="slider">
             <div className="slider-tick"></div>
           </div>

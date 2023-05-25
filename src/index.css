@@ -302,9 +302,8 @@ justify-self: center;
   position: absolute;
   background-color: #242424;
   width: 250px;
-  height: 100px;
+  height: 250px;
   border: 1px solid white;
-  border-radius: 500px;
 }
 
 .slider-flex {
