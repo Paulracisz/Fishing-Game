@@ -48,7 +48,6 @@ import AtlantisScene from "./assets/atlantisscene.png";
  *
  * POTENTIAL FEATURES:
  * User accounts that store your data []
- * Skill based slider QTE on fish action. []
  * Add color schemes []
  * Different fish in different locales 
  * Beach - Crab, Lake 2 - Turtle, Atlantis - Mermaid []
@@ -60,6 +59,7 @@ import AtlantisScene from "./assets/atlantisscene.png";
 * Dynamically display record lengths in JSX instead of hardcoded indexes []
 *
 * COMPLETE:
+* Skill based slider QTE on fish action. [X]
  * Aquarium that shows fish you have caught [X]
  * Screenshot function for the aquarium [X]
  * Aqaurium: Make 9 different keyframe animations so all the fish move differently [X]
@@ -463,6 +463,7 @@ function App() {
     sliderTick.style.animationPlayState = 'paused'
     setTimeout(() => {
       sliderModal.hidden = true;
+      setNoFish(false);
       sliderTick.style.animationPlayState = 'running' 
       sliderTick.style.borderColor = "white"
     }, "1000"); 
