@@ -89,6 +89,8 @@ import AtlantisScene from "./assets/atlantisscene.png";
 
 function App() {
   let [currentRod, setRod] = useState("wood");
+  let [currentMultiplier, setMultiplier] = useState(1)
+  let [noFishing, setNoFish] = useState(false)
   let galleryHidden = true;
   let aquariumHidden = true;
   const [fishObj, setFish] = useState([
@@ -420,49 +422,74 @@ function App() {
   let [coins, setCount] = useState(0);
   let fishes = {
     Boot: {
-      hasCaught: false,
       coinValue: 0,
     },
     Minnows: {
-      hasCaught: false,
       coinValue: 1,
     },
     Goldfish: {
-      hasCaught: false,
       coinValue: 2,
     },
     Clownfish: {
-      hasCaught: false,
       coinValue: 3,
     },
     Tuna: {
-      hasCaught: false,
       coinValue: 4,
     },
     Pufferfish: {
-      hasCaught: false,
       coinValue: 5,
     },
     Koi: {
-      hasCaught: false,
       coinValue: 6,
     },
     Carp: {
-      hasCaught: false,
       coinValue: 7,
     },
     Bass: {
-      hasCaught: false,
       coinValue: 8,
     },
     Shark: {
-      hasCaught: false,
       coinValue: 9,
     },
   };
 
+  
+  const sliderStop = (e) => {
+    setNoFish(false);
+    let sliderModal = document.getElementsByClassName("slider-modal")[0]
+    e.preventDefault();
+    let sliderTick = document.getElementsByClassName("slider-tick")[0]
+    calculateSlider();
+    sliderTick.style.animationPlayState = 'paused'
+    setTimeout(() => {
+      sliderModal.hidden = true;
+      sliderTick.style.animationPlayState = 'running' 
+      sliderTick.style.borderColor = "white"
+    }, "1000"); 
+  }
+  
+  const calculateSlider = (e) => {
+    let sliderTick = document.getElementsByClassName("slider-tick")[0]
+    let sliderTickPos = sliderTick.offsetLeft
+    // these are positions inside of the green 
+    if (sliderTickPos < 140 && sliderTickPos > 86) {
+      // if its in the green return multiplier of 2 for coins earned
+      sliderTick.style.borderColor = "green"
+      setMultiplier(2)
+    }
+    // if its not, do not multiply coins earned
+    
+    else  {
+      sliderTick.style.borderColor = "red"
+    setMultiplier(1)
+    }
+  }
 
   const fish = (e) => {
+    if (noFishing) return
+    setNoFish(true);
+    let sliderModal = document.getElementsByClassName("slider-modal")[0]
+    sliderModal.hidden = false;
     e.preventDefault();
     let RNG = fishRNG(currentRod);
     switch (RNG) {
@@ -587,7 +614,6 @@ function App() {
   };
 
   const populateData = (name) => {
-    fishes[name].hasCaught = true;
     // get length, will be based on the fish
     calculateCoins(name, currentLength);
     switch (name) {
@@ -669,14 +695,15 @@ function App() {
   };
 
   const calculateCoins = (speciesOfFish, lengthOfFish) => {
-    setCount((coins += fishes[speciesOfFish].coinValue * lengthOfFish));
+    let result = fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier
+    setCount((coins += fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier));
     document.getElementsByClassName("calc-text")[0].innerHTML =
       "Species Value: " +
       fishes[speciesOfFish].coinValue +
       " * Length Of Fish: " +
       lengthOfFish +
-      " = " +
-      fishes[speciesOfFish].coinValue * lengthOfFish;
+      " * " +
+      "Current Multipler: " + currentMultiplier + " = " + result
   };
 
   const purchaseLocale = (localeType, localeCost) => {
@@ -1040,6 +1067,15 @@ function App() {
             </div>
           </div>
         </div>
+        
+        <div hidden={true} className="slider-modal">
+          <div className="slider-flex">
+          <div className="slider">
+            <div className="slider-tick"></div>
+          </div>
+          <div className="button" onClick={sliderStop}>Catch!</div>
+          </div>
+        </div>
 
         <div hidden={true} className="aquarium-modal">
           <h1>Aquarium</h1>
@@ -1288,10 +1324,11 @@ function App() {
           <div onClick={toggleAquarium} className="button">
             AQUARIUM
           </div>
-          <div className="equip-locale-flex">
+          <div className="locale-parent-flex">
             <div className="equip-header-flex">
-              <h2 className="equip-header">Equip Locale:</h2>
+              <h2 className="equip-header">Equip <br/>Locale:</h2>
             </div>
+            <div className="equip-flex">
             <div className="gallery-div">
               <img
                 onClick={() => equipLocale("default")}
@@ -1320,9 +1357,10 @@ function App() {
                 src={Atlantis}
               ></img>{" "}
             </div>
+            </div>
+          </div>
           </div>
         </div>
-      </div>
     </>
   );
 }

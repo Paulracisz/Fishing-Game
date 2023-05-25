@@ -52,8 +52,6 @@
 .calc-text {
   font-size: 35px;
   font-weight: bold;
-	-webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
 }
 
 .gallery-button-flex {
@@ -239,8 +237,21 @@
 }
 
 .equip-header-flex {
-justify-self: flex-start;
- align-self: flex-start;
+justify-self: center;
+ align-self: center;
+}
+
+.equip-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.locale-parent-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .fish-box {
@@ -285,6 +296,43 @@ justify-self: flex-start;
   justify-content: center;
   padding: 20px;
   align-items: center;
+}
+
+.slider-modal {
+  position: absolute;
+  background-color: #242424;
+  width: 250px;
+  height: 100px;
+  border: 1px solid white;
+  border-radius: 500px;
+}
+
+.slider-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  align-items: center;
+}
+
+.slider {
+  width: 75%;
+  height: 50px;
+  background-image: linear-gradient(to right, #ff0000, #f36400, #dd9200, #c1b700, #9fd600, #9fd600, #9fd600, #9fd600, #c1b700, #dd9200, #f36400, #ff0000);
+}
+
+.slider-tick {
+  height: 2.6em;
+  width: 5%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0);
+  border: 4px solid white;
+  animation: tickmove 0.5s infinite alternate-reverse;
+}
+
+@keyframes tickmove {
+  from {left: 75%;}
+  to {left: 16%;}
 }
 
 .fish-text,
@@ -345,9 +393,8 @@ div {
 h1 {
   font-size: 2.2em;
   color: white;
+  text-shadow: 1px 1px black;
   text-align: center;
-	-webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
   line-height: 1.1;
 }
 
@@ -629,6 +676,11 @@ and (max-width : 600px) {
 .gallery-flex {
   width: 80vw;
   flex-direction: row;
+}
+
+
+.equip-flex {
+  flex-direction: column;
 }
 
 .content-box {
