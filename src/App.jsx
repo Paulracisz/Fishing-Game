@@ -757,8 +757,8 @@ function App() {
         .getElementsByClassName("Beach-Equip")[0]
         .classList.contains("selected")
     ) {
-      let diceRoll = Math.floor(Math.random() * 2);
-      if (diceRoll === 1) {
+      let diceRoll = Math.floor(Math.random() * 10);
+      if (diceRoll === 9) {
         document.getElementsByClassName("crab")[0].hidden = false;
         window.alert("You have obtained the crab! Check your aquarium!");
       }
