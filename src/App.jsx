@@ -98,6 +98,7 @@ function App() {
   let [noFishing, setNoFish] = useState(false); // used to stop the user from hitting the fish button if the QTE is running.
   let galleryHidden = true;
   let aquariumHidden = true;
+  const audio = new Audio(sound)
   const [fishObj, setFish] = useState([
     {
       type: "Boot",
@@ -741,14 +742,9 @@ function App() {
 
   const crabParty = (e) => {
     e.preventDefault();
-    const audio = new Audio(sound)
     if (audio.paused) {
     audio.play()
-    audio.volume(0.2)
-    let crab = document.getElementsByClassName("crab")[0]
-    crab.style.animationPlayState = "running";
     window.alert("Crab Party");
-    audio.pause();
     } else {
       audio.pause();
    }
@@ -761,8 +757,8 @@ function App() {
         .getElementsByClassName("Beach-Equip")[0]
         .classList.contains("selected")
     ) {
-      let diceRoll = Math.floor(Math.random() * 10);
-      if (diceRoll === 9) {
+      let diceRoll = Math.floor(Math.random() * 2);
+      if (diceRoll === 1) {
         document.getElementsByClassName("crab")[0].hidden = false;
         window.alert("You have obtained the crab! Check your aquarium!");
       }

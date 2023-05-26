@@ -301,7 +301,6 @@ justify-self: center;
   background: linear-gradient(130deg, rgb(75, 77, 77) 50%, rgb(19, 23, 61) 50%);
 }
 
-
 .selected {
   border: 2px solid greenyellow !important;
 }
