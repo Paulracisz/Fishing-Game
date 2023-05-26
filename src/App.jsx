@@ -1206,7 +1206,7 @@ function App() {
         </div>
         <div hidden={true} className="gallery-modal">
           <h1>Gallery</h1>
-          <div className="gallery-flex">
+          <div className="gallery-flex gallery-style">
             <div className="gallery-div">
               <p>
                 Boot <br />

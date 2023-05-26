@@ -313,11 +313,14 @@ justify-self: center;
 .gallery-flex {
   display: flex;
   flex-wrap: wrap;
-  width: 50vw;
   flex-direction: row;
   justify-content: center;
   padding: 20px;
   align-items: center;
+}
+
+.gallery-style {
+  width: 50vw;
 }
 
 .slider-modal {
