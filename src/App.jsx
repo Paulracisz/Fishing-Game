@@ -2,8 +2,11 @@
 
 import "./index.css";
 
+// sound
+import sound from './assets/crabparty.mp3'
+
 // libraries
-import html2canvas from 'html2canvas';
+import html2canvas from "html2canvas";
 
 // images
 import fishingRodIcon1 from "./assets/fishing-rod.png";
@@ -40,26 +43,28 @@ import Lake from "./assets/lake.png";
 import BeachScene from "./assets/beachscene.png";
 import LakeScene from "./assets/lake2.png";
 import AtlantisScene from "./assets/atlantisscene.png";
+import Crab from "./assets/crab.png";
 
 /** TODO: \
  *
  * FEATURES:
  * Update README when the project is done with finished pictures []
+ * Try to get the flip fish animation working again to spruce up the aquarium fish a bit []
  *
  * POTENTIAL FEATURES:
  * User accounts that store your data []
  * Add color schemes []
- * Different fish in different locales 
+ * Different fish in different locales
  * Beach - Crab, Lake 2 - Turtle, Atlantis - Mermaid []
-*
-* REFCATORS:
-* Get rid of redundant code in as many places as possible []
-* Possibly break different JSX fragments into different components []
-* Add more comments to the code explaining what different things do []
-* Dynamically display record lengths in JSX instead of hardcoded indexes []
-*
-* COMPLETE:
-* Skill based slider QTE on fish action. [X]
+ *
+ * REFCATORS:
+ * Get rid of redundant code in as many places as possible []
+ * Possibly break different JSX fragments into different components []
+ * Add more comments to the code explaining what different things do []
+ * Dynamically display record lengths in JSX instead of hardcoded indexes []
+ *
+ * COMPLETE:
+ * Skill based slider QTE on fish action. [X]
  * Aquarium that shows fish you have caught [X]
  * Screenshot function for the aquarium [X]
  * Aqaurium: Make 9 different keyframe animations so all the fish move differently [X]
@@ -89,8 +94,8 @@ import AtlantisScene from "./assets/atlantisscene.png";
 
 function App() {
   let [currentRod, setRod] = useState("wood");
-  let [currentMultiplier, setMultiplier] = useState(1)
-  let [noFishing, setNoFish] = useState(false)
+  let [currentMultiplier, setMultiplier] = useState(1);
+  let [noFishing, setNoFish] = useState(false); // used to stop the user from hitting the fish button if the QTE is running.
   let galleryHidden = true;
   let aquariumHidden = true;
   const [fishObj, setFish] = useState([
@@ -136,24 +141,24 @@ function App() {
     },
   ]);
   
-  var Canvas2Image = function () {
 
+  var Canvas2Image = (function () {
     // check if support sth.
-    var $support = function () {
-      var canvas = document.createElement('canvas'),
-        ctx = canvas.getContext('2d');
-  
+    var $support = (function () {
+      var canvas = document.createElement("canvas"),
+        ctx = canvas.getContext("2d");
+
       return {
         canvas: !!ctx,
         imageData: !!ctx.getImageData,
         dataURL: !!canvas.toDataURL,
-        btoa: !!window.btoa
+        btoa: !!window.btoa,
       };
-    }();
-  
-    var downloadMime = 'image/octet-stream';
-  
-    function scaleCanvas (canvas, width, height) {
+    })();
+
+    var downloadMime = "image/octet-stream";
+
+    function scaleCanvas(canvas, width, height) {
       var w = canvas.width,
         h = canvas.height;
       if (width == undefined) {
@@ -162,78 +167,80 @@ function App() {
       if (height == undefined) {
         height = h;
       }
-  
-      var retCanvas = document.createElement('canvas');
-      var retCtx = retCanvas.getContext('2d');
+
+      var retCanvas = document.createElement("canvas");
+      var retCtx = retCanvas.getContext("2d");
       retCanvas.width = width;
       retCanvas.height = height;
       retCtx.drawImage(canvas, 0, 0, w, h, 0, 0, width, height);
       return retCanvas;
     }
-  
-    function getDataURL (canvas, type, width, height) {
+
+    function getDataURL(canvas, type, width, height) {
       canvas = scaleCanvas(canvas, width, height);
       return canvas.toDataURL(type);
     }
-  
-    function saveFile (strData,filename) {
-      var save_link = document.createElement('a');
+
+    function saveFile(strData, filename) {
+      var save_link = document.createElement("a");
       save_link.href = strData;
       save_link.download = filename;
-      var event = new MouseEvent('click',{"bubbles":false, "cancelable":false});
+      var event = new MouseEvent("click", {
+        bubbles: false,
+        cancelable: false,
+      });
       save_link.dispatchEvent(event);
-  
     }
-  
+
     function genImage(strData) {
-      var img = document.createElement('img');
+      var img = document.createElement("img");
       img.src = strData;
       return img;
     }
-    function fixType (type) {
-      type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+    function fixType(type) {
+      type = type.toLowerCase().replace(/jpg/i, "jpeg");
       var r = type.match(/png|jpeg|bmp|gif/)[0];
-      return 'image/' + r;
+      return "image/" + r;
     }
-    function encodeData (data) {
-      if (!window.btoa) { throw 'btoa undefined' }
-      var str = '';
-      if (typeof data == 'string') {
+    function encodeData(data) {
+      if (!window.btoa) {
+        throw "btoa undefined";
+      }
+      var str = "";
+      if (typeof data == "string") {
         str = data;
       } else {
-        for (var i = 0; i < data.length; i ++) {
+        for (var i = 0; i < data.length; i++) {
           str += String.fromCharCode(data[i]);
         }
       }
-  
+
       return btoa(str);
     }
-    function getImageData (canvas) {
+    function getImageData(canvas) {
       var w = canvas.width,
         h = canvas.height;
-      return canvas.getContext('2d').getImageData(0, 0, w, h);
+      return canvas.getContext("2d").getImageData(0, 0, w, h);
     }
-    function makeURI (strData, type) {
-      return 'data:' + type + ';base64,' + strData;
+    function makeURI(strData, type) {
+      return "data:" + type + ";base64," + strData;
     }
-  
-  
+
     /**
      * create bitmap image
      * 按照规则生成图片响应头和响应体
      */
     var genBitmapImage = function (oData) {
-  
       //
       // BITMAPFILEHEADER: http://msdn.microsoft.com/en-us/library/windows/desktop/dd183374(v=vs.85).aspx
       // BITMAPINFOHEADER: http://msdn.microsoft.com/en-us/library/dd183376.aspx
       //
-  
-      var biWidth  = oData.width;
-      var biHeight	= oData.height;
+
+      var biWidth = oData.width;
+      var biHeight = oData.height;
       var biSizeImage = biWidth * biHeight * 3;
-      var bfSize  = biSizeImage + 54; // total header size = 54 bytes
-  
+      var bfSize = biSizeImage + 54; // total header size = 54 bytes
+
       //
       //  typedef struct tagBITMAPFILEHEADER {
       //  	WORD bfType;
@@ -245,17 +252,26 @@ function App() {
       //
       var BITMAPFILEHEADER = [
         // WORD bfType -- The file type signature; must be "BM"
-        0x42, 0x4D,
+        0x42,
+        0x4d,
         // DWORD bfSize -- The size, in bytes, of the bitmap file
-        bfSize & 0xff, bfSize >> 8 & 0xff, bfSize >> 16 & 0xff, bfSize >> 24 & 0xff,
+        bfSize & 0xff,
+        (bfSize >> 8) & 0xff,
+        (bfSize >> 16) & 0xff,
+        (bfSize >> 24) & 0xff,
         // WORD bfReserved1 -- Reserved; must be zero
-        0, 0,
+        0,
+        0,
         // WORD bfReserved2 -- Reserved; must be zero
-        0, 0,
+        0,
+        0,
         // DWORD bfOffBits -- The offset, in bytes, from the beginning of the BITMAPFILEHEADER structure to the bitmap bits.
-        54, 0, 0, 0
+        54,
+        0,
+        0,
+        0,
       ];
-  
+
       //
       //  typedef struct tagBITMAPINFOHEADER {
       //  	DWORD biSize;
@@ -273,62 +289,93 @@ function App() {
       //
       var BITMAPINFOHEADER = [
         // DWORD biSize -- The number of bytes required by the structure
-        40, 0, 0, 0,
+        40,
+        0,
+        0,
+        0,
         // LONG biWidth -- The width of the bitmap, in pixels
-        biWidth & 0xff, biWidth >> 8 & 0xff, biWidth >> 16 & 0xff, biWidth >> 24 & 0xff,
+        biWidth & 0xff,
+        (biWidth >> 8) & 0xff,
+        (biWidth >> 16) & 0xff,
+        (biWidth >> 24) & 0xff,
         // LONG biHeight -- The height of the bitmap, in pixels
-        biHeight & 0xff, biHeight >> 8  & 0xff, biHeight >> 16 & 0xff, biHeight >> 24 & 0xff,
+        biHeight & 0xff,
+        (biHeight >> 8) & 0xff,
+        (biHeight >> 16) & 0xff,
+        (biHeight >> 24) & 0xff,
         // WORD biPlanes -- The number of planes for the target device. This value must be set to 1
-        1, 0,
+        1,
+        0,
         // WORD biBitCount -- The number of bits-per-pixel, 24 bits-per-pixel -- the bitmap
         // has a maximum of 2^24 colors (16777216, Truecolor)
-        24, 0,
+        24,
+        0,
         // DWORD biCompression -- The type of compression, BI_RGB (code 0) -- uncompressed
-        0, 0, 0, 0,
+        0,
+        0,
+        0,
+        0,
         // DWORD biSizeImage -- The size, in bytes, of the image. This may be set to zero for BI_RGB bitmaps
-        biSizeImage & 0xff, biSizeImage >> 8 & 0xff, biSizeImage >> 16 & 0xff, biSizeImage >> 24 & 0xff,
+        biSizeImage & 0xff,
+        (biSizeImage >> 8) & 0xff,
+        (biSizeImage >> 16) & 0xff,
+        (biSizeImage >> 24) & 0xff,
         // LONG biXPelsPerMeter, unused
-        0,0,0,0,
+        0,
+        0,
+        0,
+        0,
         // LONG biYPelsPerMeter, unused
-        0,0,0,0,
+        0,
+        0,
+        0,
+        0,
         // DWORD biClrUsed, the number of color indexes of palette, unused
-        0,0,0,0,
+        0,
+        0,
+        0,
+        0,
         // DWORD biClrImportant, unused
-        0,0,0,0
+        0,
+        0,
+        0,
+        0,
       ];
-  
+
       var iPadding = (4 - ((biWidth * 3) % 4)) % 4;
-  
+
       var aImgData = oData.data;
-  
-      var strPixelData = '';
-      var biWidth4 = biWidth<<2;
+
+      var strPixelData = "";
+      var biWidth4 = biWidth << 2;
       var y = biHeight;
       var fromCharCode = String.fromCharCode;
-  
+
       do {
-        var iOffsetY = biWidth4*(y-1);
-        var strPixelRow = '';
+        var iOffsetY = biWidth4 * (y - 1);
+        var strPixelRow = "";
         for (var x = 0; x < biWidth; x++) {
-          var iOffsetX = x<<2;
-          strPixelRow += fromCharCode(aImgData[iOffsetY+iOffsetX+2]) +
-                   fromCharCode(aImgData[iOffsetY+iOffsetX+1]) +
-                   fromCharCode(aImgData[iOffsetY+iOffsetX]);
+          var iOffsetX = x << 2;
+          strPixelRow +=
+            fromCharCode(aImgData[iOffsetY + iOffsetX + 2]) +
+            fromCharCode(aImgData[iOffsetY + iOffsetX + 1]) +
+            fromCharCode(aImgData[iOffsetY + iOffsetX]);
         }
-  
+
         for (var c = 0; c < iPadding; c++) {
           strPixelRow += String.fromCharCode(0);
         }
-  
+
         strPixelData += strPixelRow;
       } while (--y);
-  
-      var strEncoded = encodeData(BITMAPFILEHEADER.concat(BITMAPINFOHEADER)) + encodeData(strPixelData);
-  
+
+      var strEncoded =
+        encodeData(BITMAPFILEHEADER.concat(BITMAPINFOHEADER)) +
+        encodeData(strPixelData);
+
       return strEncoded;
     };
-  
-    
+
     /**
      * [saveAsImage]
      * @param  {[obj]} canvas   [canvasElement]
@@ -338,80 +385,90 @@ function App() {
      * @param  {[String]} filename [image filename]
      * @return {[type]}          [description]
      */
-    var saveAsImage = function (canvas, width, height, type,filename) {
+    var saveAsImage = function (canvas, width, height, type, filename) {
       if ($support.canvas && $support.dataURL) {
-        if (typeof canvas == "string") { canvas = document.getElementById(canvas); }
-        if (type == undefined) { type = 'png'; }
-        filename = filename == undefined||filename.length === 0 ?Date.now()+'.'+type: filename+'.'+type
+        if (typeof canvas == "string") {
+          canvas = document.getElementById(canvas);
+        }
+        if (type == undefined) {
+          type = "png";
+        }
+        filename =
+          filename == undefined || filename.length === 0
+            ? Date.now() + "." + type
+            : filename + "." + type;
         type = fixType(type);
-  
+
         if (/bmp/.test(type)) {
           var data = getImageData(scaleCanvas(canvas, width, height));
           var strData = genBitmapImage(data);
-  
-          saveFile(makeURI(strData, downloadMimedownloadMime),filename);
+
+          saveFile(makeURI(strData, downloadMimedownloadMime), filename);
         } else {
           var strData = getDataURL(canvas, type, width, height);
-          saveFile(strData.replace(type, downloadMime),filename);
+          saveFile(strData.replace(type, downloadMime), filename);
         }
       }
     };
-  
+
     var convertToImage = function (canvas, width, height, type) {
       if ($support.canvas && $support.dataURL) {
-        if (typeof canvas == "string") { canvas = document.getElementById(canvas); }
-        if (type == undefined) { type = 'png'; }
+        if (typeof canvas == "string") {
+          canvas = document.getElementById(canvas);
+        }
+        if (type == undefined) {
+          type = "png";
+        }
         type = fixType(type);
-  
+
         if (/bmp/.test(type)) {
           var data = getImageData(scaleCanvas(canvas, width, height));
           var strData = genBitmapImage(data);
-          return genImage(makeURI(strData, 'image/bmp'));
+          return genImage(makeURI(strData, "image/bmp"));
         } else {
           var strData = getDataURL(canvas, type, width, height);
           return genImage(strData);
         }
       }
     };
-  
-  
+
     return {
       saveAsImage: saveAsImage,
       saveAsPNG: function (canvas, width, height, fileName) {
-        return saveAsImage(canvas, width, height, 'png',fileName);
+        return saveAsImage(canvas, width, height, "png", fileName);
       },
       saveAsJPEG: function (canvas, width, height, fileName) {
-        return saveAsImage(canvas, width, height, 'jpeg',fileName);
+        return saveAsImage(canvas, width, height, "jpeg", fileName);
       },
       saveAsGIF: function (canvas, width, height, fileName) {
-        return saveAsImage(canvas, width, height, 'gif',fileName);
+        return saveAsImage(canvas, width, height, "gif", fileName);
       },
       saveAsBMP: function (canvas, width, height, fileName) {
-        return saveAsImage(canvas, width, height, 'bmp',fileName);
+        return saveAsImage(canvas, width, height, "bmp", fileName);
       },
-  
+
       convertToImage: convertToImage,
       convertToPNG: function (canvas, width, height) {
-        return convertToImage(canvas, width, height, 'png');
+        return convertToImage(canvas, width, height, "png");
       },
       convertToJPEG: function (canvas, width, height) {
-        return convertToImage(canvas, width, height, 'jpeg');
+        return convertToImage(canvas, width, height, "jpeg");
       },
       convertToGIF: function (canvas, width, height) {
-        return convertToImage(canvas, width, height, 'gif');
+        return convertToImage(canvas, width, height, "gif");
       },
       convertToBMP: function (canvas, width, height) {
-        return convertToImage(canvas, width, height, 'bmp');
-      }
+        return convertToImage(canvas, width, height, "bmp");
+      },
     };
-  }();
+  })();
 
   const takeScreenShot = (e) => {
     e.preventDefault();
     const screenshotTarget =
       document.body.getElementsByClassName("aquarium")[0];
-      html2canvas(screenshotTarget).then((canvas) => {
-        return Canvas2Image.saveAsPNG(canvas);
+    html2canvas(screenshotTarget).then((canvas) => {
+      return Canvas2Image.saveAsPNG(canvas);
     });
   };
 
@@ -453,43 +510,41 @@ function App() {
     },
   };
 
-  
   const sliderStop = (e) => {
     setNoFish(false);
-    let sliderModal = document.getElementsByClassName("slider-modal")[0]
+    let sliderModal = document.getElementsByClassName("slider-modal")[0];
     e.preventDefault();
-    let sliderTick = document.getElementsByClassName("slider-tick")[0]
+    let sliderTick = document.getElementsByClassName("slider-tick")[0];
     calculateSlider();
-    sliderTick.style.animationPlayState = 'paused'
+    sliderTick.style.animationPlayState = "paused";
     setTimeout(() => {
       sliderModal.hidden = true;
       setNoFish(false);
-      sliderTick.style.animationPlayState = 'running' 
-      sliderTick.style.borderColor = "white"
-    }, "1000"); 
-  }
-  
+      sliderTick.style.animationPlayState = "running";
+      sliderTick.style.borderColor = "white";
+    }, "1000");
+  };
+
   const calculateSlider = (e) => {
-    let sliderTick = document.getElementsByClassName("slider-tick")[0]
-    let sliderTickPos = sliderTick.offsetLeft
-    // these are positions inside of the green 
+    let sliderTick = document.getElementsByClassName("slider-tick")[0];
+    let sliderTickPos = sliderTick.offsetLeft;
+    // these are positions inside of the green
     if (sliderTickPos < 140 && sliderTickPos > 86) {
       // if its in the green return multiplier of 2 for coins earned
-      sliderTick.style.borderColor = "green"
-      setMultiplier(2)
+      sliderTick.style.borderColor = "green";
+      setMultiplier(2);
     }
     // if its not, do not multiply coins earned
-    
-    else  {
-      sliderTick.style.borderColor = "red"
-    setMultiplier(1)
+    else {
+      sliderTick.style.borderColor = "red";
+      setMultiplier(1);
     }
-  }
+  };
 
   const fish = (e) => {
-    if (noFishing) return
+    if (noFishing) return;
     setNoFish(true);
-    let sliderModal = document.getElementsByClassName("slider-modal")[0]
+    let sliderModal = document.getElementsByClassName("slider-modal")[0];
     sliderModal.hidden = false;
     e.preventDefault();
     let RNG = fishRNG(currentRod);
@@ -684,7 +739,34 @@ function App() {
     document.getElementsByClassName(name)[0].classList.add("hasCaughtBox");
   };
 
+  const crabParty = (e) => {
+    e.preventDefault();
+    const audio = new Audio(sound)
+    if (audio.paused) {
+    audio.play()
+    audio.volume(0.2)
+    let crab = document.getElementsByClassName("crab")[0]
+    crab.style.animationPlayState = "running";
+    window.alert("Crab Party");
+    audio.pause();
+    } else {
+      audio.pause();
+   }
+  };
+
   const fishRNG = (rodType) => {
+    // check to see if beach is the current locale
+    if (
+      document
+        .getElementsByClassName("Beach-Equip")[0]
+        .classList.contains("selected")
+    ) {
+      let diceRoll = Math.floor(Math.random() * 10);
+      if (diceRoll === 9) {
+        document.getElementsByClassName("crab")[0].hidden = false;
+        window.alert("You have obtained the crab! Check your aquarium!");
+      }
+    }
     switch (rodType) {
       case "wood":
         return Math.floor(Math.random() * 4);
@@ -696,15 +778,27 @@ function App() {
   };
 
   const calculateCoins = (speciesOfFish, lengthOfFish) => {
-    let result = fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier
-    setCount((coins += fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier));
-    document.getElementsByClassName("calc-text")[0].innerHTML =
-      "Species Value: " +
-      fishes[speciesOfFish].coinValue +
-      " * Length Of Fish: " +
-      lengthOfFish +
-      " * " +
-      "Current Multipler: " + currentMultiplier + " = " + result
+    let result =
+      fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier;
+    setCount(
+      (coins +=
+        fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier)
+    );
+    if (speciesOfFish === "Boot") {
+      document.getElementsByClassName("calc-text")[0].innerHTML =
+        "The Boot has no monetary value.";
+    } else {
+      document.getElementsByClassName("calc-text")[0].innerHTML =
+        "Species Value: " +
+        fishes[speciesOfFish].coinValue +
+        " * Length Of Fish: " +
+        lengthOfFish +
+        " * " +
+        "Current Multipler: " +
+        currentMultiplier +
+        " = " +
+        result;
+    }
   };
 
   const purchaseLocale = (localeType, localeCost) => {
@@ -1068,20 +1162,31 @@ function App() {
             </div>
           </div>
         </div>
-        
+
         <div hidden={true} className="slider-modal">
           <div className="slider-flex">
-            <p>Land the white marker in the green area to recieve a 2x Multiplier towards the coin value of your next catch!</p>
-          <div className="slider">
-            <div className="slider-tick"></div>
-          </div>
-          <div className="button" onClick={sliderStop}>Catch!</div>
+            <p>
+              Land the white marker in the green area to recieve a 2x Multiplier
+              towards the coin value of your next catch!
+            </p>
+            <div className="slider">
+              <div className="slider-tick"></div>
+            </div>
+            <div className="button" onClick={sliderStop}>
+              Catch!
+            </div>
           </div>
         </div>
 
         <div hidden={true} className="aquarium-modal">
           <h1>Aquarium</h1>
           <div className="aquarium">
+            <img
+              hidden={true}
+              src={Crab}
+              onClick={crabParty}
+              className="crab"
+            ></img>
             <img hidden={true} src={Boot} className="aq-boot"></img>
             <img hidden={true} src={Minnows} className="aq-minnows"></img>
             <img hidden={true} src={Goldfish} className="aq-goldfish"></img>
@@ -1094,7 +1199,9 @@ function App() {
             <img hidden={true} src={Shark} className="aq-shark"></img>
           </div>
           <div className="gallery-button-flex">
-          <div className="button screensh" onClick={takeScreenShot}>Screenshot</div>
+            <div className="button screensh" onClick={takeScreenShot}>
+              Screenshot
+            </div>
           </div>
         </div>
         <div hidden={true} className="gallery-modal">
@@ -1328,41 +1435,44 @@ function App() {
           </div>
           <div className="locale-parent-flex">
             <div className="equip-header-flex">
-              <h2 className="equip-header">Equip <br/>Locale:</h2>
+              <h2 className="equip-header">
+                Equip <br />
+                Locale:
+              </h2>
             </div>
             <div className="equip-flex">
-            <div className="gallery-div">
-              <img
-                onClick={() => equipLocale("default")}
-                className="hasCaughtBox selected Default-Equip Lower-Z-Index"
-                src={DefaultIco}
-              ></img>{" "}
+              <div className="gallery-div">
+                <img
+                  onClick={() => equipLocale("default")}
+                  className="hasCaughtBox selected Default-Equip Lower-Z-Index"
+                  src={DefaultIco}
+                ></img>{" "}
+              </div>
+              <div className="gallery-div">
+                <img
+                  onClick={() => equipLocale("beach")}
+                  className="Gallery Lower-Z-Index Beach-Equip"
+                  src={Beach}
+                ></img>{" "}
+              </div>
+              <div className="gallery-div">
+                <img
+                  onClick={() => equipLocale("lake")}
+                  className="Gallery Lower-Z-Index Lake-Equip"
+                  src={LakeIco}
+                ></img>{" "}
+              </div>
+              <div className="gallery-div">
+                <img
+                  onClick={() => equipLocale("atlantis")}
+                  className="Gallery Lower-Z-Index Atlantis-Equip"
+                  src={Atlantis}
+                ></img>{" "}
+              </div>
             </div>
-            <div className="gallery-div">
-              <img
-                onClick={() => equipLocale("beach")}
-                className="Gallery Lower-Z-Index Beach-Equip"
-                src={Beach}
-              ></img>{" "}
-            </div>
-            <div className="gallery-div">
-              <img
-                onClick={() => equipLocale("lake")}
-                className="Gallery Lower-Z-Index Lake-Equip"
-                src={LakeIco}
-              ></img>{" "}
-            </div>
-            <div className="gallery-div">
-              <img
-                onClick={() => equipLocale("atlantis")}
-                className="Gallery Lower-Z-Index Atlantis-Equip"
-                src={Atlantis}
-              ></img>{" "}
-            </div>
-            </div>
-          </div>
           </div>
         </div>
+      </div>
     </>
   );
 }
