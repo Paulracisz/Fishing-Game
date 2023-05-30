@@ -3,7 +3,7 @@
 import "./index.css";
 
 // sound
-import sound from './assets/crabparty.mp3'
+import sound from "./assets/crabparty.mp3";
 
 // libraries
 import html2canvas from "html2canvas";
@@ -44,26 +44,28 @@ import BeachScene from "./assets/beachscene.png";
 import LakeScene from "./assets/lake2.png";
 import AtlantisScene from "./assets/atlantisscene.png";
 import Crab from "./assets/crab.png";
+import Turtle from "./assets/turtle.png";
 
 /** TODO: \
  *
  * FEATURES:
  * Update README when the project is done with finished pictures []
  * Try to get the flip fish animation working again to spruce up the aquarium fish a bit []
+ * Add color schemes []
+ * Different fish in different locales
+ * Beach - Crab [X], Lake 2 - Turtle [X], Atlantis - Mermaid []
  *
  * POTENTIAL FEATURES:
  * User accounts that store your data []
- * Add color schemes []
- * Different fish in different locales
- * Beach - Crab, Lake 2 - Turtle, Atlantis - Mermaid []
  *
  * REFCATORS:
  * Get rid of redundant code in as many places as possible []
  * Possibly break different JSX fragments into different components []
- * Add more comments to the code explaining what different things do []
  * Dynamically display record lengths in JSX instead of hardcoded indexes []
  *
  * COMPLETE:
+ * Add more comments to the code explaining what different things do [X]
+ * Fix bug with obtaining the crab twice [X]
  * Skill based slider QTE on fish action. [X]
  * Aquarium that shows fish you have caught [X]
  * Screenshot function for the aquarium [X]
@@ -93,12 +95,20 @@ import Crab from "./assets/crab.png";
  */
 
 function App() {
-  let [currentRod, setRod] = useState("wood");
-  let [currentMultiplier, setMultiplier] = useState(1);
+  let [currentRod, setRod] = useState("wood"); // current fishing rod
+  let [currentMultiplier, setMultiplier] = useState(1); // multiplier for coins earned based on QTE
   let [noFishing, setNoFish] = useState(false); // used to stop the user from hitting the fish button if the QTE is running.
-  let galleryHidden = true;
+  let [hasCrab, setHasCrab] = useState(false); // if the user has the crab pet
+  let [hasTurtle, setHasTurtle] = useState(false); // if the user has the turtle pet
+  let galleryHidden = true; // used to show or hide the gallery or aquarium modals
   let aquariumHidden = true;
-  const audio = new Audio(sound)
+  // used to determine which locales the user has.
+  let [ownedLocales, setLocale] = useState(["default"]);
+  let currentLength = 0; // current length of fish
+  let shopHidden = true;
+  let [coins, setCount] = useState(0); // current coins
+  const audio = new Audio(sound); // used to play the easter egg song
+  // used to store the record lengths for each fish
   const [fishObj, setFish] = useState([
     {
       type: "Boot",
@@ -141,8 +151,8 @@ function App() {
       recordLength: 0,
     },
   ]);
-  
 
+  // code for screenshot functionality in aquarium
   var Canvas2Image = (function () {
     // check if support sth.
     var $support = (function () {
@@ -464,6 +474,7 @@ function App() {
     };
   })();
 
+  // event handler to take a screenshot
   const takeScreenShot = (e) => {
     e.preventDefault();
     const screenshotTarget =
@@ -473,11 +484,7 @@ function App() {
     });
   };
 
-  let [ownedLocales, setLocale] = useState(["default"]);
-  let currentLength = 0;
-  let shopHidden = true;
-
-  let [coins, setCount] = useState(0);
+  // obj for coin values
   let fishes = {
     Boot: {
       coinValue: 0,
@@ -511,6 +518,7 @@ function App() {
     },
   };
 
+  // stops the slider for the QTE
   const sliderStop = (e) => {
     setNoFish(false);
     let sliderModal = document.getElementsByClassName("slider-modal")[0];
@@ -526,6 +534,7 @@ function App() {
     }, "1000");
   };
 
+  // determines the multiplier for the QTE based on the position of the slider tick, and changes tick color
   const calculateSlider = (e) => {
     let sliderTick = document.getElementsByClassName("slider-tick")[0];
     let sliderTickPos = sliderTick.offsetLeft;
@@ -542,6 +551,7 @@ function App() {
     }
   };
 
+  // calls fishRNG to get a number and based on that number displays information about which fish was caught
   const fish = (e) => {
     if (noFishing) return;
     setNoFish(true);
@@ -625,6 +635,7 @@ function App() {
     }
   };
 
+  // toggles the gallery modal which closes other modals
   const toggleGallery = (e) => {
     e.preventDefault();
     galleryHidden = !galleryHidden;
@@ -635,6 +646,7 @@ function App() {
     }
   };
 
+  // toggles the aquarium modal which closes other modals
   const toggleAquarium = (e) => {
     e.preventDefault();
     aquariumHidden = !aquariumHidden;
@@ -649,16 +661,7 @@ function App() {
     }
   };
 
-  const closeGallery = (e) => {
-    galleryHidden = true;
-    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;
-  };
-
-  const closeShop = (e) => {
-    shopHidden = true;
-    document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
-  };
-
+  // toggles the shop modal which closes other modals
   const toggleShop = (e) => {
     e.preventDefault();
     shopHidden = !shopHidden;
@@ -670,6 +673,19 @@ function App() {
     document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
   };
 
+  // close button for gallery
+  const closeGallery = (e) => {
+    galleryHidden = true;
+    document.getElementsByClassName("gallery-modal")[0].hidden = galleryHidden;
+  };
+
+  // close button for shop
+  const closeShop = (e) => {
+    shopHidden = true;
+    document.getElementsByClassName("shop-modal")[0].hidden = shopHidden;
+  };
+
+  // populates image of fish and grabs the current length based on type of fish
   const populateData = (name) => {
     // get length, will be based on the fish
     calculateCoins(name, currentLength);
@@ -740,29 +756,44 @@ function App() {
     document.getElementsByClassName(name)[0].classList.add("hasCaughtBox");
   };
 
+  // easter egg, clicking the crab plays a crab song.
   const crabParty = (e) => {
     e.preventDefault();
     if (audio.paused) {
-    audio.play()
-    window.alert("Crab Party");
+      audio.play();
+      window.alert("Crab Party");
     } else {
       audio.pause();
-   }
+    }
   };
 
   const fishRNG = (rodType) => {
-    // check to see if beach is the current locale
+    // check to see if beach is the current locale.
+    let diceRoll = Math.floor(Math.random() * 10);
     if (
       document
         .getElementsByClassName("Beach-Equip")[0]
-        .classList.contains("selected")
+        .classList.contains("selected") &&
+      diceRoll === 9 &&
+      !hasCrab
     ) {
-      let diceRoll = Math.floor(Math.random() * 10);
-      if (diceRoll === 9) {
-        document.getElementsByClassName("crab")[0].hidden = false;
-        window.alert("You have obtained the crab! Check your aquarium!");
-      }
+      document.getElementsByClassName("crab")[0].hidden = false;
+      window.alert("You have obtained the crab! Check your aquarium!");
+      setHasCrab(true);
     }
+    if (
+      document
+        .getElementsByClassName("Lake-Equip")[0]
+        .classList.contains("selected") &&
+      diceRoll === 9 &&
+      !hasTurtle
+    ) {
+      document.getElementsByClassName("turtle")[0].hidden = false;
+      window.alert("You have obtained the turtle! Check your aquarium!");
+      setHasTurtle(true);
+    }
+
+    // based on Rod Type, pick a number, 0-4 is wood, 0-7 Iron and 0-10 Steel.
     switch (rodType) {
       case "wood":
         return Math.floor(Math.random() * 4);
@@ -773,6 +804,7 @@ function App() {
     }
   };
 
+  // calculate coins earned based on species of fish, length and multiplier from QTE, and then update HTML for the calculation.
   const calculateCoins = (speciesOfFish, lengthOfFish) => {
     let result =
       fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier;
@@ -797,6 +829,7 @@ function App() {
     }
   };
 
+  // gets called with the localeType to be purchased and the cost, check if user doesn't already have the locale and can afford it, then switch the equipped locale.
   const purchaseLocale = (localeType, localeCost) => {
     switch (localeType) {
       case "beach":
@@ -880,6 +913,7 @@ function App() {
     }
   };
 
+  // checks if the locale to switch to is owned, and then switches which one is selected, as well as the background.
   const equipLocale = (localeType) => {
     switch (localeType) {
       case "default":
@@ -961,6 +995,7 @@ function App() {
     }
   };
 
+  // switches rod based on the type and cost if user can afford it, and also checks to see if the user already has the rod.
   const purchaseRod = (rodType, rodCost) => {
     switch (rodType) {
       case "iron":
@@ -992,6 +1027,7 @@ function App() {
     }
   };
 
+  // toggles the window showing information about fish from the gallery and populates based on what fish is clicked on.
   const toggleInfoWindow = (fishType) => {
     if (
       document
@@ -1118,6 +1154,7 @@ function App() {
     }
   };
 
+  // close info window
   const closeInfoWindow = (e) => {
     document.getElementsByClassName("info-window-modal")[0].hidden = true;
     console.log(
@@ -1183,6 +1220,7 @@ function App() {
               onClick={crabParty}
               className="crab"
             ></img>
+            <img hidden={true} src={Turtle} className="crab turtle"></img>
             <img hidden={true} src={Boot} className="aq-boot"></img>
             <img hidden={true} src={Minnows} className="aq-minnows"></img>
             <img hidden={true} src={Goldfish} className="aq-goldfish"></img>

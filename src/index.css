@@ -248,6 +248,14 @@
   top: 65%
 }
 
+.turtle {
+  left: 70%;
+}
+
+.turtle:hover { 
+  cursor:default !important
+}
+
 .crab:hover {
   cursor: pointer;
 }
