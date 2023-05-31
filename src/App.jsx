@@ -1,5 +1,4 @@
 // stylesheets
-
 import "./index.css";
 
 // sound
@@ -7,6 +6,7 @@ import sound from "./assets/crabparty.mp3";
 
 // libraries
 import html2canvas from "html2canvas";
+import React, { useState } from "react";
 
 // images
 import fishingRodIcon1 from "./assets/fishing-rod.png";
@@ -20,7 +20,6 @@ import Koifish from "./assets/koifish.png";
 import Carp from "./assets/carp.png";
 import Bass from "./assets/bass.png";
 import Shark from "./assets/shark.png";
-import React, { useState } from "react";
 import Coin from "./assets/coin.png";
 import IronRod from "./assets/ironRod.png";
 import SteelRod from "./assets/steelRod.png";
@@ -45,25 +44,26 @@ import LakeScene from "./assets/lake2.png";
 import AtlantisScene from "./assets/atlantisscene.png";
 import Crab from "./assets/crab.png";
 import Turtle from "./assets/turtle.png";
+import Mermaid from "./assets/mermaid.png";
 
 /** TODO: \
  *
  * FEATURES:
- * Update README when the project is done with finished pictures []
  * Try to get the flip fish animation working again to spruce up the aquarium fish a bit []
  * Add color schemes []
- * Different fish in different locales
- * Beach - Crab [X], Lake 2 - Turtle [X], Atlantis - Mermaid []
+ * refactor the pet ifs in fish RNG []
  *
  * POTENTIAL FEATURES:
  * User accounts that store your data []
  *
  * REFCATORS:
  * Get rid of redundant code in as many places as possible []
- * Possibly break different JSX fragments into different components []
- * Dynamically display record lengths in JSX instead of hardcoded indexes []
- *
- * COMPLETE:
+*
+* COMPLETE:
+ * Dynamically display record lengths in JSX instead of hardcoded indexes [X]
+ * Different fish in different locales
+ * Beach - Crab [X], Lake 2 - Turtle [X], Atlantis - Mermaid [X]
+ * Update README when the project is done with finished pictures [X]
  * Add more comments to the code explaining what different things do [X]
  * Fix bug with obtaining the crab twice [X]
  * Skill based slider QTE on fish action. [X]
@@ -100,6 +100,7 @@ function App() {
   let [noFishing, setNoFish] = useState(false); // used to stop the user from hitting the fish button if the QTE is running.
   let [hasCrab, setHasCrab] = useState(false); // if the user has the crab pet
   let [hasTurtle, setHasTurtle] = useState(false); // if the user has the turtle pet
+  let [hasMermaid, setHasMermaid] = useState(false); // if the user has the mermaid pet
   let galleryHidden = true; // used to show or hide the gallery or aquarium modals
   let aquariumHidden = true;
   // used to determine which locales the user has.
@@ -109,48 +110,99 @@ function App() {
   let [coins, setCount] = useState(0); // current coins
   const audio = new Audio(sound); // used to play the easter egg song
   // used to store the record lengths for each fish
-  const [fishObj, setFish] = useState([
-    {
+  const [fishObj, setFish] = useState({
+    Boot: {
       type: "Boot",
       recordLength: 0,
+      maxLengthValue: 30,
+      minLengthValue: 15,
+      coinValue: 0,
+      catchText: 
+          "You caught a boot... Well, at least you caught something...",
     },
+    Minnows:
     {
       type: "Minnows",
       recordLength: 0,
+      maxLengthValue: 5,
+      minLengthValue: 1,
+      coinValue: 1,
+      path: Minnows,
+      catchText: "You caught some minnows... Just small fry..."
     },
+    Goldfish:
     {
       type: "Goldfish",
       recordLength: 0,
+      maxLengthValue: 14,
+      minLengthValue: 1,
+      coinValue: 2,
+      catchText:  "You caught a goldfish... Maybe you can keep it as a pet..."
     },
+    Clownfish:
     {
       type: "Clownfish",
       recordLength: 0,
+      maxLengthValue: 10,
+      minLengthValue: 6,
+      coinValue: 3,
+      catchText: "You caught a clownfish... What's so funny?"
     },
+    Tuna:
     {
       type: "Tuna",
       recordLength: 0,
+      maxLengthValue: 149,
+      minLengthValue: 130,
+      coinValue: 4,
+      catchText: "You caught a Tuna... Now you just need a guitar!"
     },
+    Pufferfish:
     {
       type: "Pufferfish",
       recordLength: 0,
+      maxLengthValue: 60,
+      minLengthValue: 2,
+      coinValue: 5,
+      catchText: "You caught a Pufferfish... I heard they are getting expensive... must be inflation!"
     },
+    Koi:
     {
       type: "Koi",
       recordLength: 0,
+      maxLengthValue: 38,
+      minLengthValue: 30,
+      coinValue: 6,
+      catchText: "You caught a Koi... Make sure its the real thing, and not a deKoi!"
     },
+    Carp:
     {
       type: "Carp",
       recordLength: 0,
+      maxLengthValue: 63,
+      minLengthValue: 30,
+      coinValue: 7,
+      catchText: "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!"
     },
+    Bass:
     {
       type: "Bass",
       recordLength: 0,
+      maxLengthValue: 96,
+      minLengthValue: 40,
+      coinValue: 8,
+      catchText: "You caught a Bass... don't drop it!"
     },
+    Shark:
     {
       type: "Shark",
       recordLength: 0,
+      maxLengthValue: 99,
+      minLengthValue: 17,
+      coinValue: 9,
+      catchText: "You caught a Shark... We're gonna need a bigger boat..."
     },
-  ]);
+});
 
   // code for screenshot functionality in aquarium
   var Canvas2Image = (function () {
@@ -484,40 +536,6 @@ function App() {
     });
   };
 
-  // obj for coin values
-  let fishes = {
-    Boot: {
-      coinValue: 0,
-    },
-    Minnows: {
-      coinValue: 1,
-    },
-    Goldfish: {
-      coinValue: 2,
-    },
-    Clownfish: {
-      coinValue: 3,
-    },
-    Tuna: {
-      coinValue: 4,
-    },
-    Pufferfish: {
-      coinValue: 5,
-    },
-    Koi: {
-      coinValue: 6,
-    },
-    Carp: {
-      coinValue: 7,
-    },
-    Bass: {
-      coinValue: 8,
-    },
-    Shark: {
-      coinValue: 9,
-    },
-  };
-
   // stops the slider for the QTE
   const sliderStop = (e) => {
     setNoFish(false);
@@ -559,80 +577,11 @@ function App() {
     sliderModal.hidden = false;
     e.preventDefault();
     let RNG = fishRNG(currentRod);
-    switch (RNG) {
-      case 0:
-        // BOOT
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a boot... Well, at least you caught something...";
-        document.getElementsByClassName("aq-boot")[0].hidden = false;
-        document.getElementsByClassName("calc-text")[0].innerHTML =
-          "The Boot has no monetary value.";
-        populateData("Boot");
-        break;
-      case 1:
-        // MINNOWS
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught some minnows... Just small fry...";
-        document.getElementsByClassName("aq-minnows")[0].hidden = false;
-        populateData("Minnows");
-        break;
-      case 2:
-        // GOLDFISH
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a goldfish... Maybe you can keep it as a pet...";
-        document.getElementsByClassName("aq-goldfish")[0].hidden = false;
-        populateData("Goldfish");
-        break;
-      case 3:
-        // CLOWNFISH
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a clownfish... What's so funny?";
-        document.getElementsByClassName("aq-clownfish")[0].hidden = false;
-        populateData("Clownfish");
-        break;
-      case 4:
-        // TUNA
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a Tuna... Now you just need a guitar!";
-        document.getElementsByClassName("aq-tuna")[0].hidden = false;
-        populateData("Tuna");
-        break;
-      case 5:
-        // PUFFERFISH
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a Pufferfish... I heard they are getting expensive... must be inflation!";
-        document.getElementsByClassName("aq-pufferfish")[0].hidden = false;
-        populateData("Pufferfish");
-        break;
-      case 6:
-        // KOI
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a Koi... Make sure its the real thing, and not a deKoi!";
-        document.getElementsByClassName("aq-koifish")[0].hidden = false;
-        populateData("Koi");
-        break;
-      case 7:
-        // CARP
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!";
-        document.getElementsByClassName("aq-carp")[0].hidden = false;
-        populateData("Carp");
-        break;
-      case 8:
-        // BASS
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a Bass... don't drop it!";
-        document.getElementsByClassName("aq-bass")[0].hidden = false;
-        populateData("Bass");
-        break;
-      case 9:
-        // SHARK
-        document.getElementsByClassName("catch-text")[0].innerHTML =
-          "You caught a Shark... We're gonna need a bigger boat...";
-        document.getElementsByClassName("aq-shark")[0].hidden = false;
-        populateData("Shark");
-        break;
-    }
+    let fishFromObj = fishObj[Object.keys(fishObj)[RNG]]
+    document.getElementsByClassName("catch-text")[0].innerHTML = fishFromObj.catchText
+    document.getElementsByClassName(`aq-${fishFromObj.type}`)[0].hidden = false;
+    populateData(`${fishFromObj.type}`);
+
   };
 
   // toggles the gallery modal which closes other modals
@@ -687,68 +636,16 @@ function App() {
 
   // populates image of fish and grabs the current length based on type of fish
   const populateData = (name) => {
-    // get length, will be based on the fish
-    calculateCoins(name, currentLength);
-    switch (name) {
-      case "Boot":
-        currentLength = Math.floor(Math.random() * (30 - 15) + 15);
-        document.getElementsByClassName("fish-ico")[0].src = Boot;
-        break;
-      case "Minnows":
-        currentLength = Math.floor(Math.random() * (5 - 1) + 1);
-        document.getElementsByClassName("fish-ico")[0].src = Minnows;
-        calculateCoins("Minnows", currentLength);
-        break;
-      case "Goldfish":
-        currentLength = Math.floor(Math.random() * (14 - 1) + 1);
-        document.getElementsByClassName("fish-ico")[0].src = Goldfish;
-        calculateCoins("Goldfish", currentLength);
-        break;
-      case "Clownfish":
-        currentLength = Math.floor(Math.random() * (10 - 6) + 6);
-        document.getElementsByClassName("fish-ico")[0].src = Clownfish;
-        calculateCoins("Clownfish", currentLength);
-        break;
-      case "Tuna":
-        currentLength = Math.floor(Math.random() * (149 - 130) + 130);
-        document.getElementsByClassName("fish-ico")[0].src = Tuna;
-        calculateCoins("Tuna", currentLength);
-        break;
-      case "Pufferfish":
-        currentLength = Math.floor(Math.random() * (60 - 2) + 2);
-        document.getElementsByClassName("fish-ico")[0].src = Pufferfish;
-        calculateCoins("Pufferfish", currentLength);
-        break;
-      case "Koi":
-        currentLength = Math.floor(Math.random() * (38 - 30) + 30);
-        document.getElementsByClassName("fish-ico")[0].src = Koifish;
-        calculateCoins("Koi", currentLength);
-        break;
-      case "Carp":
-        currentLength = Math.floor(Math.random() * (63 - 30) + 30);
-        document.getElementsByClassName("fish-ico")[0].src = Carp;
-        calculateCoins("Carp", currentLength);
-        break;
-      case "Bass":
-        currentLength = Math.floor(Math.random() * (96 - 40) + 40);
-        document.getElementsByClassName("fish-ico")[0].src = Bass;
-        calculateCoins("Bass", currentLength);
-        break;
-      case "Shark":
-        currentLength = Math.floor(Math.random() * (99 - 17) + 17);
-        document.getElementsByClassName("fish-ico")[0].src = Shark;
-        calculateCoins("Shark", currentLength);
-        break;
-    }
-
+    // // get length, will be based on the fish
+    document.getElementsByClassName("fish-ico")[0].src = evalString(name)
+    currentLength = Math.floor(Math.random() * (fishObj[name].maxLengthValue - fishObj[name].minLengthValue) + fishObj[name].minLengthValue)
+    calculateCoins(`${name}`, currentLength)
     // Calculate if its a record length, and if it is, update the obj for the gallery
-    const tempArray = [...fishObj]; // get a temp array of the fish state array
-    const fishIndex = tempArray.findIndex((x) => x.type === name); // find the fish in question, and get its index
-    if (tempArray[fishIndex].recordLength < currentLength) {
-      tempArray[fishIndex].recordLength = currentLength; // set the new record length
-      setFish(tempArray);
+    const tempObj = {...fishObj}; // get a temp obj of the fish
+    if (tempObj[name].recordLength < currentLength) { 
+    tempObj[name].recordLength = currentLength
+    setFish(tempObj);
     }
-
     // Populating the HTML
     document.getElementsByClassName("length-text")[0].innerHTML =
       "Length: " + currentLength + "CM";
@@ -766,6 +663,11 @@ function App() {
       audio.pause();
     }
   };
+  
+  // evaluates a string as javascript, moved this into a function instead of using eval() directly for safety.
+  const evalString = (string) => {
+    return eval(`(${string})`);
+  }
 
   const fishRNG = (rodType) => {
     // check to see if beach is the current locale.
@@ -792,6 +694,17 @@ function App() {
       window.alert("You have obtained the turtle! Check your aquarium!");
       setHasTurtle(true);
     }
+    if (
+      document
+        .getElementsByClassName("Atlantis-Equip")[0]
+        .classList.contains("selected") &&
+      diceRoll === 9 &&
+      !hasMermaid
+    ) {
+      document.getElementsByClassName("mermaid")[0].hidden = false;
+      window.alert("You have obtained the mermaid! Check your aquarium!");
+      setHasMermaid(true);
+    }
 
     // based on Rod Type, pick a number, 0-4 is wood, 0-7 Iron and 0-10 Steel.
     switch (rodType) {
@@ -807,10 +720,10 @@ function App() {
   // calculate coins earned based on species of fish, length and multiplier from QTE, and then update HTML for the calculation.
   const calculateCoins = (speciesOfFish, lengthOfFish) => {
     let result =
-      fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier;
+      fishObj[speciesOfFish].coinValue * lengthOfFish * currentMultiplier;
     setCount(
       (coins +=
-        fishes[speciesOfFish].coinValue * lengthOfFish * currentMultiplier)
+        fishObj[speciesOfFish].coinValue * lengthOfFish * currentMultiplier)
     );
     if (speciesOfFish === "Boot") {
       document.getElementsByClassName("calc-text")[0].innerHTML =
@@ -818,7 +731,7 @@ function App() {
     } else {
       document.getElementsByClassName("calc-text")[0].innerHTML =
         "Species Value: " +
-        fishes[speciesOfFish].coinValue +
+        fishObj[speciesOfFish].coinValue +
         " * Length Of Fish: " +
         lengthOfFish +
         " * " +
@@ -1157,10 +1070,6 @@ function App() {
   // close info window
   const closeInfoWindow = (e) => {
     document.getElementsByClassName("info-window-modal")[0].hidden = true;
-    console.log(
-      "hidden",
-      document.getElementsByClassName("info-window-modal")[0].hidden
-    );
   };
 
   return (
@@ -1220,17 +1129,18 @@ function App() {
               onClick={crabParty}
               className="crab"
             ></img>
+            <img hidden={true} src={Mermaid} className="crab mermaid"></img>
             <img hidden={true} src={Turtle} className="crab turtle"></img>
-            <img hidden={true} src={Boot} className="aq-boot"></img>
-            <img hidden={true} src={Minnows} className="aq-minnows"></img>
-            <img hidden={true} src={Goldfish} className="aq-goldfish"></img>
-            <img hidden={true} src={Clownfish} className="aq-clownfish"></img>
-            <img hidden={true} src={Tuna} className="aq-tuna"></img>
-            <img hidden={true} src={Pufferfish} className="aq-pufferfish"></img>
-            <img hidden={true} src={Koifish} className="aq-koifish"></img>
-            <img hidden={true} src={Carp} className="aq-carp"></img>
-            <img hidden={true} src={Bass} className="aq-bass"></img>
-            <img hidden={true} src={Shark} className="aq-shark"></img>
+            <img hidden={true} src={Boot} className="aq-Boot"></img>
+            <img hidden={true} src={Minnows} className="aq-Minnows"></img>
+            <img hidden={true} src={Goldfish} className="aq-Goldfish"></img>
+            <img hidden={true} src={Clownfish} className="aq-Clownfish"></img>
+            <img hidden={true} src={Tuna} className="aq-Tuna"></img>
+            <img hidden={true} src={Pufferfish} className="aq-Pufferfish"></img>
+            <img hidden={true} src={Koifish} className="aq-Koifish"></img>
+            <img hidden={true} src={Carp} className="aq-Carp"></img>
+            <img hidden={true} src={Bass} className="aq-Bass"></img>
+            <img hidden={true} src={Shark} className="aq-Shark"></img>
           </div>
           <div className="gallery-button-flex">
             <div className="button screensh" onClick={takeScreenShot}>
@@ -1245,7 +1155,7 @@ function App() {
               <p>
                 Boot <br />
                 Record Length: <br />
-                {fishObj[0].recordLength}cm
+                {fishObj["Boot"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Boot")}
@@ -1257,7 +1167,7 @@ function App() {
               <p>
                 Minnows <br />
                 Record Length: <br />
-                {fishObj[1].recordLength}cm
+                {fishObj["Minnows"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Minnows")}
@@ -1270,7 +1180,7 @@ function App() {
                 Goldfish
                 <br />
                 Record Length: <br />
-                {fishObj[2].recordLength}cm
+                {fishObj["Goldfish"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Goldfish")}
@@ -1283,7 +1193,7 @@ function App() {
                 Clownfish
                 <br />
                 Record Length:
-                <br /> {fishObj[3].recordLength}cm
+                <br /> {fishObj["Clownfish"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Clownfish")}
@@ -1296,7 +1206,7 @@ function App() {
                 Tuna
                 <br />
                 Record Length: <br />
-                {fishObj[4].recordLength}cm
+                {fishObj["Tuna"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Tuna")}
@@ -1309,7 +1219,7 @@ function App() {
                 Pufferfish
                 <br />
                 Record Length: <br />
-                {fishObj[5].recordLength}cm
+                {fishObj["Pufferfish"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Pufferfish")}
@@ -1322,7 +1232,7 @@ function App() {
                 Koifish
                 <br />
                 Record Length: <br />
-                {fishObj[6].recordLength}cm
+                {fishObj["Koi"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Koi")}
@@ -1335,7 +1245,7 @@ function App() {
                 Carp
                 <br />
                 Record Length:
-                <br /> {fishObj[7].recordLength}cm
+                <br /> {fishObj["Carp"].recordLength}cm
                 <br />
               </p>
               <img
@@ -1349,7 +1259,7 @@ function App() {
                 Bass
                 <br />
                 Record Length:
-                <br /> {fishObj[8].recordLength}cm
+                <br /> {fishObj["Bass"].recordLength}cm
               </p>
               <img
                 onClick={() => toggleInfoWindow("Bass")}
@@ -1362,7 +1272,7 @@ function App() {
                 Shark
                 <br />
                 Record Length: <br />
-                {fishObj[9].recordLength}cm
+                {fishObj["Shark"].recordLength}cm
                 <br />
               </p>
               <img

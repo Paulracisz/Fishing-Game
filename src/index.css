@@ -221,15 +221,15 @@
   background-image: url('./assets/aqback2.jpg');
 }
 
-.aq-boot,
-.aq-minnows,
-.aq-clownfish,
-.aq-goldfish,
-.aq-tuna,.aq-pufferfish,
-.aq-koifish,
-.aq-carp,
-.aq-bass,
-.aq-shark{
+.aq-Boot,
+.aq-Minnows,
+.aq-Clownfish,
+.aq-Goldfish,
+.aq-Tuna,.aq-Pufferfish,
+.aq-Koifish,
+.aq-Carp,
+.aq-Bass,
+.aq-Shark{
   width: 8em;
   margin: 4px;  
   z-index: 1;
@@ -252,7 +252,16 @@
   left: 70%;
 }
 
+
 .turtle:hover { 
+  cursor:default !important
+}
+
+.mermaid {
+  left: 50%;
+}
+
+.mermaid:hover { 
   cursor:default !important
 }
 
@@ -458,43 +467,43 @@ p {
   text-align: center;
 }
 
-.aq-shark {
+.aq-Shark {
   animation: swimShark 4s infinite alternate-reverse;
 }
 
-.aq-bass {
+.aq-Bass {
   animation: swimCarp 6s infinite alternate-reverse;
 }
 
-.aq-carp {
+.aq-Carp {
   animation: swimCarp 4s infinite alternate-reverse;
 }
 
-.aq-koifish {
+.aq-Koifish {
   animation: swimKoifish 2s infinite alternate-reverse;
 }
 
-.aq-pufferfish {
+.aq-Pufferfish {
   animation: swimPufferfish 6s infinite alternate-reverse;
 }
 
-.aq-tuna {
+.aq-Tuna {
   animation: swimTuna 9s infinite alternate-reverse;
 }
 
-.aq-clownfish {
+.aq-Clownfish {
   animation: swimClownfish 6s infinite alternate-reverse;
 }
 
-.aq-boot {
+.aq-Boot {
   animation: swimBoot 4s infinite alternate-reverse;
 }
 
-.aq-minnows {
+.aq-Minnows {
   animation: swimMinnows 4s infinite alternate-reverse;
 }
 
-.aq-goldfish {
+.aq-Goldfish {
   animation: swimFlip 1s infinite alternate-reverse, swimGoldfish 4s infinite alternate-reverse;
 }
 
