@@ -28,6 +28,15 @@ import LakeIco from "./assets/lake-ico.png";
 import Atlantis from "./assets/atlantis.png";
 import DefaultIco from "./assets/defaultIco.png";
 import Checked from "./assets/checked.png";
+import Lake from "./assets/lake.png";
+import BeachScene from "./assets/beachscene.png";
+import LakeScene from "./assets/lake2.png";
+import AtlantisScene from "./assets/atlantisscene.png";
+import Crab from "./assets/crab.png";
+import Turtle from "./assets/turtle.png";
+import Mermaid from "./assets/mermaid.png";
+
+// these are not implicitly referenced in the code, but are checked dynamically, so therefore must be present.
 import RealBoot from "./assets/realboot.png";
 import RealMinnows from "./assets/realminnow.png";
 import RealGoldfish from "./assets/realgoldfish.png";
@@ -38,28 +47,23 @@ import RealKoi from "./assets/realkoi.png";
 import RealCarp from "./assets/realcarp.png";
 import RealBass from "./assets/realbass.png";
 import RealShark from "./assets/realshark.png";
-import Lake from "./assets/lake.png";
-import BeachScene from "./assets/beachscene.png";
-import LakeScene from "./assets/lake2.png";
-import AtlantisScene from "./assets/atlantisscene.png";
-import Crab from "./assets/crab.png";
-import Turtle from "./assets/turtle.png";
-import Mermaid from "./assets/mermaid.png";
 
 /** TODO: \
  *
  * FEATURES:
  * Try to get the flip fish animation working again to spruce up the aquarium fish a bit []
  * Add color schemes []
- * refactor the pet ifs in fish RNG []
+ * refactor the pet ifs in fish RNG to make it dynamic []
+ * refactor the logic for purchase locale to make it dynamic []
+ * refactor the logic for equip locale to make it dynamic []
  *
  * POTENTIAL FEATURES:
  * User accounts that store your data []
  *
  * REFCATORS:
  * Get rid of redundant code in as many places as possible []
-*
-* COMPLETE:
+ *
+ * COMPLETE:
  * Dynamically display record lengths in JSX instead of hardcoded indexes [X]
  * Different fish in different locales
  * Beach - Crab [X], Lake 2 - Turtle [X], Atlantis - Mermaid [X]
@@ -117,92 +121,105 @@ function App() {
       maxLengthValue: 30,
       minLengthValue: 15,
       coinValue: 0,
-      catchText: 
-          "You caught a boot... Well, at least you caught something...",
+      catchText: "You caught a boot... Well, at least you caught something...",
+      infoWindowText:
+        "Boots are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While boots are consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.",
     },
-    Minnows:
-    {
+    Minnows: {
       type: "Minnows",
       recordLength: 0,
       maxLengthValue: 5,
       minLengthValue: 1,
       coinValue: 1,
       path: Minnows,
-      catchText: "You caught some minnows... Just small fry..."
+      catchText: "You caught some minnows... Just small fry...",
+      infoWindowText:
+        "Minnow is the common name for a number of species of small freshwater fish, belonging to several genera of the families Cyprinidae and Leuciscidae. They are also known in Ireland as pinkeens. Smaller fish in the subfamily Leusciscidae are considered by anglers to be 'true' minnows.",
     },
-    Goldfish:
-    {
+    Goldfish: {
       type: "Goldfish",
       recordLength: 0,
       maxLengthValue: 14,
       minLengthValue: 1,
       coinValue: 2,
-      catchText:  "You caught a goldfish... Maybe you can keep it as a pet..."
+      catchText: "You caught a goldfish... Maybe you can keep it as a pet...",
+      infoWindowText:
+        "The Goldfish (Carassius auratus) is a freshwater fish in the family Cyprinidae of order Cypriniformes. It is commonly kept as a pet in indoor aquariums, and is one of the most popular aquarium fish. Goldfish released into the wild have become an invasive pest in parts of North America. Native to China, the goldfish is a relatively small member of the carp family (which also includes the Prussian carp and the crucian carp).",
     },
-    Clownfish:
-    {
+    Clownfish: {
       type: "Clownfish",
       recordLength: 0,
       maxLengthValue: 10,
       minLengthValue: 6,
       coinValue: 3,
-      catchText: "You caught a clownfish... What's so funny?"
+      catchText: "You caught a clownfish... What's so funny?",
+      infoWindowText:
+        "Clownfish or anemonefish are fishes from the subfamily Amphiprioninae in the family Pomacentridae. Thirty species of clownfish are recognized: one in the genus Premnas, while the remaining are in the genus Amphiprion. In the wild, they all form symbiotic mutualisms with sea anemones. Depending on the species, anemonefish are overall yellow, orange, or a reddish or blackish color, and many show white bars or patches. The largest can reach a length of 17 cm (6+1⁄2 in), while the smallest barely achieve 7–8 cm (2+3⁄4–3+1⁄4 in).",
     },
-    Tuna:
-    {
+    Tuna: {
       type: "Tuna",
       recordLength: 0,
       maxLengthValue: 149,
       minLengthValue: 130,
       coinValue: 4,
-      catchText: "You caught a Tuna... Now you just need a guitar!"
+      catchText: "You caught a Tuna... Now you just need a guitar!",
+      infoWindowText:
+        "A tuna is a saltwater fish that belongs to the tribe Thunnini, a subgrouping of the Scombridae (mackerel) family. The Thunnini comprise 15 species across five genera, the sizes of which vary greatly, ranging from the bullet tuna (max length: 50 cm or 1.6 ft, weight: 1.8 kg or 4 lb) up to the Atlantic bluefin tuna (max length: 4.6 m or 15 ft, weight: 684 kg or 1,508 lb), which averages 2 m (6.6 ft) and is believed to live up to 50 years.",
     },
-    Pufferfish:
-    {
+    Pufferfish: {
       type: "Pufferfish",
       recordLength: 0,
       maxLengthValue: 60,
       minLengthValue: 2,
       coinValue: 5,
-      catchText: "You caught a Pufferfish... I heard they are getting expensive... must be inflation!"
+      catchText:
+        "You caught a Pufferfish... I heard they are getting expensive... must be inflation!",
+      infoWindowText:
+        "Tetraodontidae is a family of primarily marine and estuarine fish of the order Tetraodontiformes. The family includes many familiar species variously called pufferfish, puffers, balloonfish, blowfish, blowers, blowies, bubblefish, globefish, swellfish, toadfish, toadies, toadle, honey toads, sugar toads, and sea squab.They are morphologically similar to the closely related porcupinefish, which have large external spines (unlike the thinner, hidden spines of the Tetraodontidae, which are only visible when the fish have puffed up).",
     },
-    Koi:
-    {
+    Koi: {
       type: "Koi",
       recordLength: 0,
       maxLengthValue: 38,
       minLengthValue: 30,
       coinValue: 6,
-      catchText: "You caught a Koi... Make sure its the real thing, and not a deKoi!"
+      catchText:
+        "You caught a Koi... Make sure its the real thing, and not a deKoi!",
+      infoWindowText:
+        "Koi (鯉, English: /ˈkɔɪ/, Japanese: [koꜜi]), or more specifically nishikigoi (錦鯉, Japanese: [ɲiɕi̥kiꜜɡoi], literally 'brocaded carp'), are colored varieties of the Amur carp (Cyprinus rubrofuscus) that are kept for decorative purposes in outdoor koi ponds or water gardens. Koi is an informal name for the colored variants of C. rubrofuscus kept for ornamental purposes. There are many varieties of ornamental koi, originating from breeding that began in Niigata, Japan in the early 19th century.",
     },
-    Carp:
-    {
+    Carp: {
       type: "Carp",
       recordLength: 0,
       maxLengthValue: 63,
       minLengthValue: 30,
       coinValue: 7,
-      catchText: "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!"
+      catchText:
+        "You caught a Carp... don't hurt your wrists pulling it in, wouldn't want CARPAL tunnel!",
+      infoWindowText:
+        "Carp are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While carp is consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.",
     },
-    Bass:
-    {
+    Bass: {
       type: "Bass",
       recordLength: 0,
       maxLengthValue: 96,
       minLengthValue: 40,
       coinValue: 8,
-      catchText: "You caught a Bass... don't drop it!"
+      catchText: "You caught a Bass... don't drop it!",
+      infoWindowText:
+        "Bass (/bæs/) is a name shared by many species of fish. The term encompasses both freshwater and marine species, all belonging to the large order Perciformes, or perch-like fishes. The word bass comes from Middle English bars, meaning 'perch'.",
     },
-    Shark:
-    {
+    Shark: {
       type: "Shark",
       recordLength: 0,
       maxLengthValue: 99,
       minLengthValue: 17,
       coinValue: 9,
-      catchText: "You caught a Shark... We're gonna need a bigger boat..."
+      catchText: "You caught a Shark... We're gonna need a bigger boat...",
+      infoWindowText:
+        "Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head. Modern sharks are classified within the clade Selachimorpha (or Selachii) and are the sister group to the Batoidea (rays and kin). Some sources extend the term 'shark' as an informal category including extinct members of Chondrichthyes (cartilaginous fish) with a shark-like morphology, such as hybodonts and xenacanths. Shark-like chondrichthyans such as Cladoselache and Doliodus first appeared in the Devonian Period (419-359 Ma), though some fossilized chondrichthyan-like scales are as old as the Late Ordovician (458-444 Ma). The oldest modern sharks (selachians) are known from the Early Jurassic, about 200 Ma.",
     },
-});
+  });
 
   // code for screenshot functionality in aquarium
   var Canvas2Image = (function () {
@@ -577,11 +594,11 @@ function App() {
     sliderModal.hidden = false;
     e.preventDefault();
     let RNG = fishRNG(currentRod);
-    let fishFromObj = fishObj[Object.keys(fishObj)[RNG]]
-    document.getElementsByClassName("catch-text")[0].innerHTML = fishFromObj.catchText
+    let fishFromObj = fishObj[Object.keys(fishObj)[RNG]];
+    document.getElementsByClassName("catch-text")[0].innerHTML =
+      fishFromObj.catchText;
     document.getElementsByClassName(`aq-${fishFromObj.type}`)[0].hidden = false;
     populateData(`${fishFromObj.type}`);
-
   };
 
   // toggles the gallery modal which closes other modals
@@ -637,14 +654,18 @@ function App() {
   // populates image of fish and grabs the current length based on type of fish
   const populateData = (name) => {
     // // get length, will be based on the fish
-    document.getElementsByClassName("fish-ico")[0].src = evalString(name)
-    currentLength = Math.floor(Math.random() * (fishObj[name].maxLengthValue - fishObj[name].minLengthValue) + fishObj[name].minLengthValue)
-    calculateCoins(`${name}`, currentLength)
+    document.getElementsByClassName("fish-ico")[0].src = evalString(name);
+    currentLength = Math.floor(
+      Math.random() *
+        (fishObj[name].maxLengthValue - fishObj[name].minLengthValue) +
+        fishObj[name].minLengthValue
+    );
+    calculateCoins(`${name}`, currentLength);
     // Calculate if its a record length, and if it is, update the obj for the gallery
-    const tempObj = {...fishObj}; // get a temp obj of the fish
-    if (tempObj[name].recordLength < currentLength) { 
-    tempObj[name].recordLength = currentLength
-    setFish(tempObj);
+    const tempObj = { ...fishObj }; // get a temp obj of the fish
+    if (tempObj[name].recordLength < currentLength) {
+      tempObj[name].recordLength = currentLength;
+      setFish(tempObj);
     }
     // Populating the HTML
     document.getElementsByClassName("length-text")[0].innerHTML =
@@ -663,11 +684,11 @@ function App() {
       audio.pause();
     }
   };
-  
+
   // evaluates a string as javascript, moved this into a function instead of using eval() directly for safety.
   const evalString = (string) => {
     return eval(`(${string})`);
-  }
+  };
 
   const fishRNG = (rodType) => {
     // check to see if beach is the current locale.
@@ -947,121 +968,27 @@ function App() {
         .getElementsByClassName(fishType)[0]
         .classList.contains("hasCaughtBox")
     ) {
+      document.getElementsByClassName("info-window-modal")[0].hidden = false;
+      document.getElementsByClassName(
+        "info-title"
+      )[0].innerHTML = `${fishType}`;
+      document.getElementsByClassName("info-text")[0].innerHTML =
+        fishObj[fishType].infoWindowText;
+      document.getElementsByClassName("info-pic")[0].src = evalString(
+        `Real${fishType}`
+      );
+      document.getElementsByClassName(
+        "info-link"
+      )[0].href = `https://en.wikipedia.org/wiki/${fishType}`;
       switch (fishType) {
-        case "Boot":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML = "BOOT";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Boots are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While boots are consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
-          document.getElementsByClassName("info-pic")[0].src = RealBoot;
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Boot";
-          break;
-        case "Minnows":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML =
-            "Minnows";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Minnow is the common name for a number of species of small freshwater fish, belonging to several genera of the families Cyprinidae and Leuciscidae. They are also known in Ireland as pinkeens. Smaller fish in the subfamily Leusciscidae are considered by anglers to be 'true' minnows.";
-          document.getElementsByClassName("info-pic")[0].src = RealMinnows;
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Minnow";
-          break;
-        case "Goldfish":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML =
-            "Goldfish";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "The Goldfish (Carassius auratus) is a freshwater fish in the family Cyprinidae of order Cypriniformes. It is commonly kept as a pet in indoor aquariums, and is one of the most popular aquarium fish. Goldfish released into the wild have become an invasive pest in parts of North America. Native to China, the goldfish is a relatively small member of the carp family (which also includes the Prussian carp and the crucian carp).";
-          document.getElementsByClassName("info-pic")[0].src = RealGoldfish;
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Goldfish";
-          break;
-        case "Clownfish":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML =
-            "Clownfish";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Clownfish or anemonefish are fishes from the subfamily Amphiprioninae in the family Pomacentridae. Thirty species of clownfish are recognized: one in the genus Premnas, while the remaining are in the genus Amphiprion. In the wild, they all form symbiotic mutualisms with sea anemones. Depending on the species, anemonefish are overall yellow, orange, or a reddish or blackish color, and many show white bars or patches. The largest can reach a length of 17 cm (6+1⁄2 in), while the smallest barely achieve 7–8 cm (2+3⁄4–3+1⁄4 in).";
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Clownfish";
-          document.getElementsByClassName("info-pic")[0].src = RealClownfish;
-          break;
-        case "Tuna":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML = "Tuna";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "A tuna is a saltwater fish that belongs to the tribe Thunnini, a subgrouping of the Scombridae (mackerel) family. The Thunnini comprise 15 species across five genera, the sizes of which vary greatly, ranging from the bullet tuna (max length: 50 cm or 1.6 ft, weight: 1.8 kg or 4 lb) up to the Atlantic bluefin tuna (max length: 4.6 m or 15 ft, weight: 684 kg or 1,508 lb), which averages 2 m (6.6 ft) and is believed to live up to 50 years.";
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Tuna";
-          document.getElementsByClassName("info-pic")[0].src = RealTuna;
-          break;
+        // edge cases where the wikipedia link does not match the exact name of the fish
         case "Pufferfish":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML =
-            "Pufferfish";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Tetraodontidae is a family of primarily marine and estuarine fish of the order Tetraodontiformes. The family includes many familiar species variously called pufferfish, puffers, balloonfish, blowfish, blowers, blowies, bubblefish, globefish, swellfish, toadfish, toadies, toadle, honey toads, sugar toads, and sea squab.They are morphologically similar to the closely related porcupinefish, which have large external spines (unlike the thinner, hidden spines of the Tetraodontidae, which are only visible when the fish have puffed up).";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Tetraodontidae";
-          document.getElementsByClassName("info-pic")[0].src = RealPufferfish;
-          break;
-        case "Koi":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML =
-            "Koi Fish";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Koi (鯉, English: /ˈkɔɪ/, Japanese: [koꜜi]), or more specifically nishikigoi (錦鯉, Japanese: [ɲiɕi̥kiꜜɡoi], literally 'brocaded carp'), are colored varieties of the Amur carp (Cyprinus rubrofuscus) that are kept for decorative purposes in outdoor koi ponds or water gardens. Koi is an informal name for the colored variants of C. rubrofuscus kept for ornamental purposes. There are many varieties of ornamental koi, originating from breeding that began in Niigata, Japan in the early 19th century.";
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Koi";
-          document.getElementsByClassName("info-pic")[0].src = RealKoi;
-          break;
-        case "Carp":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML = "Carp";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Carp are various species of oily freshwater fish from the family Cyprinidae, a very large group of fish native to Europe and Asia. While carp is consumed in many parts of the world, they are generally considered an invasive species in parts of Africa, Australia and most of the United States.";
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Carp";
-          document.getElementsByClassName("info-pic")[0].src = RealCarp;
           break;
         case "Bass":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML = "Bass";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Bass (/bæs/) is a name shared by many species of fish. The term encompasses both freshwater and marine species, all belonging to the large order Perciformes, or perch-like fishes. The word bass comes from Middle English bars, meaning 'perch'.";
           document.getElementsByClassName("info-link")[0].href =
             "https://en.wikipedia.org/wiki/Bass_(fish)";
-          document.getElementsByClassName("info-pic")[0].src = RealBass;
-          break;
-        case "Shark":
-          document.getElementsByClassName(
-            "info-window-modal"
-          )[0].hidden = false;
-          document.getElementsByClassName("info-title")[0].innerHTML = "Shark";
-          document.getElementsByClassName("info-text")[0].innerHTML =
-            "Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head. Modern sharks are classified within the clade Selachimorpha (or Selachii) and are the sister group to the Batoidea (rays and kin). Some sources extend the term 'shark' as an informal category including extinct members of Chondrichthyes (cartilaginous fish) with a shark-like morphology, such as hybodonts and xenacanths. Shark-like chondrichthyans such as Cladoselache and Doliodus first appeared in the Devonian Period (419-359 Ma), though some fossilized chondrichthyan-like scales are as old as the Late Ordovician (458-444 Ma). The oldest modern sharks (selachians) are known from the Early Jurassic, about 200 Ma.";
-          document.getElementsByClassName("info-link")[0].href =
-            "https://en.wikipedia.org/wiki/Shark";
-          document.getElementsByClassName("info-pic")[0].src = RealShark;
           break;
       }
     }
