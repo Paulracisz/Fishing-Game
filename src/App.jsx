@@ -53,7 +53,6 @@ import RealShark from "./assets/realshark.png";
  * FEATURES:
  * Try to get the flip fish animation working again to spruce up the aquarium fish a bit []
  * Add color schemes []
- * refactor the pet ifs in fish RNG to make it dynamic []
  * refactor the logic for purchase locale to make it dynamic []
  * refactor the logic for equip locale to make it dynamic []
  *
@@ -64,6 +63,7 @@ import RealShark from "./assets/realshark.png";
  * Get rid of redundant code in as many places as possible []
  *
  * COMPLETE:
+ * refactor the pet ifs in fish RNG to make it dynamic [X]
  * Dynamically display record lengths in JSX instead of hardcoded indexes [X]
  * Different fish in different locales
  * Beach - Crab [X], Lake 2 - Turtle [X], Atlantis - Mermaid [X]
