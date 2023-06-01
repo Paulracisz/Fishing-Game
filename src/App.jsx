@@ -693,38 +693,47 @@ function App() {
   const fishRNG = (rodType) => {
     // check to see if beach is the current locale.
     let diceRoll = Math.floor(Math.random() * 10);
-    if (
-      document
-        .getElementsByClassName("Beach-Equip")[0]
-        .classList.contains("selected") &&
-      diceRoll === 9 &&
-      !hasCrab
-    ) {
-      document.getElementsByClassName("crab")[0].hidden = false;
-      window.alert("You have obtained the crab! Check your aquarium!");
-      setHasCrab(true);
-    }
-    if (
-      document
-        .getElementsByClassName("Lake-Equip")[0]
-        .classList.contains("selected") &&
-      diceRoll === 9 &&
-      !hasTurtle
-    ) {
-      document.getElementsByClassName("turtle")[0].hidden = false;
-      window.alert("You have obtained the turtle! Check your aquarium!");
-      setHasTurtle(true);
-    }
-    if (
-      document
-        .getElementsByClassName("Atlantis-Equip")[0]
-        .classList.contains("selected") &&
-      diceRoll === 9 &&
-      !hasMermaid
-    ) {
-      document.getElementsByClassName("mermaid")[0].hidden = false;
-      window.alert("You have obtained the mermaid! Check your aquarium!");
-      setHasMermaid(true);
+    if (diceRoll === 9) {
+      if (
+        document
+          .getElementsByClassName("Beach-Equip")[0]
+          .classList.contains("selected") &&
+        !hasCrab
+      ) {
+        document.getElementsByClassName("crab")[0].hidden = false;
+        window.alert("You have obtained the crab! Check your aquarium!");
+        setHasCrab(true);
+      }
+      if (
+        document
+          .getElementsByClassName("Lake-Equip")[0]
+          .classList.contains("selected") &&
+        !hasTurtle
+      ) {
+        document.getElementsByClassName("turtle")[0].hidden = false;
+        window.alert("You have obtained the turtle! Check your aquarium!");
+        setHasTurtle(true);
+      }
+      if (
+        document
+          .getElementsByClassName("Lake-Equip")[0]
+          .classList.contains("selected") &&
+        !hasTurtle
+      ) {
+        document.getElementsByClassName("turtle")[0].hidden = false;
+        window.alert("You have obtained the turtle! Check your aquarium!");
+        setHasTurtle(true);
+      }
+      if (
+        document
+          .getElementsByClassName("Atlantis-Equip")[0]
+          .classList.contains("selected") &&
+        !hasMermaid
+      ) {
+        document.getElementsByClassName("mermaid")[0].hidden = false;
+        window.alert("You have obtained the mermaid! Check your aquarium!");
+        setHasMermaid(true);
+      }
     }
 
     // based on Rod Type, pick a number, 0-4 is wood, 0-7 Iron and 0-10 Steel.
