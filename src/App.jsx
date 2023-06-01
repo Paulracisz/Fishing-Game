@@ -1011,6 +1011,7 @@ function App() {
   return (
     <>
       <h1>Fishing Game</h1>
+      <div className="dark-mode-light-mode"><div className="dark-mode-switch"></div></div>
       <div className="content-box">
         <h1 className="catch-text"></h1>
         <h1 className="calc-text"></h1>

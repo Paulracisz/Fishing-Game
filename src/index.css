@@ -20,6 +20,8 @@
   --border-color: black;
   --picture-background-color: white;
   --fishing-box-color: rgb(73,73,73);
+  --dark-mode-tick: black;
+  --dark-mode-bg: white;
 }
 
 /* classes */
@@ -287,6 +289,26 @@ justify-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dark-mode-light-mode {
+  background-color: var(--dark-mode-bg);
+  width: 6em;
+  padding: 5px;
+  border: 5px solid var(--dark-mode-tick);
+  border-radius: 500px;
+  height: 2em;
+}
+
+.dark-mode-switch {
+  background-color: var(--dark-mode-tick);
+  width: 2em;
+  height: 2em;
+  border-radius: 500px;
+}
+
+.dark-mode-switch:hover {
+  cursor: pointer;
 }
 
 .locale-parent-flex {
