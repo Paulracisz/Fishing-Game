@@ -291,25 +291,6 @@ justify-self: center;
   align-items: center;
 }
 
-.dark-mode-light-mode {
-  background-color: var(--dark-mode-bg);
-  width: 6em;
-  padding: 5px;
-  border-radius: 500px;
-  height: 2em;
-}
-
-.dark-mode-switch {
-  background-color: var(--dark-mode-tick);
-  width: 2em;
-  height: 2em;
-  border-radius: 500px;
-}
-
-.dark-mode-switch:hover {
-  cursor: pointer;
-}
-
 .locale-parent-flex {
   display: flex;
   flex-direction: column;

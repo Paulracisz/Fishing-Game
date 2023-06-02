@@ -50,19 +50,8 @@ import RealShark from "./assets/realshark.png";
 
 /** TODO: \
  *
- * FEATURES:
- * Try to get the flip fish animation working again to spruce up the aquarium fish a bit []
- * Add color schemes []
- * refactor the logic for purchase locale to make it dynamic []
- * refactor the logic for equip locale to make it dynamic []
- *
- * POTENTIAL FEATURES:
- * User accounts that store your data []
- *
- * REFCATORS:
- * Get rid of redundant code in as many places as possible []
- *
  * COMPLETE:
+ * Get rid of redundant code in as many places as possible [X]
  * refactor the pet ifs in fish RNG to make it dynamic [X]
  * Dynamically display record lengths in JSX instead of hardcoded indexes [X]
  * Different fish in different locales
@@ -1011,7 +1000,6 @@ function App() {
   return (
     <>
       <h1>Fishing Game</h1>
-      <div className="dark-mode-light-mode"><div className="dark-mode-switch"></div></div>
       <div className="content-box">
         <h1 className="catch-text"></h1>
         <h1 className="calc-text"></h1>
